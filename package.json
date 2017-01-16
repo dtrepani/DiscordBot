@@ -11,7 +11,7 @@
     ""
   ],
   "scripts": {
-    "bot": "node ./lib/index.js",
+    "bot": "node --harmony ./lib/index.js",
     "prepublish": "gulp prepublish",
     "test": "gulp"
   },
@@ -39,7 +39,11 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "clapp": "^1.1.1",
-    "discord.js": "^11.0.0"
+    "discord.js": "^11.0.0",
+    "discord.js-commando": "^0.8.3",
+    "random-puppy": "^1.1.0",
+    "request": "^2.79.0",
+    "sqlite": "^2.2.4",
+    "uws": "^0.12.0"
   }
 }
