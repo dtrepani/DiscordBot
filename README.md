@@ -10,7 +10,7 @@ $ npm install
 
 ## Usage
 
-```js
+```sh
 $ npm run bot
 ```
 ## License
