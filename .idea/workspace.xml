@@ -7,18 +7,11 @@
     <bookmark url="file://$PROJECT_DIR$/lib/commands/mod/invite.js" line="18" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dff3a37d-17a3-4a52-af14-64914887352a" name="Default" comment="Hickory command added. List refactored a bit. Fixes.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-add.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-remove.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commands/pkmn-spec/hickory.js" />
+    <list default="true" id="dff3a37d-17a3-4a52-af14-64914887352a" name="Default" comment="GW2 Wiki fixed and working.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/classes/list-add.js" afterPath="$PROJECT_DIR$/lib/classes/list-add.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/classes/list-base.js" afterPath="$PROJECT_DIR$/lib/classes/list-base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/classes/list-tags.js" afterPath="$PROJECT_DIR$/lib/classes/list-tags.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/classes/list.js" afterPath="$PROJECT_DIR$/lib/classes/list.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-add.js" afterPath="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-add.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-remove.js" afterPath="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-remove.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc.js" afterPath="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/assets/settings.sqlite3" afterPath="$PROJECT_DIR$/lib/assets/settings.sqlite3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/commands/util/wiki-gw2.js" afterPath="$PROJECT_DIR$/lib/commands/util/wiki-gw2.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -43,57 +36,39 @@
         <entry file="file://$PROJECT_DIR$/lib/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="224">
-              <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+              <caret line="14" column="3" lean-forward="false" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dgc-remove.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-remove.js">
+      <file leaf-file-name="wiki-gw2.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/commands/util/wiki-gw2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="338">
+              <caret line="132" column="9" lean-forward="true" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
+              <folding>
+                <marker date="1485105430641" expanded="true" signature="1202:3582" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stats.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/commands/util/stats.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="608">
+              <caret line="38" column="20" lean-forward="true" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hickory-add.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-add.js">
+      <file leaf-file-name="nuke.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/commands/util/nuke.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dgc-add.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-add.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="2" column="47" lean-forward="false" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hickory-remove.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-remove.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hickory.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/hickory.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="4" column="23" lean-forward="false" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+            <state relative-caret-position="528">
+              <caret line="69" column="22" lean-forward="true" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -165,7 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/commands/lists/pkmn-add.js" />
         <option value="$PROJECT_DIR$/lib/commands/lists/pkmn/pkmn-add.js" />
         <option value="$PROJECT_DIR$/lib/commands/lists/pkmn/add.js" />
         <option value="$PROJECT_DIR$/lib/commands/lists/add.js" />
@@ -177,7 +151,6 @@
         <option value="$PROJECT_DIR$/lib/classes/add.js" />
         <option value="$PROJECT_DIR$/lib/classes/tags.js" />
         <option value="$PROJECT_DIR$/lib/commands/pkmn/guess.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/lib/commands/util/stats.js" />
         <option value="$PROJECT_DIR$/lib/assets/hickory.json" />
         <option value="$PROJECT_DIR$/lib/assets/8ball.json" />
@@ -216,6 +189,8 @@
         <option value="$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-add.js" />
         <option value="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-add.js" />
         <option value="$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-remove.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/lib/commands/util/wiki-gw2.js" />
       </list>
     </option>
   </component>
@@ -629,7 +604,7 @@
       <workItem from="1485021272196" duration="97000" />
       <workItem from="1485021380480" duration="314000" />
       <workItem from="1485021705323" duration="74000" />
-      <workItem from="1485021788320" duration="12388000" />
+      <workItem from="1485021788320" duration="36764000" />
     </task>
     <task id="LOCAL-00001" summary="Added add to list command">
       <created>1484695588275</created>
@@ -652,11 +627,18 @@
       <option name="project" value="LOCAL" />
       <updated>1485043563679</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Hickory command added. List refactored a bit. Fixes.">
+      <created>1485050446657</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1485050446657</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134765000" />
+    <option name="totallyTimeSpent" value="159141000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -704,10 +686,13 @@
     <MESSAGE value="Fixed some coding errors. Implemented 8ball command." />
     <MESSAGE value="Error fixes, dgc command added, and some base list refinements and fixes." />
     <MESSAGE value="Hickory command added. List refactored a bit. Fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Hickory command added. List refactored a bit. Fixes." />
+    <MESSAGE value="GW2 Wiki fixed and working." />
+    <option name="LAST_COMMIT_MESSAGE" value="GW2 Wiki fixed and working." />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -836,33 +821,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/commands/util/wiki-gw2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="33" column="15" lean-forward="false" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="144">
-            <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/commands/util/stats.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="38" column="36" lean-forward="false" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/commands/fun/dog.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -895,14 +853,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-343">
-          <caret line="2" column="19" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -915,14 +865,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1168">
           <caret line="73" column="13" lean-forward="true" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/commands/util/nuke.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="48" lean-forward="true" selection-start-line="0" selection-start-column="48" selection-end-line="1" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -1055,23 +997,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/index.js">
+    <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/hickory.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+        <state relative-caret-position="240">
+          <caret line="15" column="2" lean-forward="true" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-remove.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-add.js">
+    <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-remove.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
@@ -1087,7 +1021,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-remove.js">
+    <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-add.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
@@ -1095,11 +1029,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/hickory.js">
+    <entry file="file://$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-remove.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="23" lean-forward="false" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+        <state relative-caret-position="16">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="14" column="3" lean-forward="false" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="144">
+            <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="46" column="24" lean-forward="true" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/commands/util/nuke.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="69" column="22" lean-forward="true" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/commands/util/stats.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="38" column="20" lean-forward="true" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/commands/util/wiki-gw2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="132" column="9" lean-forward="true" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
+          <folding>
+            <marker date="1485105430641" expanded="true" signature="1202:3582" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
