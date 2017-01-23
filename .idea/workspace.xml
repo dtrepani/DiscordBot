@@ -7,10 +7,11 @@
     <bookmark url="file://$PROJECT_DIR$/lib/commands/mod/invite.js" line="18" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dff3a37d-17a3-4a52-af14-64914887352a" name="Default" comment="Error fixes and code cleanup in WikiBaseCommand. Namely, it now accounts for being denied access to searches.">
+    <list default="true" id="dff3a37d-17a3-4a52-af14-64914887352a" name="Default" comment="Added roll command.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commands/fun/roll.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/classes/wiki-base.js" afterPath="$PROJECT_DIR$/lib/classes/wiki-base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/index.js" afterPath="$PROJECT_DIR$/lib/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/commands/fun/8ball.js" afterPath="$PROJECT_DIR$/lib/commands/fun/8ball.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,10 +32,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
+            <state relative-caret-position="-358">
               <caret line="3" column="38" lean-forward="true" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
               <folding />
             </state>
@@ -54,8 +55,28 @@
       <file leaf-file-name="wiki-base.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/classes/wiki-base.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="130" column="9" lean-forward="true" selection-start-line="130" selection-start-column="9" selection-end-line="130" selection-end-column="9" />
+            <state relative-caret-position="112">
+              <caret line="7" column="43" lean-forward="true" selection-start-line="7" selection-start-column="43" selection-end-line="8" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="roll.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/commands/fun/roll.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="608">
+              <caret line="38" column="18" lean-forward="true" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="8ball.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/commands/fun/8ball.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="23" column="16" lean-forward="false" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -127,7 +148,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/commands/pkmn/pkmn-add.js" />
         <option value="$PROJECT_DIR$/lib/classes/base.js" />
         <option value="$PROJECT_DIR$/lib/classes/remove.js" />
         <option value="$PROJECT_DIR$/lib/classes/add.js" />
@@ -138,7 +158,6 @@
         <option value="$PROJECT_DIR$/lib/assets/8ball.json" />
         <option value="$PROJECT_DIR$/lib/assets/dgc.json" />
         <option value="$PROJECT_DIR$/lib/commands/fun/8ball.json" />
-        <option value="$PROJECT_DIR$/lib/commands/fun/8ball.js" />
         <option value="$PROJECT_DIR$/lib/commands/fun/cat.js" />
         <option value="$PROJECT_DIR$/lib/commands/fun/dog.js" />
         <option value="$PROJECT_DIR$/lib/commands/mod/invite.js" />
@@ -178,6 +197,8 @@
         <option value="$PROJECT_DIR$/lib/index.js" />
         <option value="$PROJECT_DIR$/node_modules/wikijs/dist/wiki.js" />
         <option value="$PROJECT_DIR$/lib/classes/wiki-base.js" />
+        <option value="$PROJECT_DIR$/lib/commands/fun/8ball.js" />
+        <option value="$PROJECT_DIR$/lib/commands/fun/roll.js" />
       </list>
     </option>
   </component>
@@ -481,18 +502,18 @@
     <property name="javascript.nodejs.core.library.configured.version" value="7.4.0" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\finap\git\DiscordBot\lib\commands\fun" />
+      <recent name="C:\Users\finap\git\DiscordBot\lib\commands\pkmn-spec" />
+      <recent name="C:\Users\finap\git\DiscordBot\lib\commands\tags" />
+      <recent name="C:\Users\finap\git\DiscordBot\lib\classes" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\finap\git\DiscordBot\lib\commands\pkmn-spec" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\commands\pkmn" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\commands\lists\" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\commands\lists" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\assets" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\finap\git\DiscordBot\lib\commands\pkmn-spec" />
-      <recent name="C:\Users\finap\git\DiscordBot\lib\commands\tags" />
-      <recent name="C:\Users\finap\git\DiscordBot\lib\classes" />
-      <recent name="C:\Users\finap\git\DiscordBot\lib\commands\fun" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.index.js">
@@ -592,7 +613,7 @@
       <workItem from="1485021380480" duration="314000" />
       <workItem from="1485021705323" duration="74000" />
       <workItem from="1485021788320" duration="45749000" />
-      <workItem from="1485127196736" duration="4222000" />
+      <workItem from="1485127196736" duration="8588000" />
     </task>
     <task id="LOCAL-00001" summary="Added add to list command">
       <created>1484695588275</created>
@@ -636,11 +657,18 @@
       <option name="project" value="LOCAL" />
       <updated>1485110849270</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Error fixes and code cleanup in WikiBaseCommand. Namely, it now accounts for being denied access to searches.">
+      <created>1485151797492</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1485151797492</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172348000" />
+    <option name="totallyTimeSpent" value="176714000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -657,7 +685,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1859375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -691,7 +719,8 @@
     <MESSAGE value="GW2 Wiki fixed and working." />
     <MESSAGE value="Wiki base abstracted. Wikipedia, ESO, and BDO wikis added." />
     <MESSAGE value="Error fixes and code cleanup in WikiBaseCommand. Namely, it now accounts for being denied access to searches." />
-    <option name="LAST_COMMIT_MESSAGE" value="Error fixes and code cleanup in WikiBaseCommand. Namely, it now accounts for being denied access to searches." />
+    <MESSAGE value="Added roll command." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added roll command." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -700,13 +729,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/assets/hickory.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="34" lean-forward="false" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/assets/8ball.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -746,6 +768,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="26" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -835,13 +858,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/commands/fun/8ball.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/assets/settings.sqlite3">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -909,6 +925,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="88" column="33" lean-forward="false" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -938,6 +955,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-310">
           <caret line="26" column="87" lean-forward="true" selection-start-line="25" selection-start-column="68" selection-end-line="26" selection-end-column="87" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1008,17 +1026,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/commands/util/nuke.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="69" column="22" lean-forward="false" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/commands/util/stats.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="38" column="20" lean-forward="false" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1036,14 +1048,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/commands/util/wiki.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/wikijs/dist/wiki.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -1052,18 +1056,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/classes/wiki-base.js">
+    <entry file="file://$PROJECT_DIR$/lib/commands/util/wiki.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="130" column="9" lean-forward="true" selection-start-line="130" selection-start-column="9" selection-end-line="130" selection-end-column="9" />
+        <state relative-caret-position="64">
+          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
+        <state relative-caret-position="-358">
           <caret line="3" column="38" lean-forward="true" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/classes/wiki-base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="7" column="43" lean-forward="true" selection-start-line="7" selection-start-column="43" selection-end-line="8" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/commands/util/nuke.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1104">
+          <caret line="69" column="22" lean-forward="false" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/commands/fun/roll.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="38" column="18" lean-forward="true" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/commands/fun/8ball.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="23" column="16" lean-forward="false" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
           <folding />
         </state>
       </provider>
