@@ -1,6 +1,6 @@
 'use strict';
 
-const config = require('../config.json');
+const config = require('./config.json');
 const Discord = require('discord.js');
 const Commando = require('discord.js-commando');
 const winston = require('winston');
@@ -68,7 +68,7 @@ client.registry
 		['mod', 'Mod-Only']
 	])
 	.registerDefaults()
-	.registerCommandsIn(path.join(__dirname, 'commands'));
+	.registerCommandsIn(path.join(__dirname, 'lib/commands'));
 
 client.login(config.tokens.discord);
 
