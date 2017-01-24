@@ -7,10 +7,8 @@
     "lib"
   ],
   "main": "lib/index.js",
-  "keywords": [
-    ""
-  ],
   "scripts": {
+    "start": "node --harmony ./lib/index.js",
     "bot": "node --harmony ./lib/index.js",
     "prepublish": "gulp prepublish",
     "test": "gulp"
