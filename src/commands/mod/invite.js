@@ -10,8 +10,13 @@ module.exports = class InviteCommand extends Commando.Command {
 			aliases: ['invite'],
 			group: 'mod',
 			memberName: 'invite',
-			description: 'Get OAuth2 link'
+			description: 'Get OAuth2 link',
+			guarded: true
 		});
+	}
+
+	hasPermission(msg) {
+		return msg.author.id === this.client.options.owner;
 	}
 
 	async run(msg, args) {

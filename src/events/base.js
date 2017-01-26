@@ -1,5 +1,7 @@
 'use strict';
 
+const winston = require('winston');
+
 module.exports = class EventLog {
 	/**
 	 * @typedef {Object} RichEmbed
@@ -22,11 +24,29 @@ module.exports = class EventLog {
 	 * @param {EventInfo} info - The event information
 	 */
 	constructor(client, info) {
-		if(!client) throw new Error('A client must be specified.');
-		if(typeof info.name !== 'string') throw new TypeError('Event name must be a string.');
-
-		this.client = client;
+		Object.defineProperty(this, 'client', { value: client });
 		Object.defineProperty(this, 'name', { value: info.name });
+	}
+
+	register() {
+		this.client.on(this.name, (...args) => {
+			try {
+				const guild = args[0].guild || args[1].guild;
+				const modLogSettings = this.client.provider.get(guild, 'mod_log', {});
+
+				if (!modLogSettings.enabled) return;
+
+				this.run(...args)
+			} catch(err) {
+				winston.error("No Guild Found: \n" + err.stack);
+				winston.debug(args);
+			}
+		});
+	}
+
+	getLogChannel(guild) {
+		const modLogSettings = this.client.provider.get(guild, 'mod_log', {});
+		return guild.channels.get(modLogSettings.channelID);
 	}
 
 	/**
@@ -34,12 +54,5 @@ module.exports = class EventLog {
 	 */
 	run(...args) {
 		throw new Error(`${this.constructor.name} doesn't have a run() method.`);
-	}
-
-	/**
-	 * @param {GuildMember} member
-	 */
-	static getVoiceChannel(member) {
-		return member.guild.channels.get(member.voiceChannelID);
 	}
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-const EventLog = require('../events/base');
+const EventLog = require('./base');
 const winston = require('winston');
 const fs = require('fs');
 const path = require('path');
@@ -14,9 +14,6 @@ module.exports = class Logger {
 	 * @param {String} dir - Directory for the event objects
 	 */
 	constructor(client, dir) {
-		if(!client) throw new Error('A client must be specified.');
-		if(typeof dir !== 'string') throw new TypeError('Directory must be a string.');
-
 		this.client = client;
 		this.dir = dir;
 		this.registerEvents();
@@ -46,21 +43,21 @@ module.exports = class Logger {
 			throw new Error(`"${wsEvent.name}" is already registered as an event.`);
 		}
 
-		this.client.on(wsEvent.name, wsEvent.run);
+		wsEvent.register();
 	}
 
 	reloadEvents() {
 		for (let wsEvent in this.wsEvents) {
 			if(!wsEvent.name) continue;
 
-			const pathName = path.join(this.dir, `${Logger.camelCaseToDash(wsEvent.name)}.js`);
+			const pathName = path.join(this.dir, `${this.camelCaseToDash(wsEvent.name)}.js`);
 			if(require.cache[pathName]) delete require.cache[pathName];
 		}
 
 		this.registerEvents();
 	}
 
-	static camelCaseToDash(str) {
+	camelCaseToDash(str) {
 		return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 	}
 };

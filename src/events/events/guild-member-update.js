@@ -7,9 +7,7 @@ const config = require('../../assets/config.json');
 
 module.exports = class GuildMemberUpdateEvent extends EventLog {
 	constructor(client) {
-		super(client, {
-			name: 'guildMemberUpdate'
-		});
+		super(client, { name: 'guildMemberUpdate' });
 	}
 
 	/**
@@ -24,7 +22,7 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 			}
 		};
 
-		const descriptors = GuildMemberUpdateEvent.getChangedDescriptors(before, after);
+		const descriptors = this.getChangedDescriptors(before, after);
 		if(!descriptors) {
 			winston.debug(before);
 			winston.debug(after);
@@ -32,10 +30,10 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 		}
 
 		Object.assign(embed, descriptors);
-		EventEmbed.sendUserEmbed(before.guild, before.user.id, embed);
+		EventEmbed.sendUserEmbed(this.getLogChannel(before.guild), before.user.id, embed);
 	}
 
-	static getChangedDescriptors(before, after) {
+	getChangedDescriptors(before, after) {
 		let statChanged = '';
 		let changedVal = '';
 
@@ -46,6 +44,8 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 			statChanged = "Nickname";
 			changedVal = "nickname";
 		}
+
+		// TODO: roles
 
 		if(!statChanged) return false;
 

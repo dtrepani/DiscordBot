@@ -7,9 +7,7 @@ const config = require('../../assets/config.json');
 
 module.exports = class VoiceStateUpdateEvent extends EventLog {
 	constructor(client) {
-		super(client, {
-			name: 'voiceStateUpdate'
-		});
+		super(client, { name: 'voiceStateUpdate' });
 	}
 
 	/**
@@ -23,24 +21,34 @@ module.exports = class VoiceStateUpdateEvent extends EventLog {
 				icon_url: before.user.avatarURL
 			}
 		};
-		const descriptors = VoiceStateUpdateEvent.getChangedDescriptors(before, after);
+		const descriptors = this.getChangedDescriptors(before, after);
+		if(!descriptors) return;
 		Object.assign(embed, descriptors);
 
-		EventEmbed.sendVoiceEmbed(before.guild, before.user.id, embed);
+		EventEmbed.sendVoiceEmbed(this.getLogChannel(before.guild), before.user.id, embed);
 	}
 
-	static getChangedDescriptors(before, after) {
+	getChangedDescriptors(before, after) {
+		if(before.voiceChannelID === after.voiceChannelID) return false;
+
 		if(!before.voiceChannelID) {
-			return { description: `${after.user} entered voice channel ${EventLog.getVoiceChannel(after)}` }
+			return { description: `${after.user} entered voice channel ${this.getVoiceChannel(after)}` };
 		}
 
 		if(!after.voiceChannelID) {
-			return { description: `${before.user} left voice channel ${EventLog.getVoiceChannel(before)}` }
+			return { description: `${before.user} left voice channel ${this.getVoiceChannel(before)}` };
 		}
 
 		return {
-			description: oneLine`${before.user} moved from ${EventLog.getVoiceChannel(before)} 
-				to ${EventLog.getVoiceChannel(after)}
-		`}
+			description: oneLine`${before.user} moved from ${this.getVoiceChannel(before)} 
+				to ${this.getVoiceChannel(after)}`
+		};
+	}
+
+	/**
+	 * @param {GuildMember} member
+	 */
+	getVoiceChannel(member) {
+		return member.guild.channels.get(member.voiceChannelID);
 	}
 };

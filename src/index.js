@@ -7,15 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const sqlite = require('sqlite');
 const oneLine = require('common-tags').oneLine;
-const Logger = require('./modules/logger');
-
-const client = new Commando.Client({
-	owner: config.owner,
-	commandPrefix: config.prefix,
-	unknownCommandResponse: false
-});
-
-const logger = new Logger(client, path.join(__dirname, 'events/events'));
+const Logger = require('./events/logger');
 
 winston.configure({
 	transports: [
@@ -27,6 +19,14 @@ winston.configure({
 		})
 	]
 });
+
+const client = new Commando.Client({
+	owner: config.owner,
+	commandPrefix: config.prefix,
+	unknownCommandResponse: false
+});
+
+const logger = new Logger(client, path.join(__dirname, 'events/events'));
 
 // TODO: sqlite.clear(guild) when guild deleted
 client
