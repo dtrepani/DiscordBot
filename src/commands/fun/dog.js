@@ -11,12 +11,11 @@ module.exports = class DogCommand extends Commando.Command {
 			aliases: ['dogs'],
 			group: 'fun',
 			memberName: 'dog',
-			description: 'wow such doge much want',
-			guildOnly: true
+			description: 'wow such doge much want'
 		});
 	}
 
-	async run(msg, args) {
+	async run(msg) {
 		randomPuppy().then(res => {
 			deleteMsg(msg);
 			return msg.reply(`\`dog\`: ${res}`);

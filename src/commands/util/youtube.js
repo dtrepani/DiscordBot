@@ -13,7 +13,7 @@ module.exports = class YoutubeCommand extends Commando.Command {
 			aliases: ['yt'],
 			group: 'util',
 			memberName: 'youtube',
-			description: `Search for videos on Youtube.`,
+			description: 'Search for videos on Youtube.',
 			args: [
 				{
 					key: 'query',
@@ -32,11 +32,11 @@ module.exports = class YoutubeCommand extends Commando.Command {
 		return youtube.search(query, 1, (err, res) => {
 			if(err) {
 				winston.error(err);
-				return alerts.sendError(`Something went wrong when searching for the video.`);
+				return alerts.sendError('Something went wrong when searching for the video.');
 			}
 
 			if(res.items.length === 0) {
-				return msg.reply(`No results for that search.`);
+				return msg.reply('No results for that search.');
 			}
 
 			return msg.reply(this.getUrl(res.items[0]));
@@ -45,14 +45,14 @@ module.exports = class YoutubeCommand extends Commando.Command {
 
 	getUrl(result) {
 		switch(result.id.kind) {
-			case "youtube#playlist":
+			case 'youtube#playlist':
 				return `http://www.youtube.com/playlist?list=${result.id.playlistId}`;
-			case "youtube#video":
+			case 'youtube#video':
 				return `http://www.youtube.com/watch?v=${result.id.videoId}`;
-			case "youtube#channel":
+			case 'youtube#channel':
 				return `http://www.youtube.com/channel/${result.id.channelId}`;
 			default:
-				return `No results for that search.`
+				return 'No results for that search.'
 		}
 	}
 };

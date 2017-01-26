@@ -70,7 +70,7 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 		info.description = `Remove ` + ((listInfo.urlOnly) ? `a URL ` : `an item `);
 
 		if(listInfo.requireOptions) {
-			info.description += `from its corresponding tags `;
+			info.description += 'from its corresponding tags ';
 		}
 
 		info.description += `from the ${listName} list.`;
@@ -97,20 +97,20 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 		return info;
 	}
 
-    /**
+	/**
 	 * @returns {Reply}
-     */
-    getReply(args, list) {
-        if(this.urlOnly && !this.isUrl(args.item)) {
-            return {
-            	error: true,
+	 */
+	getReply(args, list) {
+		if(this.urlOnly && !this.isUrl(args.item)) {
+			return {
+				error: true,
 				msg: `Item must be a valid URL beginning with "http".`
 			};
-        }
+		}
 
-        if(args.options) {
-            return this.removeFromGivenTags(args, list);
-        }
+		if(args.options) {
+			return this.removeFromGivenTags(args, list);
+		}
 
 		return this.removeItemFromAll(args, list);
 	}
@@ -124,7 +124,7 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 		if(list instanceof Array) {
 			return {
 				error: true,
-				msg: commonTags.oneLine`\`${this.listName}\` does not support tags. 
+				msg: commonTags.oneLine`\`${this.listName}\` does not support tags.
 					If the item you wish to remove has multiple words, please wrap them in quotation marks.`
 			};
 		}
@@ -134,8 +134,6 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 
 		args.options.forEach(tag => {
 			tag = tag.toLowerCase();
-
-			console.log(tag + " and " + list.hasOwnProperty(tag));
 
 			if (list.hasOwnProperty(tag)) {
 				if (this.removeItemFromTag(list, args, tag)) successfulTags.push(tag);
@@ -153,10 +151,10 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 		} else {
 			return {
 				error: false,
-				msg: commonTags.oneLineCommaLists`\`${args.item}\` was removed from 
+				msg: commonTags.oneLineCommaLists`\`${args.item}\` was removed from
 					\`${successfulTags}\`` +
 					((errorTags.length !== 0)
-						? `\n\n` + commonTags.oneLineCommaLists`:no_entry_sign: But the tag(s) \`${errorTags}\` were 
+						? `\n\n` + commonTags.oneLineCommaLists`:no_entry_sign: But the tag(s) \`${errorTags}\` were
 							either non-existent or already did not have the item.`
 						: ``)
 			};
@@ -202,7 +200,7 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 			args.item = args.item.toLowerCase();
 		}
 
-		if(list[tag] && (typeof list[tag] === "string" || list[tag] instanceof String)) {
+		if(list[tag] && (typeof list[tag] === 'string' || list[tag] instanceof String)) {
 			if (tag !== args.item) {
 				return false;
 			}

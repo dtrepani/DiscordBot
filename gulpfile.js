@@ -1,4 +1,5 @@
 'use strict';
+
 const path = require('path');
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
@@ -10,10 +11,10 @@ const plumber = require('gulp-plumber');
 
 gulp.task('static', function () {
   return gulp.src('**/*.js')
-    .pipe(excludeGitignore())
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+	.pipe(excludeGitignore())
+	.pipe(eslint())
+	.pipe(eslint.format())
+	.pipe(eslint.failAfterError());
 });
 
 gulp.task('nsp', function (cb) {
@@ -22,26 +23,26 @@ gulp.task('nsp', function (cb) {
 
 gulp.task('pre-test', function () {
   return gulp.src('src/**/*.js')
-    .pipe(excludeGitignore())
-    .pipe(istanbul({
-      includeUntested: true
-    }))
-    .pipe(istanbul.hookRequire());
+	.pipe(excludeGitignore())
+	.pipe(istanbul({
+		includeUntested: true
+	}))
+	.pipe(istanbul.hookRequire());
 });
 
 gulp.task('test', ['pre-test'], function (cb) {
   let mochaErr;
 
   gulp.src('test/**/*.js')
-    .pipe(plumber())
-    .pipe(mocha({reporter: 'spec'}))
-    .on('error', function (err) {
-      mochaErr = err;
-    })
-    .pipe(istanbul.writeReports())
-    .on('end', function () {
-      cb(mochaErr);
-    });
+	.pipe(plumber())
+	.pipe(mocha({reporter: 'spec'}))
+	.on('error', function (err) {
+		mochaErr = err;
+	})
+	.pipe(istanbul.writeReports())
+	.on('end', function () {
+		cb(mochaErr);
+	});
 });
 
 gulp.task('watch', function () {

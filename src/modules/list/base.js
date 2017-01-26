@@ -4,7 +4,6 @@ const Commando = require('discord.js-commando');
 const winston = require('winston');
 const oneLine = require('common-tags').oneLine;
 const fs = require('fs');
-const sqlite = require('sqlite');
 const deleteMsg = require('../delete-msg');
 const alerts = require('../alerts');
 
@@ -59,7 +58,7 @@ module.exports = class ListBaseCommand extends Commando.Command {
 	}
 
 	getList() {
-		const path = `lib/assets/${this.listName}.json`;
+		const path = 'src/assets/${this.listName}.json';
 		let defaultList;
 
 		try {
@@ -89,10 +88,10 @@ module.exports = class ListBaseCommand extends Commando.Command {
 	 * The reply will change based on whatever the command does and thus must be overridden.
 	 * @returns {Reply}
 	 */
-	getReply(args, list) {
+	getReply(args, list) { // eslint-disable-line no-unused-vars
 		return {
 			error: true,
-			msg: oneLine`ListBase:getReply() was not overridden. 
+			msg: oneLine`ListBase:getReply() was not overridden.
                 This error should never happen. Please contact @Kyuu#9384`
 		};
 	}

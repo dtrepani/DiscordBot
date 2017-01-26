@@ -16,14 +16,14 @@ module.exports = class UserInfoCommand extends commando.Command {
 			args: [
 				{
 					key: 'member',
-					label: 'user',
-					prompt: 'What user would you like to snoop on?',
+					prompt: 'What user?',
 					type: 'member'
 				}
 			]
 		});
 	}
 
+	// TODO: convert to embed
 	async run(msg, args) {
 		const member = args.member;
 		const user = member.user;

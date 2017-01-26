@@ -35,7 +35,7 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 			aliases: [ `tags-${listName}` ],
 			group: groupName,
 			memberName: `${listName}-tags`,
-			description: `List the tags currently added.`
+			description: 'List the tags currently added.'
 		};
 		super(client, listName, info, listInfo);
 	}
@@ -47,7 +47,7 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 		if(list instanceof Array) {
 			return {
 				error: true,
-				msg: `This list does not support tags. You should never see this message. Please contact @Kyuu#9284.`
+				msg: 'This list does not support tags. You should never see this message. Please contact @Kyuu#9284.'
 			};
 		}
 
@@ -56,7 +56,7 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 		if(tags.length === 0) {
 			return {
 				error: false,
-				msg: `There are no tags added currently.`
+				msg: 'There are no tags added currently.'
 			};
 		}
 

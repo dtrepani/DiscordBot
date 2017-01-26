@@ -7,6 +7,7 @@ const winston = require('winston');
 const wiki = require('wikijs').default;
 const htmlToText = require('html-to-text');
 const alerts = require('../alerts');
+const config = require('../../assets/config.json');
 
 module.exports = class WikiBaseCommand extends Commando.Command {
 	/**
@@ -24,10 +25,10 @@ module.exports = class WikiBaseCommand extends Commando.Command {
 
 		if(wikiName === '') {
 			Object.assign(info, {
-				name: `wiki`,
-				aliases: [ `wikipedia` ],
-				memberName: `wiki`,
-				description: `Search wikipedia.`
+				name: 'wiki',
+				aliases: [ 'wikipedia' ],
+				memberName: 'wiki',
+				description: 'Search wikipedia.'
 			});
 		} else {
 			Object.assign(info, {
@@ -108,7 +109,7 @@ module.exports = class WikiBaseCommand extends Commando.Command {
 
 	async getSearchResults(msg, searchTerm) {
 		try {
-			const delimiter = `\n• `;
+			const delimiter = `\n${config.embed_bullet} `;
 			const search = await wiki(this.options).search(searchTerm);
 
 			if(search.results.length === 0) {
@@ -124,7 +125,7 @@ module.exports = class WikiBaseCommand extends Commando.Command {
 			winston.warn(err);
 			return msg.reply(oneLine`
 				An article by that exact name doesn't exist and this wiki doesn't allow bot searches for
-				similar matches. Here's a link to manually search it instead: 
+				similar matches. Here's a link to manually search it instead:
 				${baseUrl}/index.php?title=Special%3ASearch&search=${searchTerm}
 			`);
 		}
@@ -136,8 +137,8 @@ module.exports = class WikiBaseCommand extends Commando.Command {
 	 * the start of the summary. If there's both tags present, return the one that occurs first.
 	 */
 	getSummaryStartInd(html) {
-		const strongInd = html.indexOf("<strong");
-		const bInd = html.indexOf("<b>");
+		const strongInd = html.indexOf('<strong');
+		const bInd = html.indexOf('<b>');
 
 		if(bInd === -1) return strongInd;
 		if(strongInd === -1) return bInd;
@@ -173,7 +174,7 @@ module.exports = class WikiBaseCommand extends Commando.Command {
 	}
 
 	parseEndOfSummary(summary) {
-		const contentsSectionInd = summary.indexOf("CONTENTS");
+		const contentsSectionInd = summary.indexOf('CONTENTS');
 		if(contentsSectionInd !== -1) {
 			summary = summary.slice(0, contentsSectionInd);
 		} else {
@@ -185,7 +186,7 @@ module.exports = class WikiBaseCommand extends Commando.Command {
 	}
 
 	stripLength(summary) {
-		const contd = `... [continued]`;
+		const contd = '... [continued]';
 		const maxLength = 800 - contd.length; // Embeds cannot exceed 1024 characters
 
 		if(summary.length >= maxLength) {

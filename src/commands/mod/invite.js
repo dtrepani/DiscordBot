@@ -19,7 +19,7 @@ module.exports = class InviteCommand extends Commando.Command {
 		return msg.author.id === this.client.options.owner;
 	}
 
-	async run(msg, args) {
+	async run(msg) {
 		msg.delete();
 		return msg.direct(`https://discordapp.com/api/oauth2/authorize?client_id=${config.client_id}&scope=bot&permissions=${config.permissions}`, {});
 	}

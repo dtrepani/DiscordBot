@@ -18,7 +18,7 @@ module.exports = class WolframCommand extends Commando.Command {
 			],
 			group: 'util',
 			memberName: 'wolfram',
-			description: `Search Wolfram|Alpha or solve problems.`,
+			description: 'Search Wolfram|Alpha or solve problems.',
 			args: [
 				{
 					key: 'query',
@@ -56,7 +56,7 @@ module.exports = class WolframCommand extends Commando.Command {
 				return msg.replyEmbed(embed, `Results for \`${query}\`:`);
 			} catch(err) {
 				winston.error(err);
-				return alerts.sendError(msg, `Something went wrong when searching.`);
+				return alerts.sendError(msg, 'Something went wrong when searching.');
 			}
 		});
 	}

@@ -4,68 +4,13 @@
     <option name="ANALYZE_TEST_SOURCES" value="false" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/commands/mod/invite.js" line="18" />
+    <bookmark url="file://$PROJECT_DIR$/src/commands/mod/invite.js" line="23" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dff3a37d-17a3-4a52-af14-64914887352a" name="Default" comment="Reorganized project structure. Added Logger that will log WSEvents to a guild-specified channel.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/events/base.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/events/event-embed.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/events/events/guild-member-update.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/events/events/voice-state-update.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/modules/delete-msg.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/modules/logger.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config.json" afterPath="$PROJECT_DIR$/src/assets/config.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/assets/8ball.json" afterPath="$PROJECT_DIR$/src/assets/8ball.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/assets/dgc.json" afterPath="$PROJECT_DIR$/src/assets/dgc.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/assets/hickory.json" afterPath="$PROJECT_DIR$/src/assets/hickory.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/assets/pkmn.json" afterPath="$PROJECT_DIR$/src/assets/pkmn.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/assets/settings.sqlite3" afterPath="$PROJECT_DIR$/src/assets/settings.sqlite3" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/classes/list-add.js" afterPath="$PROJECT_DIR$/src/modules/list/list-add.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/classes/list-base.js" afterPath="$PROJECT_DIR$/src/modules/list/base.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/classes/list-remove.js" afterPath="$PROJECT_DIR$/src/modules/list/list-remove.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/classes/list-tags.js" afterPath="$PROJECT_DIR$/src/modules/list/list-tags.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/classes/list.js" afterPath="$PROJECT_DIR$/src/modules/list/list.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/classes/wiki-base.js" afterPath="$PROJECT_DIR$/src/modules/wiki/wiki-base.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/fun/8ball.js" afterPath="$PROJECT_DIR$/src/commands/fun/8ball.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/fun/cat.js" afterPath="$PROJECT_DIR$/src/commands/fun/cat.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/fun/cleverbot.js" afterPath="$PROJECT_DIR$/src/commands/fun/cleverbot.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/fun/dog.js" afterPath="$PROJECT_DIR$/src/commands/fun/dog.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/fun/roll.js" afterPath="$PROJECT_DIR$/src/commands/fun/roll.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/mod/invite.js" afterPath="$PROJECT_DIR$/src/commands/mod/invite.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/mod/say.js" afterPath="$PROJECT_DIR$/src/commands/mod/say.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-add.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/dgc-add.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-remove.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/dgc-remove.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/dgc.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/guess-add.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/guess-add.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/guess-remove.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/guess-remove.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/guess-tags.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/guess-tags.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/guess.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/guess.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-add.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/hickory-add.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-remove.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/hickory-remove.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/hickory.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/hickory.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/pkmn-add.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/pkmn-add.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/pkmn-remove.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/pkmn-remove.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/pkmn-tags.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/pkmn-tags.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/pkmn-spec/pkmn.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/pkmn.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/tags/tag-add.js" afterPath="$PROJECT_DIR$/src/commands/tags/tag-add.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/tags/tag-remove.js" afterPath="$PROJECT_DIR$/src/commands/tags/tag-remove.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/tags/tag-tags.js" afterPath="$PROJECT_DIR$/src/commands/tags/tag-tags.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/tags/tag.js" afterPath="$PROJECT_DIR$/src/commands/tags/tag.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/util/google.js" afterPath="$PROJECT_DIR$/src/commands/util/google.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/util/nuke.js" afterPath="$PROJECT_DIR$/src/commands/util/nuke.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/util/stats.js" afterPath="$PROJECT_DIR$/src/commands/util/stats.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/util/user-info.js" afterPath="$PROJECT_DIR$/src/commands/util/user-info.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/util/wiki-bdo.js" afterPath="$PROJECT_DIR$/src/commands/util/wiki-bdo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/util/wiki-eso.js" afterPath="$PROJECT_DIR$/src/commands/util/wiki-eso.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/util/wiki-gw2.js" afterPath="$PROJECT_DIR$/src/commands/util/wiki-gw2.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/util/wiki.js" afterPath="$PROJECT_DIR$/src/commands/util/wiki.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/util/wolfram.js" afterPath="$PROJECT_DIR$/src/commands/util/wolfram.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commands/util/youtube.js" afterPath="$PROJECT_DIR$/src/commands/util/youtube.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/modules/alerts.js" afterPath="$PROJECT_DIR$/src/modules/alerts.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/src/index.js" />
+    <list default="true" id="dff3a37d-17a3-4a52-af14-64914887352a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/settings.sqlite3" afterPath="$PROJECT_DIR$/src/assets/settings.sqlite3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/base.js" afterPath="$PROJECT_DIR$/src/events/base.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -89,28 +34,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="2" column="47" lean-forward="false" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="logger.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/logger.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="35" column="20" lean-forward="true" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="delete-msg.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/modules/delete-msg.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="14" column="2" lean-forward="true" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+            <state relative-caret-position="794">
+              <caret line="86" column="4" lean-forward="false" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -119,18 +44,48 @@
       <file leaf-file-name="voice-state-update.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/events/events/voice-state-update.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-62">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="368">
+              <caret line="23" column="70" lean-forward="true" selection-start-line="23" selection-start-column="70" selection-end-line="23" selection-end-column="70" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="message-delete.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/events/events/message-delete.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-254">
+              <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mod-log.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/commands/mod/mod-log.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="60" column="32" lean-forward="true" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/events/base.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-190">
-              <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+            <state relative-caret-position="554">
+              <caret line="40" column="20" lean-forward="false" selection-start-line="40" selection-start-column="12" selection-end-line="41" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="invite.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/commands/mod/invite.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -139,18 +94,8 @@
       <file leaf-file-name="guild-member-update.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/events/events/guild-member-update.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="event-embed.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/events/event-embed.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="496">
-              <caret line="31" column="23" lean-forward="true" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+            <state relative-caret-position="410">
+              <caret line="27" column="33" lean-forward="true" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -222,15 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc.js" />
-        <option value="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-remove.js" />
-        <option value="$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-add.js" />
-        <option value="$PROJECT_DIR$/lib/commands/pkmn-spec/dgc-add.js" />
-        <option value="$PROJECT_DIR$/lib/commands/pkmn-spec/hickory-remove.js" />
-        <option value="$PROJECT_DIR$/lib/commands/util/wiki-gw2.js" />
-        <option value="$PROJECT_DIR$/lib/commands/util/wiki-bdo.js" />
-        <option value="$PROJECT_DIR$/lib/commands/util/wiki-eso.js" />
-        <option value="$PROJECT_DIR$/lib/commands/util/wiki.js" />
         <option value="$PROJECT_DIR$/node_modules/wikijs/dist/wiki.js" />
         <option value="$PROJECT_DIR$/lib/classes/wiki-base.js" />
         <option value="$PROJECT_DIR$/lib/commands/fun/8ball.js" />
@@ -254,16 +190,11 @@
         <option value="$PROJECT_DIR$/lib/events/events/voice-state-update.js" />
         <option value="$PROJECT_DIR$/lib/assets/config.json" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/assets/config.json" />
         <option value="$PROJECT_DIR$/src/modules/deleteMsg.js" />
         <option value="$PROJECT_DIR$/src/commands/fun/cat.js" />
         <option value="$PROJECT_DIR$/src/commands/fun/dog.js" />
-        <option value="$PROJECT_DIR$/src/events/events/voice-state-update.js" />
-        <option value="$PROJECT_DIR$/src/events/base.js" />
-        <option value="$PROJECT_DIR$/src/events/events/guild-member-update.js" />
         <option value="$PROJECT_DIR$/src/commands/util/nuke.js" />
         <option value="$PROJECT_DIR$/src/modules/alerts.js" />
-        <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/commands/mod/say.js" />
         <option value="$PROJECT_DIR$/src/modules/list/base.js" />
         <option value="$PROJECT_DIR$/src/modules/wiki/wiki-base.js" />
@@ -273,6 +204,20 @@
         <option value="$PROJECT_DIR$/src/commands/pkmn-spec/dgc.js" />
         <option value="$PROJECT_DIR$/src/modules/delete-msg.js" />
         <option value="$PROJECT_DIR$/gulpfile.js" />
+        <option value="$PROJECT_DIR$/src/assets/config.json" />
+        <option value="$PROJECT_DIR$/src/modules/logger.js" />
+        <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/events/logger.js" />
+        <option value="$PROJECT_DIR$/src/events/events/guild-member-update.js" />
+        <option value="$PROJECT_DIR$/src/events/event-embed.js" />
+        <option value="$PROJECT_DIR$/src/events/events/guild-member-remove.js" />
+        <option value="$PROJECT_DIR$/src/events/events/guild-member-add.js" />
+        <option value="$PROJECT_DIR$/src/events/events/message-delete.js" />
+        <option value="$PROJECT_DIR$/src/commands/util/user-info.js" />
+        <option value="$PROJECT_DIR$/src/events/events/voice-state-update.js" />
+        <option value="$PROJECT_DIR$/src/commands/mod/invite.js" />
+        <option value="$PROJECT_DIR$/src/commands/mod/mod-log.js" />
+        <option value="$PROJECT_DIR$/src/events/base.js" />
       </list>
     </option>
   </component>
@@ -401,6 +346,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="list" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DiscordBot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DiscordBot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="events" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -424,6 +391,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="events" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DiscordBot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DiscordBot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -541,18 +530,18 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\finap\git\DiscordBot\src\events" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\assets" />
       <recent name="C:\Users\finap\git\DiscordBot\lib" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\events\events" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\modules\wiki" />
-      <recent name="C:\Users\finap\git\DiscordBot\lib\modules\list" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\finap\git\DiscordBot\src\events\events" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\events" />
       <recent name="C:\Users\finap\git\DiscordBot\test" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\commands\util" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\commands\fun" />
-      <recent name="C:\Users\finap\git\DiscordBot\lib\commands\pkmn-spec" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.index.js">
@@ -653,7 +642,7 @@
       <workItem from="1485021705323" duration="74000" />
       <workItem from="1485021788320" duration="45749000" />
       <workItem from="1485127196736" duration="24633000" />
-      <workItem from="1485303576334" duration="32854000" />
+      <workItem from="1485303576334" duration="53744000" />
     </task>
     <task id="LOCAL-00001" summary="Added add to list command">
       <created>1484695588275</created>
@@ -753,13 +742,27 @@
       <option name="project" value="LOCAL" />
       <updated>1485239033070</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Reorganized project structure. Added Logger that will log WSEvents to a guild-specified channel.">
+      <created>1485383355363</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1485383355363</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Fixed bugs in WSEvent. Added permissions to mod commands. Added more WSEvents.">
+      <created>1485406880124</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1485406880124</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="225613000" />
+    <option name="totallyTimeSpent" value="246503000" />
   </component>
-  <component name="TodoView">
+  <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -770,11 +773,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1859375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -813,7 +816,8 @@
     <MESSAGE value="Added wolfram alpha command." />
     <MESSAGE value="Making Azure-friendly." />
     <MESSAGE value="Reorganized project structure. Added Logger that will log WSEvents to a guild-specified channel." />
-    <option name="LAST_COMMIT_MESSAGE" value="Reorganized project structure. Added Logger that will log WSEvents to a guild-specified channel." />
+    <MESSAGE value="Fixed bugs in WSEvent. Added permissions to mod commands. Added more WSEvents." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bugs in WSEvent. Added permissions to mod commands. Added more WSEvents." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -822,34 +826,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/commands/pkmn-spec/pkmn.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="15" column="2" lean-forward="false" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/pkmn-spec/pkmn-add.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="2" lean-forward="false" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/assets/dgc.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="21" column="37" lean-forward="true" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/pkmn-spec/guess.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="23" column="2" lean-forward="false" selection-start-line="23" selection-start-column="2" selection-end-line="23" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/commands/pkmn-spec/guess-add.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1011,14 +987,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/assets/config.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/list/list-tags.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1043,14 +1011,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/events/events/voice-state-update.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-62">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/commands/util/nuke.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -1067,42 +1027,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/mod/say.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="48" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="47" lean-forward="false" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/events/events/guild-member-update.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/commands/util/wolfram.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="45" column="41" lean-forward="false" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/events/event-embed.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="31" column="23" lean-forward="true" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -1115,34 +1043,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/events/base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-190">
-          <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/wiki/wiki-base.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
           <caret line="70" column="4" lean-forward="false" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/util/user-info.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="27" column="7" lean-forward="false" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/mod/invite.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="16" column="7" lean-forward="false" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -1171,34 +1075,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/list/base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="83" column="4" lean-forward="false" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/list/list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="95" column="4" lean-forward="false" selection-start-line="95" selection-start-column="4" selection-end-line="95" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/list/list-remove.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="185" column="26" lean-forward="false" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/logger.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="35" column="20" lean-forward="true" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1214,7 +1094,135 @@
     <entry file="file://$PROJECT_DIR$/src/modules/delete-msg.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
-          <caret line="14" column="2" lean-forward="true" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+          <caret line="14" column="2" lean-forward="false" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commands/mod/say.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" column="48" lean-forward="true" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/list/base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="826">
+          <caret line="83" column="4" lean-forward="false" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/events/guild-member-add.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="25" column="65" lean-forward="false" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/events/guild-member-remove.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="25" column="65" lean-forward="false" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/event-embed.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="40" column="47" lean-forward="false" selection-start-line="40" selection-start-column="47" selection-end-line="40" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/list/list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1483">
+          <caret line="95" column="4" lean-forward="false" selection-start-line="95" selection-start-column="4" selection-end-line="95" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commands/util/user-info.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commands/mod/invite.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/events/guild-member-update.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="27" column="33" lean-forward="true" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/events/voice-state-update.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="23" column="70" lean-forward="true" selection-start-line="23" selection-start-column="70" selection-end-line="23" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/logger.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="36" column="45" lean-forward="true" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="794">
+          <caret line="86" column="4" lean-forward="false" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/events/message-delete.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-254">
+          <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commands/mod/mod-log.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="60" column="32" lean-forward="true" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="40" column="20" lean-forward="false" selection-start-line="40" selection-start-column="12" selection-end-line="41" selection-end-column="36" />
           <folding />
         </state>
       </provider>

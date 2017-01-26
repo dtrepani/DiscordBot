@@ -3,7 +3,6 @@
 const EventLog = require('../base');
 const EventEmbed = require('../event-embed');
 const { oneLine } = require('common-tags');
-const config = require('../../assets/config.json');
 
 module.exports = class VoiceStateUpdateEvent extends EventLog {
 	constructor(client) {
@@ -40,7 +39,7 @@ module.exports = class VoiceStateUpdateEvent extends EventLog {
 		}
 
 		return {
-			description: oneLine`${before.user} moved from ${this.getVoiceChannel(before)} 
+			description: oneLine`${before.user} moved from ${this.getVoiceChannel(before)}
 				to ${this.getVoiceChannel(after)}`
 		};
 	}

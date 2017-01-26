@@ -5,7 +5,7 @@ const Discord = require('discord.js');
 module.exports = {
 	sendError: (msg, err) => {
 		const embed = new Discord.RichEmbed()
-			.setTitle(`An Error Occurred`)
+			.setTitle('An Error Occurred')
 			.setColor('#CE1616')
 			.setDescription(err);
 

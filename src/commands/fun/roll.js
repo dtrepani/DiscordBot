@@ -17,7 +17,7 @@ module.exports = class RollCommand extends Commando.Command {
 			name: 'roll',
 			group: 'fun',
 			memberName: 'roll',
-			description: `Roll them dice! :game_die:`,
+			description: 'Roll them dice! :game_die:',
 			args: [
 				{
 					key: 'roll',

@@ -70,8 +70,8 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 
 		if(listInfo.requireOptions) {
 			info.description += (listInfo.multipleOptions)
-				? `with its corresponding tags `
-				: `with a corresponding value `;
+				? 'with its corresponding tags '
+				: 'with a corresponding value ';
 		}
 
 		info.description += `to the ${listName} list.`;
@@ -115,26 +115,26 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 		return { error: false };
 	}
 
-    /**
-     * @return {Reply}
-     */
+	/**
+	 * @return {Reply}
+	 */
 	getReply(args, list) {
-        if(args.options) {
-            if(this.multipleOptions) {
-            	return this.getReplyForMultipleOptions(args, list);
-            }
-            return this.getReplyForSingleOption(args, list);
-        }
-        return this.getReplyForNoOptions(args, list);
-    }
+		if(args.options) {
+			if(this.multipleOptions) {
+				return this.getReplyForMultipleOptions(args, list);
+			}
+			return this.getReplyForSingleOption(args, list);
+		}
+		return this.getReplyForNoOptions(args, list);
+	}
 
-    getReplyForMultipleOptions(args, list) {
-	    let res = this.checkIfURLRequiredAndItemIsURL(args.item);
-	    if(res.error) return res;
+	getReplyForMultipleOptions(args, list) {
+		let res = this.checkIfURLRequiredAndItemIsURL(args.item);
+		if(res.error) return res;
 
-	    args.options = args.options.split(" ");
-	    return this.pushToTags(args, list);
-    }
+		args.options = args.options.split(" ");
+		return this.pushToTags(args, list);
+	}
 
 	getReplyForNoOptions(args, list) {
 		let res = this.checkIfURLRequiredAndItemIsURL(args.item);
@@ -155,16 +155,16 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 		};
 	}
 
-    getReplyForSingleOption(args, list) {
-	    if (!this.urlOnly && this.isUrl(args.item)) {
-		    return {
-			    error: true,
-			    msg: commonTags.oneLine`Item must not be a URL. Did you perhaps mix up your arguments? 
+	getReplyForSingleOption(args, list) {
+		if (!this.urlOnly && this.isUrl(args.item)) {
+			return {
+				error: true,
+				msg: commonTags.oneLine`Item must not be a URL. Did you perhaps mix up your arguments?
 							See examples in \`help ${this.listName}\``
-		    };
-	    }
+			};
+		}
 
-	    if(!this.urlOnly) args.item = args.item.toLowerCase();
+		if(!this.urlOnly) args.item = args.item.toLowerCase();
 
 		if(list[args.item] instanceof Array) {
 			if(list[args.item].includes(args.options)) {
@@ -186,11 +186,11 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 			list[args.item] = args.options;
 		}
 
-	    return {
-		    error: false,
-		    msg: commonTags.commaLists`\`${args.options}\` was added to \`${args.item}\``
-	    };
-    }
+		return {
+			error: false,
+			msg: commonTags.commaLists`\`${args.options}\` was added to \`${args.item}\``
+		};
+	}
 
 	/**
 	 * @returns {Reply}
@@ -222,7 +222,7 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 			return {
 				error: false,
 				msg: commonTags.oneLine`
-						\`${args.item}\` is already in \`${errorKeys.join(", ")}\` 
+						\`${args.item}\` is already in \`${errorKeys.join(", ")}\`
 						but any tags not listed were added successfully.`
 			};
 		}

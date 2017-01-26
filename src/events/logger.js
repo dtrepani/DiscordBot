@@ -2,7 +2,6 @@
 
 const EventLog = require('./base');
 const winston = require('winston');
-const fs = require('fs');
 const path = require('path');
 
 /**
@@ -13,51 +12,55 @@ module.exports = class Logger {
 	 * @param {CommandoClient} client - The client the command is for
 	 * @param {String} dir - Directory for the event objects
 	 */
-	constructor(client, dir) {
-		this.client = client;
-		this.dir = dir;
-		this.registerEvents();
-	}
+  constructor(client, dir) {
+    this.client = client;
+    this.dir = dir;
+    this.registerEvents();
+  }
 
-	registerEvents() {
-		const wsEventObjs = require('require-all')(this.dir);
-		this.wsEvents = [];
+  registerEvents() {
+    const wsEventObjs = require('require-all')(this.dir);
+    this.wsEvents = [];
 
-		for (const wsEvent of Object.values(wsEventObjs)) {
-			this.wsEvents.push(wsEvent);
-			this.registerEvent(wsEvent);
-		}
-	}
+    for (const wsEvent of Object.values(wsEventObjs)) {
+      this.wsEvents.push(wsEvent);
+      this.registerEvent(wsEvent);
+    }
+  }
 
-	registerEvent(wsEvent) {
-		if(typeof wsEvent === 'function') {
-			wsEvent = new wsEvent(this.client);
-		}
+  registerEvent(wsEvent) {
+    if (typeof wsEvent === 'function') {
+      wsEvent = new wsEvent(this.client);
+    }
 
-		if (!(wsEvent instanceof EventLog)) {
-			winston.warn(`Skipping invalid WSEvent: ${wsEvent}`);
-			return;
-		}
+    if (!(wsEvent instanceof EventLog)) {
+      winston.warn(`Skipping invalid WSEvent: ${wsEvent}`);
+      return;
+    }
 
-		if(this.wsEvents.some(anEvent => wsEvent.name === anEvent.name)) {
-			throw new Error(`"${wsEvent.name}" is already registered as an event.`);
-		}
+    if (this.wsEvents.some(anEvent => wsEvent.name === anEvent.name)) {
+      throw new Error(`"${wsEvent.name}" is already registered as an event.`);
+    }
 
-		wsEvent.register();
-	}
+    wsEvent.register();
+  }
 
-	reloadEvents() {
-		for (let wsEvent in this.wsEvents) {
-			if(!wsEvent.name) continue;
+  reloadEvents() {
+    for (let wsEvent in this.wsEvents) {
+      if (!wsEvent.name) {
+        continue;
+      }
 
-			const pathName = path.join(this.dir, `${this.camelCaseToDash(wsEvent.name)}.js`);
-			if(require.cache[pathName]) delete require.cache[pathName];
-		}
+      const pathName = path.join(this.dir, `${this.camelCaseToDash(wsEvent.name)}.js`);
+      if (require.cache[pathName]) {
+        delete require.cache[pathName];
+      }
+    }
 
-		this.registerEvents();
-	}
+    this.registerEvents();
+  }
 
-	camelCaseToDash(str) {
-		return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-	}
+  camelCaseToDash(str) {
+    return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+  }
 };

@@ -25,7 +25,7 @@ module.exports = class MessageDeleteEvent extends EventLog {
 			fields: [
 				{
 					name: `${config.embed_prefix} Message Content`,
-					value: msg.content || "None"
+					value: msg.content || 'None'
 				}
 			]
 		};

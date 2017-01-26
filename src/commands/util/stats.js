@@ -1,6 +1,6 @@
 const Commando = require('discord.js-commando');
 const moment = require('moment');
-const momentDurFormat = require('moment-duration-format');
+const momentDurFormat = require('moment-duration-format'); // eslint-disable-line no-unused-vars
 const stripIndents = require('common-tags').stripIndents;
 const version = require('../../../package').version;
 

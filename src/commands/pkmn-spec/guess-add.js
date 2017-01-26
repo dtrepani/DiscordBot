@@ -27,7 +27,7 @@ module.exports = class GuessAddCommand extends ListAddCommand {
 		}
 
 		if(args.item.substr(0, 4) === "ill ") {
-			args.item = "i'll " + args.item.substr(4);
+			args.item = `i'll ${args.item.substr(4)}`;
 		}
 
 		return super.run(msg, args);

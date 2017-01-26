@@ -1,10 +1,8 @@
 'use strict';
 
 const Commando = require('discord.js-commando');
-const winston = require('winston');
 const { oneLine } = require('common-tags');
 const alerts = require('../../modules/alerts');
-const deleteMsg = require('../../modules/delete-msg');
 
 module.exports = class ModLogCommand extends Commando.Command {
 	constructor(client) {
@@ -14,7 +12,7 @@ module.exports = class ModLogCommand extends Commando.Command {
 			group: 'mod',
 			memberName: 'mod-log',
 			description: 'Enable or disable the mod log.',
-			details: oneLine`If no channel is provided for the mod log, it will default previously set channel or 
+			details: oneLine`If no channel is provided for the mod log, it will default previously set channel or
 				#mod-log, but only if either are valid channels.`,
 			guildOnly: true,
 			guarded: true,
@@ -56,7 +54,7 @@ module.exports = class ModLogCommand extends Commando.Command {
 			return this.client.provider.set(guild, 'mod_log', modLogSettings)
 				.then(() => {
 					if(args.enabled) return msg.reply(`Logging is now enabled in ${guild.channels.get(channelID)}`);
-					return msg.reply(`Logging is now disabled.`);
+					return msg.reply('Logging is now disabled.');
 				})
 				.catch(err => { throw new Error(err); });
 		} catch(err) {

@@ -25,13 +25,13 @@ module.exports = class DGCCommand extends ListCommand {
 			} else {
 				return {
 					error: true,
-					msg: `Value entered must be a number.`
+					msg: 'Value entered must be a number.'
 				};
 			}
 		}
 
 		const rand = Math.floor(Math.random() * 100);
-		const subList = (rand <= chanceForEchium) ? "echium" : "dgc";
+		const subList = (rand <= chanceForEchium) ? 'echium' : 'dgc';
 
 		let res = super.getReply(args, list[subList]);
 		if(!res.error) {

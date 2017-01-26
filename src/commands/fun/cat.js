@@ -11,12 +11,11 @@ module.exports = class CatCommand extends Commando.Command {
 			aliases: ['cats'],
 			group: 'fun',
 			memberName: 'cat',
-			description: 'Cats! So many cats!',
-			guildOnly: true
+			description: 'Cats! So many cats!'
 		});
 	}
 
-	async run(msg, args) {
+	async run(msg) {
 		request('http://random.cat/meow', (err, res, body) => {
 			let reply = `http://i.imgur.com/Bai6JTL.jpg`;
 

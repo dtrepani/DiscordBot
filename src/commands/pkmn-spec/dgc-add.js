@@ -1,6 +1,5 @@
 'use strict';
 
-const alerts = require('../../modules/alerts');
 const ListAddCommand = require('../../modules/list/list-add.js');
 
 module.exports = class DGCAddCommand extends ListAddCommand {

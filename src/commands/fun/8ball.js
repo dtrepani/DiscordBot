@@ -21,15 +21,15 @@ module.exports = class EightBallCommand extends Commando.Command {
 		});
 	}
 
-	async run(msg, args) {
-		const path = `lib/assets/8ball.json`;
+	async run(msg) {
+		const pathName = 'src/assets/8ball.json';
 		let answers = [];
 
 		try {
-			fs.accessSync(path, fs.constants.F_OK);
-			answers = JSON.parse(fs.readFileSync(path));
+			fs.accessSync(pathName, fs.constants.F_OK);
+			answers = JSON.parse(fs.readFileSync(pathName));
 		} catch(err) {
-			return msg.reply(`:8ball: lol :8ball:`);
+			return msg.reply('lol :8ball:');
 		}
 
 		const rand = Math.floor(Math.random() * answers.length);

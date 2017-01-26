@@ -3,7 +3,6 @@
 const config = require('./assets/config.json');
 const Commando = require('discord.js-commando');
 const winston = require('winston');
-const fs = require('fs');
 const path = require('path');
 const sqlite = require('sqlite');
 const oneLine = require('common-tags').oneLine;
@@ -12,7 +11,7 @@ const Logger = require('./events/logger');
 winston.configure({
 	transports: [
 		new winston.transports.Console({
-			level: "debug",
+			level: 'debug',
 			handleExceptions: true,
 			colorize: true,
 			prettyPrint: true
@@ -26,7 +25,7 @@ const client = new Commando.Client({
 	unknownCommandResponse: false
 });
 
-const logger = new Logger(client, path.join(__dirname, 'events/events'));
+const logger = new Logger(client, path.join(__dirname, 'events/events')); // eslint-disable-line no-unused-vars
 
 // TODO: sqlite.clear(guild) when guild deleted
 client
@@ -58,8 +57,8 @@ client
 			> ${msg.guild ? `${msg.guild.name} (${msg.guild.id})` : 'DM'}
 			>> ${cmd.groupID}:${cmd.memberName}
 			${
-				(Object.values(args)[0] !== '') 
-					? (args instanceof Array) 
+				(Object.values(args)[0] !== '')
+					? (args instanceof Array)
 						? `>>> ${Object.values(args)}`
 						: `>>> ${args}`
 					: ''
@@ -83,6 +82,6 @@ client.registry
 
 client.login(config.tokens.discord_test);
 
-process.on("unhandledRejection", err => {
+process.on('unhandledRejection', err => {
 	winston.error("Uncaught Promise Error: \n" + err.stack);
 });

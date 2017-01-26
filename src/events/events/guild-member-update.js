@@ -38,11 +38,11 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 		let changedVal = '';
 
 		if(before.user.username !== after.user.username) {
-			statChanged = "Username";
-			changedVal = "user.username";
+			statChanged = 'Username';
+			changedVal = 'user.username';
 		} else if(before.nickname !== after.nickname) {
-			statChanged = "Nickname";
-			changedVal = "nickname";
+			statChanged = 'Nickname';
+			changedVal = 'nickname';
 		}
 
 		// TODO: roles
@@ -54,12 +54,12 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 			fields: [
 				{
 					name: `${config.embed_prefix} Before`,
-					value: `${before[changedVal] || "None"}`,
+					value: `${before[changedVal] || 'None'}`,
 					inline: true
 				},
 				{
 					name: `${config.embed_prefix} After`,
-					value: `${after[changedVal] || "None"}`,
+					value: `${after[changedVal] || 'None'}`,
 					inline: true
 				}
 			]

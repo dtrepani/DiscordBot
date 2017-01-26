@@ -52,7 +52,7 @@ module.exports = class EventLog {
 	/**
 	 * Function to run when the event is triggered.
 	 */
-	run(...args) {
+	run(...args) { // eslint-disable-line no-unused-vars
 		throw new Error(`${this.constructor.name} doesn't have a run() method.`);
 	}
 };

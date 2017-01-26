@@ -10,6 +10,6 @@ const winston = require('winston');
 module.exports = (msg, deleteFlag = true, delDelay = 200) => {
 	if(deleteFlag) {
 		msg.delete(delDelay)
-			.catch(err => winston.error(`Message was already deleted.`));
+			.catch(err => winston.error(`Message was already deleted.`));  // eslint-disable-line no-unused-vars
 	}
 };
