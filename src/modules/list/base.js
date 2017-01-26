@@ -15,11 +15,6 @@ module.exports = class ListBaseCommand extends Commando.Command {
 	 */
 
 	/**
-	 * @typedef {Object} CommandClient
-	 * @see module:discord.js-commando
-	 */
-
-	/**
 	 * @typedef {Object} ListInfo
 	 * @property {boolean} [readOnly = false] - Whether to set the list, which is not needed for read-only commands
 	 * @property {boolean} [isArrList = false] - Whether the list is an object or an array; used when providing a
@@ -28,7 +23,7 @@ module.exports = class ListBaseCommand extends Commando.Command {
 	 */
 
 	/**
-	 * @param {CommandClient} client
+	 * @param {?CommandClient} client
 	 * @param {string} listName - Name of list
 	 * @param {CommandInfo} commandInfo
 	 * @param {ListInfo} listInfo - How the command handles the list
@@ -42,8 +37,8 @@ module.exports = class ListBaseCommand extends Commando.Command {
 	}
 
 	async run(msg, args) {
-		let list = this.getList();
-		let res = this.getReply(args, list);
+		const list = this.getList();
+		const res = this.getReply(args, list);
 
 		if(res.error) {
 			return alerts.sendError(msg, res.msg);
@@ -81,11 +76,14 @@ module.exports = class ListBaseCommand extends Commando.Command {
 	}
 
 	isUrl(item) {
-		return (item.search(/https?:\/\/[^ \/\.]+\.[^ \/\.]+/) !== -1);
+		return (item.search(/https?:\/\/[^ \/\.]+\.[^ \/\.]+/) !== -1); // eslint-disable-line no-useless-escape
 	}
 
 	/**
 	 * The reply will change based on whatever the command does and thus must be overridden.
+	 * @abstract
+	 * @param {Array} args
+	 * @param {Object|Array} list
 	 * @returns {Reply}
 	 */
 	getReply(args, list) { // eslint-disable-line no-unused-vars

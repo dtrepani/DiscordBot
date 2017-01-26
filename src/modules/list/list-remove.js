@@ -67,7 +67,7 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 	}
 
 	static constructDescription(info, listName, listInfo) {
-		info.description = `Remove ` + ((listInfo.urlOnly) ? `a URL ` : `an item `);
+		info.description = `Remove ${(listInfo.urlOnly) ? `a URL ` : `an item `}`;
 
 		if(listInfo.requireOptions) {
 			info.description += 'from its corresponding tags ';
@@ -81,7 +81,7 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 	static constructExamples(info, listName, listInfo) {
 		const command = `remove-${listName}`;
 		const exampleUrl = `\`http://i.imgur.com/f75Pzvn.jpg\``;
-		let examples = info.examples;
+		const examples = info.examples;
 
 		if(!listInfo.requireOptions) {
 			/* Always push URL example so user knows they can use URLs. */
@@ -98,7 +98,7 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 	}
 
 	/**
-	 * @returns {Reply}
+	 * @Override
 	 */
 	getReply(args, list) {
 		if(this.urlOnly && !this.isUrl(args.item)) {
@@ -116,10 +116,12 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 	}
 
 	/**
+	 * @param {Object} args
+	 * @param {Object|Array} list
 	 * @returns {Reply}
 	 */
 	removeFromGivenTags(args, list) {
-		args.options = args.options.split(" ");
+		args.options = args.options.split(' ');
 
 		if(list instanceof Array) {
 			return {
@@ -129,14 +131,14 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 			};
 		}
 
-		let errorTags = [];
-		let successfulTags = [];
+		const errorTags = [];
+		const successfulTags = [];
 
 		args.options.forEach(tag => {
 			tag = tag.toLowerCase();
 
-			if (list.hasOwnProperty(tag)) {
-				if (this.removeItemFromTag(list, args, tag)) successfulTags.push(tag);
+			if(list.hasOwnProperty(tag)) {
+				if(this.removeItemFromTag(list, args, tag)) successfulTags.push(tag);
 				else errorTags.push(tag);
 			} else {
 				errorTags.push(tag);
@@ -146,29 +148,32 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 		if(successfulTags.length === 0) {
 			return {
 				error: true,
-				msg: `All the tags given (\`${args.options}\`) were either non-existent or already did not contain \`${args.item}\``
-			};
-		} else {
-			return {
-				error: false,
-				msg: commonTags.oneLineCommaLists`\`${args.item}\` was removed from
-					\`${successfulTags}\`` +
-					((errorTags.length !== 0)
-						? `\n\n` + commonTags.oneLineCommaLists`:no_entry_sign: But the tag(s) \`${errorTags}\` were
-							either non-existent or already did not have the item.`
-						: ``)
+				msg: commonTags.oneLine`All the tags given (\`${args.options}\`) were either non-existent or
+					already did not contain \`${args.item}\``
 			};
 		}
+
+		return {
+			error: false,
+			msg: commonTags.oneLineCommaLists`\`${args.item}\` was removed from
+				\`${successfulTags}\`` +
+				((errorTags.length !== 0)
+					? `\n\n${commonTags.oneLineCommaLists`:no_entry_sign: But the tag(s) \`${errorTags}\` were
+						either non-existent or already did not have the item.`}`
+					: ``)
+		};
 	}
 
 	/**
+	 * @param {Object} args
+	 * @param {Object|Array} list
 	 * @returns {Reply}
 	 */
 	removeItemFromAll(args, list) {
-		let tagsRemovedFrom = [];
+		const tagsRemovedFrom = [];
 
 		if(list instanceof Array) {
-			let itemIndex = list.indexOf(args.item);
+			const itemIndex = list.indexOf(args.item);
 
 			if(itemIndex === -1) {
 				return {
@@ -179,7 +184,7 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 
 			list.splice(itemIndex, 1);
 		} else {
-			for(let tag in list) {
+			for(const tag in list) {
 				if(this.removeItemFromTag(list, args, tag)) {
 					tagsRemovedFrom.push(tag);
 				}
@@ -188,10 +193,10 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 
 		return {
 			error: false,
-			msg: `\`${args.item}\` was removed` +
-				((tagsRemovedFrom.length > 1)
-					? ` from \`${tagsRemovedFrom.join(", ")}\``
-					: `.`)
+			msg: `\`${args.item}\` was removed${
+				(tagsRemovedFrom.length > 1)
+					? ` from \`${tagsRemovedFrom.join(', ')}\``
+					: `.`}`
 		};
 	}
 
@@ -201,7 +206,7 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 		}
 
 		if(list[tag] && (typeof list[tag] === 'string' || list[tag] instanceof String)) {
-			if (tag !== args.item) {
+			if(tag !== args.item) {
 				return false;
 			}
 
@@ -209,13 +214,13 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 		} else {
 			const itemIndex = list[tag].indexOf(args.item);
 
-			if (itemIndex === -1) {
+			if(itemIndex === -1) {
 				return false;
 			}
 
 			list[tag].splice(itemIndex, 1);
 
-			if (list[tag].length === 0) {
+			if(list[tag].length === 0) {
 				delete list[tag];
 			}
 		}

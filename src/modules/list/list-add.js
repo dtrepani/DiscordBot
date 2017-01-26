@@ -35,7 +35,7 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 	constructor(client, listName, groupName, listInfo) {
 		let info = {
 			name: `${listName}-add`,
-			aliases: [ `add-${listName}` ],
+			aliases: [`add-${listName}`],
 			group: groupName,
 			memberName: `${listName}-add`,
 			examples: [],
@@ -66,7 +66,7 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 	}
 
 	static constructDescription(info, listName, listInfo) {
-		info.description = `Add ` + ((listInfo.urlOnly) ? `a URL ` : `an item `);
+		info.description = `Add ${(listInfo.urlOnly) ? `a URL ` : `an item `}`;
 
 		if(listInfo.requireOptions) {
 			info.description += (listInfo.multipleOptions)
@@ -82,7 +82,7 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 	static constructExamples(info, listName, listInfo) {
 		const command = `add-${listName}`;
 		const exampleUrl = `\`http://i.imgur.com/f75Pzvn.jpg\``;
-		let examples = info.examples;
+		const examples = info.examples;
 
 		if(!listInfo.requireOptions) {
 			/* Always push URL example so user knows they can use URLs. */
@@ -90,15 +90,13 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 				examples.push(`${command} "snippet of text"`);
 			}
 			examples.push(`${command} ${exampleUrl}`);
+		} else if(listInfo.multipleOptions) {
+			examples.push(`${command} ${exampleUrl} kyuu lhu email`);
+			examples.push(`${command} ${exampleUrl} kyuu`);
 		} else {
-			if(listInfo.multipleOptions) {
-				examples.push(`${command} ${exampleUrl} kyuu lhu email`);
-				examples.push(`${command} ${exampleUrl} kyuu`);
-			} else {
-				examples.push(`${command} lenny "( ͡° ͜ʖ ͡°)"`);
-				examples.push(`${command} omw "On my way!"`);
-				examples.push(`${command} u you`);
-			}
+			examples.push(`${command} lenny "( ͡° ͜ʖ ͡°)"`);
+			examples.push(`${command} omw "On my way!"`);
+			examples.push(`${command} u you`);
 		}
 
 		return info;
@@ -116,7 +114,7 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 	}
 
 	/**
-	 * @return {Reply}
+	 * @Override
 	 */
 	getReply(args, list) {
 		if(args.options) {
@@ -129,15 +127,15 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 	}
 
 	getReplyForMultipleOptions(args, list) {
-		let res = this.checkIfURLRequiredAndItemIsURL(args.item);
+		const res = this.checkIfURLRequiredAndItemIsURL(args.item);
 		if(res.error) return res;
 
-		args.options = args.options.split(" ");
+		args.options = args.options.split(' ');
 		return this.pushToTags(args, list);
 	}
 
 	getReplyForNoOptions(args, list) {
-		let res = this.checkIfURLRequiredAndItemIsURL(args.item);
+		const res = this.checkIfURLRequiredAndItemIsURL(args.item);
 		if(res.error) return res;
 
 		if(list.includes(args.item)) {
@@ -156,7 +154,7 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 	}
 
 	getReplyForSingleOption(args, list) {
-		if (!this.urlOnly && this.isUrl(args.item)) {
+		if(!this.urlOnly && this.isUrl(args.item)) {
 			return {
 				error: true,
 				msg: commonTags.oneLine`Item must not be a URL. Did you perhaps mix up your arguments?
@@ -176,7 +174,7 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 
 			list[args.item].push(args.options);
 		} else {
-			if (list.hasOwnProperty(args.item)) {
+			if(list.hasOwnProperty(args.item)) {
 				return {
 					error: true,
 					msg: `\`${args.item}\` already exists. Please use another value.`
@@ -193,43 +191,43 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 	}
 
 	/**
+	 * @param {Array} args
+	 * @param {Object[]} list
 	 * @returns {Reply}
 	 */
 	pushToTags(args, list) {
 		const item = args.item;
-		let tags = args.options;
-		let errorKeys = [];
+		const tags = args.options;
+		const errorKeys = [];
 
 		tags.forEach(tag => {
 			tag = tag.toLowerCase();
 
-			if (list.hasOwnProperty(tag)) {
-				if (list[tag].indexOf(item) === -1) list[tag].push(item);
-				else {
-					errorKeys.push(tag);
-				}
-			} else list[tag] = [item];
+			if(list.hasOwnProperty(tag)) {
+				if(list[tag].indexOf(item) === -1) list[tag].push(item);
+				else errorKeys.push(tag);
+			} else { list[tag] = [item]; }
 		});
 
 		if(errorKeys.length === tags.length) {
 			return {
 				error: true,
-				msg: `\`${args.item}\` is already in \`${errorKeys.join(", ")}\``
-			}
+				msg: `\`${args.item}\` is already in \`${errorKeys.join(', ')}\``
+			};
 		}
 
 		if(errorKeys.length !== 0) {
 			return {
 				error: false,
 				msg: commonTags.oneLine`
-						\`${args.item}\` is already in \`${errorKeys.join(", ")}\`
+						\`${args.item}\` is already in \`${errorKeys.join(', ')}\`
 						but any tags not listed were added successfully.`
 			};
 		}
 
 		return {
 			error: false,
-			msg: `\`${item}\` was added with tags \`${tags.slice(0).join(", ")}\``
+			msg: `\`${item}\` was added with tags \`${tags.slice(0).join(', ')}\``
 		};
 	}
 };

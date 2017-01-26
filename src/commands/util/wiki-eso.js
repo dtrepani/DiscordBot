@@ -1,9 +1,9 @@
 'use strict';
 
-const WikiBaseCommand = require('../../modules/wiki/wiki-base.js');
+const WikiCommand = require('./wiki.js');
 
-module.exports = class WikiESOCommand extends WikiBaseCommand {
+module.exports = class WikiESOCommand extends WikiCommand {
 	constructor(client) {
-		super(client, 'eso', {apiUrl: 'https://elderscrolls.wikia.com/api.php'});
+		super(client, 'eso', { apiUrl: 'https://elderscrolls.wikia.com/api.php' });
 	}
 };

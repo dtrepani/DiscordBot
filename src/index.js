@@ -5,7 +5,7 @@ const Commando = require('discord.js-commando');
 const winston = require('winston');
 const path = require('path');
 const sqlite = require('sqlite');
-const oneLine = require('common-tags').oneLine;
+const { oneLine } = require('common-tags');
 const Logger = require('./events/logger');
 
 winston.configure({
@@ -34,10 +34,11 @@ client
 	.on('disconnect', () => { winston.warn('Disconnected!'); })
 	.on('reconnect', () => { winston.warn('Reconnecting...'); })
 	.on('ready', () => {
-		winston.info(`Client ready; logged in as ${client.user.username}#${client.user.discriminator} (${client.user.id})`);
-
+		winston.info(oneLine`
+			Client ready; logged in as
+			${client.user.username}#${client.user.discriminator} (${client.user.id})`
+		);
 		client.user.setGame('Pikmin Crossing: Fashion Wars 2')
-			.then(() => {})
 			.catch((err) => {
 				winston.warn(`Error setting game: ${err}`);
 			});
@@ -49,7 +50,7 @@ client
 		`);
 	})
 	.on('commandError', (cmd, err) => {
-		if (err instanceof Commando.FriendlyError) return;
+		if(err instanceof Commando.FriendlyError) return;
 		winston.error(`Error in command ${cmd.groupID}:${cmd.memberName}`, err);
 	})
 	.on('commandRun', (cmd, promise, msg, args) => {
@@ -83,5 +84,5 @@ client.registry
 client.login(config.tokens.discord_test);
 
 process.on('unhandledRejection', err => {
-	winston.error("Uncaught Promise Error: \n" + err.stack);
+	winston.error(`Uncaught Promise Error: \n ${err.stack}`);
 });

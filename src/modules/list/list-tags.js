@@ -30,9 +30,9 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 	 * @param {ListInfo} [listInfo = {}] - How the command handles the list
 	 */
 	constructor(client, listName, groupName, listInfo = {}) {
-		let info = {
+		const info = {
 			name: `${listName}-tags`,
-			aliases: [ `tags-${listName}` ],
+			aliases: [`tags-${listName}`],
 			group: groupName,
 			memberName: `${listName}-tags`,
 			description: 'List the tags currently added.'
@@ -41,7 +41,7 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 	}
 
 	/**
-	 * @returns {Reply}
+	 * @Override
 	 */
 	getReply(args, list) {
 		if(list instanceof Array) {
@@ -51,7 +51,7 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 			};
 		}
 
-		let tags = list ? Object.keys(list) : [];
+		const tags = list ? Object.keys(list) : [];
 
 		if(tags.length === 0) {
 			return {
@@ -63,7 +63,7 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 		return {
 			error: false,
 			msg: commonTags.stripIndents`\`${this.listName}\` tags:
-				\`\`\`${tags.sort().join(", ")}\`\`\``
+				\`\`\`${tags.sort().join(', ')}\`\`\``
 		};
 	}
 };

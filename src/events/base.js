@@ -34,11 +34,11 @@ module.exports = class EventLog {
 				const guild = args[0].guild || args[1].guild;
 				const modLogSettings = this.client.provider.get(guild, 'mod_log', {});
 
-				if (!modLogSettings.enabled) return;
+				if(!modLogSettings.enabled) return;
 
-				this.run(...args)
+				this.run(...args);
 			} catch(err) {
-				winston.error("No Guild Found: \n" + err.stack);
+				winston.error(`No Guild Found: \n ${err.stack}`);
 				winston.debug(args);
 			}
 		});
@@ -51,6 +51,7 @@ module.exports = class EventLog {
 
 	/**
 	 * Function to run when the event is triggered.
+	 * @abstract
 	 */
 	run(...args) { // eslint-disable-line no-unused-vars
 		throw new Error(`${this.constructor.name} doesn't have a run() method.`);

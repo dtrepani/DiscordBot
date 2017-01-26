@@ -8,9 +8,7 @@ module.exports = class TagCommand extends ListCommand {
 			client,
 			'tag',
 			'tags',
-			{
-				requireItem: true
-			}
+			{ requireItem: true }
 		);
 	}
 };

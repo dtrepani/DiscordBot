@@ -34,9 +34,7 @@ module.exports = class RollCommand extends Commando.Command {
 		try {
 			const rollInfo = this.parseRoll(args.roll);
 			const diceRolls = this.rollAllDice(rollInfo);
-			const rollTotal = diceRolls.reduce((roll1, roll2) => {
-				return roll1 + roll2;
-			}, 0);
+			const rollTotal = diceRolls.reduce((roll1, roll2) => (roll1 + roll2), 0);
 			const diceRollsStr = ((diceRolls.length > 1)
 				? `[${diceRolls.join(' + ')}]`
 				: ``);
@@ -48,6 +46,7 @@ module.exports = class RollCommand extends Commando.Command {
 	}
 
 	/**
+	 * @param {String} roll
 	 * @returns {RollInfo}
 	 */
 	parseRoll(roll) {
@@ -64,16 +63,16 @@ module.exports = class RollCommand extends Commando.Command {
 		return {
 			numOfDice: numOfDice,
 			numSidedDice: numSidedDice
-		}
+		};
 	}
 
 
 	/**
 	 * @param {RollInfo} rollInfo
-	 * @returns [int] Each dice roll
+	 * @returns {integer} Each dice roll
 	 */
 	rollAllDice(rollInfo) {
-		let diceRolls = [];
+		const diceRolls = [];
 
 		for(let i = 0; i < rollInfo.numOfDice; i++) {
 			diceRolls.push(this.rollSingleDice(rollInfo.numSidedDice));

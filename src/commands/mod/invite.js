@@ -21,6 +21,6 @@ module.exports = class InviteCommand extends Commando.Command {
 
 	async run(msg) {
 		msg.delete();
-		return msg.direct(`https://discordapp.com/api/oauth2/authorize?client_id=${config.client_id}&scope=bot&permissions=${config.permissions}`, {});
+		return msg.direct(`https://discordapp.com/api/oauth2/authorize?client_id=${config.client_id}&scope=bot&permissions=${config.permissions}`, {}); // eslint-disable-line max-len
 	}
 };

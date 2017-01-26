@@ -8,7 +8,7 @@ module.exports = class ModLogCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'mod-log',
-			alias: [ 'log' ],
+			alias: ['log'],
 			group: 'mod',
 			memberName: 'mod-log',
 			description: 'Enable or disable the mod log.',
@@ -40,9 +40,11 @@ module.exports = class ModLogCommand extends Commando.Command {
 		try {
 			const guild = msg.guild;
 			const oldModLogSettings = this.client.provider.get(guild, 'mod_log', {});
-			const channelID = args.channel.id || oldModLogSettings.channelID || guild.channels.find('name', 'mod-log').id;
+			const channelID = args.channel.id ||
+				oldModLogSettings.channelID ||
+				guild.channels.find('name', 'mod-log').id;
 
-			if (!channelID) {
+			if(!channelID) {
 				throw new Error(`Please provide a valid channel.`);
 			}
 

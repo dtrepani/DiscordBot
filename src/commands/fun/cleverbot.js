@@ -27,12 +27,9 @@ module.exports = class CleverbotCommand extends Commando.Command {
 	}
 
 	async run(msg, args) {
-		let cleverbot = new Cleverbot;
-
+		const cleverbot = new Cleverbot;
 		return Cleverbot.prepare(() => {
-			cleverbot.write(args.text, res => {
-				return msg.reply(res.message);
-			});
+			cleverbot.write(args.text, res => msg.reply(res.message));
 		});
 	}
 };

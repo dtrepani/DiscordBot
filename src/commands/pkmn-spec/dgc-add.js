@@ -21,7 +21,7 @@ module.exports = class DGCAddCommand extends ListAddCommand {
 			return {
 				error: true,
 				msg: `The only tags available are "echium" or "dgc".`
-			}
+			};
 		}
 
 		return super.getReply(args, list);

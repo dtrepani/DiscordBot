@@ -43,38 +43,38 @@ module.exports = class NukeCommand extends Commando.Command {
 	// TODO: fix filters lol
 	async run(msg, args) {
 		const limit = args.limit;
-		const filter = args['filter'].toLowerCase();
+		const filter = args.filter.toLowerCase();
 		let messageFilter;
 
 		switch(filter) {
-			case 'bots':
-				messageFilter = message => message.author.bot;
-				break;
-			case 'links':
-				messageFilter = message => message.content.search(/https?:\/\/[^ \/\.]+\.[^ \/\.]+/) !== -1; // eslint-disable-line no-useless-escape
-				break;
-			case 'invite':
-				messageFilter = (message =>
+		case 'bots':
+			messageFilter = message => message.author.bot;
+			break;
+		case 'links':
+			messageFilter = message => message.content.search(/https?:\/\/[^ \/\.]+\.[^ \/\.]+/) !== -1; // eslint-disable-line
+			break;
+		case 'invite':
+			messageFilter = (message =>
 					message.content.search(/(discord\.gg\/.+|discordapp\.com\/invite\/.+)/i) !== -1
 				);
-				break;
-			case 'upload':
-				messageFilter = message => message.attachments.size !== 0;
-				break;
-			case 'user':
-				if (!args.member) {
-					return alerts.sendError(`Please provide a user (@User) to filter.`);
-				}
-				messageFilter = message => message.author.id === args.member.user.id;
-				break;
-			case 'you':
-				messageFilter = message => message.author.id === message.client.user.id;
-				break;
+			break;
+		case 'upload':
+			messageFilter = message => message.attachments.size !== 0;
+			break;
+		case 'user':
+			if(!args.member) {
+				alerts.sendError(`Please provide a user (@User) to filter.`);
+			}
+			messageFilter = message => message.author.id === args.member.user.id;
+			break;
+		case 'you':
+			messageFilter = message => message.author.id === message.client.user.id;
+			break;
 		}
 
 		msg.delete();
 
-		if (!filter) {
+		if(!filter) {
 			const messagesToDelete = await msg.channel.fetchMessages({ limit: limit });
 
 			msg.channel.bulkDelete(messagesToDelete.array().reverse());

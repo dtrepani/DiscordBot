@@ -32,7 +32,7 @@ module.exports = class ListCommand extends ListBaseCommand {
 	constructor(client, listName, groupName, listInfo) {
 		let info = {
 			name: `${listName}`,
-			aliases: [ `${listName}` ],
+			aliases: [`${listName}`],
 			group: groupName,
 			memberName: `${listName}`,
 			examples: [],
@@ -67,7 +67,7 @@ module.exports = class ListCommand extends ListBaseCommand {
 	}
 
 	/**
-	 * @returns {Reply}
+	 * @Override
 	 */
 	getReply(args, list) {
 		if(list instanceof Array) {
@@ -89,6 +89,8 @@ module.exports = class ListCommand extends ListBaseCommand {
 
 	/**
 	 * Array lists that require an item will handle it on a per-list basis and thus must override this method.
+ 	 * @param {Object} args
+ 	 * @param {Object|Array} list
 	 * @returns {Reply}
 	 */
 	handleItemOnArrList(args, list) { // eslint-disable-line no-unused-vars
@@ -100,8 +102,8 @@ module.exports = class ListCommand extends ListBaseCommand {
 	}
 
 	getRandomItem(list) {
-		let keys = Object.keys(list);
-		let randKey = this.getRandomItemFromArrList(keys);
+		const keys = Object.keys(list);
+		const randKey = this.getRandomItemFromArrList(keys);
 
 		return {
 			error: false,
@@ -110,7 +112,7 @@ module.exports = class ListCommand extends ListBaseCommand {
 	}
 
 	getRandomItemFromTag(args, list) {
-		if (!list.hasOwnProperty(args.item)) {
+		if(!list.hasOwnProperty(args.item)) {
 			return {
 				error: true,
 				msg: `\`${args.item}\` is not a valid tag.`
@@ -130,7 +132,7 @@ module.exports = class ListCommand extends ListBaseCommand {
 
 		return ((arrList && arrList.length > 0)
 			? arrList[Math.floor(Math.random() * arrList.length)]
-			: ""
+			: ''
 		);
 	}
 };

@@ -14,15 +14,8 @@ module.exports = {
 			':no_entry_sign:'
 		);
 	},
-	getHelpEmbed: (title) => {
-		return new Discord.RichEmbed()
+	getHelpEmbed: (title) => new Discord.RichEmbed()
 			.setDescription(`**${title}**`)
-			.setColor('#00AE86');
-	},
-	sendHelp: (msg, embed) => {
-		return msg.replyEmbed(
-			embed,
-			'help is here!'
-		);
-	}
+			.setColor('#00AE86'),
+	sendHelp: (msg, embed) => msg.replyEmbed(embed, 'help is here!')
 };

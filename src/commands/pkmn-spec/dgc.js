@@ -8,9 +8,7 @@ module.exports = class DGCCommand extends ListCommand {
 			client,
 			'dgc',
 			'pkmn-spec',
-			{
-				requireItem: false
-			}
+			{ requireItem: false }
 		);
 	}
 
@@ -20,7 +18,7 @@ module.exports = class DGCCommand extends ListCommand {
 		if(args.item) {
 			const item = parseFloat(args.item);
 
-			if (this.isNumber(item)) {
+			if(this.isNumber(item)) {
 				chanceForEchium = item;
 			} else {
 				return {
@@ -32,10 +30,9 @@ module.exports = class DGCCommand extends ListCommand {
 
 		const rand = Math.floor(Math.random() * 100);
 		const subList = (rand <= chanceForEchium) ? 'echium' : 'dgc';
-
-		let res = super.getReply(args, list[subList]);
+		const res = super.getReply(args, list[subList]);
 		if(!res.error) {
-			res.msg = `\`${chanceForEchium}%\` chance for Echium: ` + res.msg
+			res.msg = `\`${chanceForEchium}%\` chance for Echium: ${res.msg}`;
 		}
 
 		return res;

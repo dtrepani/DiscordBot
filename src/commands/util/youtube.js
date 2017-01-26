@@ -45,14 +45,14 @@ module.exports = class YoutubeCommand extends Commando.Command {
 
 	getUrl(result) {
 		switch(result.id.kind) {
-			case 'youtube#playlist':
-				return `http://www.youtube.com/playlist?list=${result.id.playlistId}`;
-			case 'youtube#video':
-				return `http://www.youtube.com/watch?v=${result.id.videoId}`;
-			case 'youtube#channel':
-				return `http://www.youtube.com/channel/${result.id.channelId}`;
-			default:
-				return 'No results for that search.'
+		case 'youtube#playlist':
+			return `http://www.youtube.com/playlist?list=${result.id.playlistId}`;
+		case 'youtube#video':
+			return `http://www.youtube.com/watch?v=${result.id.videoId}`;
+		case 'youtube#channel':
+			return `http://www.youtube.com/channel/${result.id.channelId}`;
+		default:
+			return 'No results for that search.';
 		}
 	}
 };

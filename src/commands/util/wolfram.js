@@ -38,7 +38,7 @@ module.exports = class WolframCommand extends Commando.Command {
 			if(res.length === 0) return msg.reply(`There were no results for \`${query}\``);
 
 			try {
-				let embed = new Discord.RichEmbed();
+				const embed = new Discord.RichEmbed();
 
 				res.forEach(item => {
 					const title = `${delimiter}${item.title}`;
@@ -54,8 +54,8 @@ module.exports = class WolframCommand extends Commando.Command {
 				});
 
 				return msg.replyEmbed(embed, `Results for \`${query}\`:`);
-			} catch(err) {
-				winston.error(err);
+			} catch(e) {
+				winston.error(e);
 				return alerts.sendError(msg, 'Something went wrong when searching.');
 			}
 		});
@@ -63,6 +63,8 @@ module.exports = class WolframCommand extends Commando.Command {
 
 	/**
 	 * Embed fields cannot exceed 1024 characters.
+	 * @param {String} text
+	 * @returns {boolean}
 	 */
 	isNotTooLong(text) {
 		return (text.length < 1024);

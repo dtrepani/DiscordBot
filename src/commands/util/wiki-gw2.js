@@ -1,9 +1,9 @@
 'use strict';
 
-const WikiBaseCommand = require('../../modules/wiki/wiki-base.js');
+const WikiCommand = require('./wiki.js');
 
-module.exports = class WikiGW2Command extends WikiBaseCommand {
+module.exports = class WikiGW2Command extends WikiCommand {
 	constructor(client) {
-		super(client, 'gw2', {apiUrl: 'https://wiki.guildwars2.com/api.php'});
+		super(client, 'gw2', { apiUrl: 'https://wiki.guildwars2.com/api.php' });
 	}
 };

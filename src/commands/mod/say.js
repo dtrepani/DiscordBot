@@ -54,7 +54,7 @@ module.exports = class SayCommand extends Commando.Command {
 		}
 
 		const guilds = this.client.guilds;
-		const guildMatch = guilds.find(val => val.name.toLowerCase() == args.guild.toLowerCase());
+		const guildMatch = guilds.find(guild => guild.name.toLowerCase() === args.guild.toLowerCase());
 
 		if(!guildMatch) {
 			return alerts.sendError(msg, `I'm not a member of the guild \`${args.guild}\`.`);
@@ -67,7 +67,7 @@ module.exports = class SayCommand extends Commando.Command {
 		let channel = guildMatch.channels.first();
 
 		if(args.channel) {
-			channel = guildMatch.channels.find(val => val.name.toLowerCase() == args.channel.toLowerCase());
+			channel = guildMatch.channels.find(aChannel => aChannel.name.toLowerCase() === args.channel.toLowerCase());
 
 			if(!channel) {
 				return alerts.sendError(msg, `\`${args.channel}\` is not a valid channel in \`${args.guild}\``);

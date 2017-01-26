@@ -14,10 +14,10 @@ module.exports = class VoiceStateUpdateEvent extends EventLog {
 	 * @param {GuildMember} after - User after the change
 	 */
 	run(before, after) {
-		let embed = {
+		const embed = {
 			author: {
 				name: `${before.user.username}#${before.user.discriminator}`,
-				icon_url: before.user.avatarURL
+				icon_url: before.user.avatarURL // eslint-disable-line camelcase
 			}
 		};
 		const descriptors = this.getChangedDescriptors(before, after);
@@ -46,6 +46,7 @@ module.exports = class VoiceStateUpdateEvent extends EventLog {
 
 	/**
 	 * @param {GuildMember} member
+	 * @returns {GuildChannel}
 	 */
 	getVoiceChannel(member) {
 		return member.guild.channels.get(member.voiceChannelID);

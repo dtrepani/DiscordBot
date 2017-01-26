@@ -8,9 +8,7 @@ module.exports = class PKMNCommand extends ListCommand {
 			client,
 			'pkmn',
 			'pkmn-spec',
-			{
-				requireItem: false
-			}
+			{ requireItem: false }
 		);
 	}
 };

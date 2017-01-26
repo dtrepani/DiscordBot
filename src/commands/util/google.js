@@ -30,13 +30,14 @@ module.exports = class GoogleCommand extends Commando.Command {
 
 		return google(query, (err, res) => {
 			if(err) return alerts.sendError(err);
-			let embed = new Discord.RichEmbed({
+			const embed = new Discord.RichEmbed({
 				title: `Top results for ${query}`,
 				url: res.url
 			});
 
 			res.links.forEach(result => {
-				if(!result.link) return; // "News/Images for $query" have no link.
+				// "News/Images for $query" have no link.
+				if(!result.link) return;
 
 				embed.addField(
 					`${delimiter} ${result.title}`,

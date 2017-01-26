@@ -16,10 +16,10 @@ module.exports = class MessageDeleteEvent extends EventLog {
 		if(this.isCommand(msg) || this.isLogChannel(msg)) return;
 
 		const member = msg.member;
-		let embed = {
+		const embed = {
 			author: {
 				name: `${member.user.username}#${member.user.discriminator}`,
-				icon_url: member.user.avatarURL
+				icon_url: member.user.avatarURL // eslint-disable-line camelcase
 			},
 			description: `Message by ${member} deleted in ${msg.channel}`,
 			fields: [
@@ -44,7 +44,8 @@ module.exports = class MessageDeleteEvent extends EventLog {
 		return attachments.reduce((attachmentsStr, attachment) => {
 			const attachmentInfo = `${config.embed_bullet} ${attachment.filename} ${attachment.filesize}B`;
 
-			if(attachmentsStr === '') return attachmentInfo; // Don't start with a newline
+			// Don't start with a newline
+			if(attachmentsStr === '') return attachmentInfo;
 			return `${attachmentsStr}\n${attachmentInfo}`;
 		}, '');
 	}

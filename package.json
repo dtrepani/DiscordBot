@@ -28,15 +28,9 @@
     "gulp-plumber": "^1.0.0",
     "gulp-nsp": "^2.1.0"
   },
-  "eslintConfig": {
-    "extends": "xo-space",
-    "env": {
-      "mocha": true
-    }
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/finajo/DiscordBot.git"
+    "url": "git+ssh://git@github.com/finajo/DiscordBot.git"
   },
   "license": "Apache-2.0",
   "dependencies": {

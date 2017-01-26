@@ -15,10 +15,10 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 	 * @param {GuildMember} after - User after the change
 	 */
 	run(before, after) {
-		let embed = {
+		const embed = {
 			author: {
 				name: `${after.user.username}#${after.user.discriminator}`,
-				icon_url: after.user.avatarURL
+				icon_url: after.user.avatarURL // eslint-disable-line camelcase
 			}
 		};
 

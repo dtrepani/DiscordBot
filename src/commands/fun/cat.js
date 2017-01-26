@@ -19,7 +19,7 @@ module.exports = class CatCommand extends Commando.Command {
 		request('http://random.cat/meow', (err, res, body) => {
 			let reply = `http://i.imgur.com/Bai6JTL.jpg`;
 
-			if (!err && res.statusCode === 200) {
+			if(!err && res.statusCode === 200) {
 				reply = JSON.parse(body).file;
 			}
 

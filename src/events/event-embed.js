@@ -1,3 +1,5 @@
+/* eslint-disable valid-jsdoc */
+
 'use strict';
 
 const Discord = require('discord.js');
@@ -42,7 +44,7 @@ module.exports = class EventEmbed {
 	 * @param {RichEmbed} embedInfo - Information to include in the embed
 	 */
 	static sendEmbed(color, channel, id, embedInfo) {
-		let embed = new Discord.RichEmbed(embedInfo);
+		const embed = new Discord.RichEmbed(embedInfo);
 		embed.setDescription(`**${embedInfo.description}**`);
 		embed.setColor(color);
 		embed.setFooter(`ID: ${id}`);
