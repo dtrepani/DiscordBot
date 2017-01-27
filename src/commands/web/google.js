@@ -1,12 +1,12 @@
 'use strict';
 
 const Discord = require('discord.js');
-const Commando = require('discord.js-commando');
 const { stripIndents } = require('common-tags');
 const google = require('google');
-const alerts = require('../../modules/alerts');
+const WebCommand = require('../../modules/web/base');
+const config = require('../../assets/config.json');
 
-module.exports = class GoogleCommand extends Commando.Command {
+module.exports = class GoogleCommand extends WebCommand {
 	constructor(client) {
 		super(client, {
 			name: 'google',
@@ -23,13 +23,15 @@ module.exports = class GoogleCommand extends Commando.Command {
 		});
 	}
 
-	async run(msg, args) {
+	/**
+	 * @Override
+	 */
+	async query(msg, args) {
 		const query = args.query;
 		google.resultsPerPage = 5;
-		const delimiter = `❯ `;
 
 		return google(query, (err, res) => {
-			if(err) return alerts.sendError(err);
+			if(err) throw new Error(err);
 			const embed = new Discord.RichEmbed({
 				title: `Top results for ${query}`,
 				url: res.url
@@ -40,7 +42,7 @@ module.exports = class GoogleCommand extends Commando.Command {
 				if(!result.link) return;
 
 				embed.addField(
-					`${delimiter} ${result.title}`,
+					`${config.embed_prefix} ${result.title}`,
 					stripIndents`
 					${result.link}
 					${result.description}`

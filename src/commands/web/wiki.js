@@ -1,15 +1,14 @@
 'use strict';
 
-const Discord = require('discord.js');
-const Commando = require('discord.js-commando');
 const { oneLine, stripIndents } = require('common-tags');
-const winston = require('winston');
-const wiki = require('wikijs').default;
-const htmlToText = require('html-to-text');
-const alerts = require('../../modules/alerts');
 const config = require('../../assets/config.json');
+const Discord = require('discord.js');
+const htmlToText = require('html-to-text');
+const WebCommand = require('../../modules/web/base');
+const wiki = require('wikijs').default;
+const winston = require('winston');
 
-module.exports = class WikiCommand extends Commando.Command {
+module.exports = class WikiCommand extends WebCommand {
 	/**
 	 * @typedef {Object} WikiOptions
 	 * @property {string} [apiUrl = ""]
@@ -45,7 +44,10 @@ module.exports = class WikiCommand extends Commando.Command {
 		this.options = options;
 	}
 
-	async run(msg, args) {
+	/**
+	 * @Override
+	 */
+	async query(msg, args) {
 		args = this.toTitleCase(args);
 
 		try {
@@ -58,14 +60,13 @@ module.exports = class WikiCommand extends Commando.Command {
 			const img = await this.getImage(args, page);
 			const summary = await this.getSummary(page);
 
-			// msg.delete(2000);
 			return msg.replyEmbed(
 				this.getEmbed(page, summary, img),
 				`From the ${this.wikiName ? this.wikiName.toUpperCase() : ''}wiki: <${page.raw.fullurl}>`
 			);
 		} catch(err) {
 			winston.error(err);
-			return alerts.sendError(msg, err);
+			throw new Error(err);
 		}
 	}
 
@@ -91,7 +92,13 @@ module.exports = class WikiCommand extends Commando.Command {
 	async getImage(searchTerm, page) {
 		try {
 			return await page.mainImage();
-		} catch(err) {
+		} catch(e) {
+			return this.getImageThatMatchesSearch(searchTerm, page);
+		}
+	}
+
+	async getImageThatMatchesSearch(searchTerm, page) {
+		try {
 			const re = new RegExp(this.toWebName(searchTerm), 'i');
 			const images = await page.images();
 
@@ -100,6 +107,8 @@ module.exports = class WikiCommand extends Commando.Command {
 					return images[i];
 				}
 			}
+		} catch(e) {
+			winston.error(e);
 		}
 
 		return '';

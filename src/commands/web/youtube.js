@@ -1,12 +1,11 @@
 'use strict';
 
-const Commando = require('discord.js-commando');
+const config = require('../../assets/config.json');
+const WebCommand = require('../../modules/web/base');
 const winston = require('winston');
 const Youtube = require('youtube-node');
-const alerts = require('../../modules/alerts');
-const config = require('../../assets/config.json');
 
-module.exports = class YoutubeCommand extends Commando.Command {
+module.exports = class YoutubeCommand extends WebCommand {
 	constructor(client) {
 		super(client, {
 			name: 'youtube',
@@ -24,7 +23,10 @@ module.exports = class YoutubeCommand extends Commando.Command {
 		});
 	}
 
-	async run(msg, args) {
+	/**
+	 * @Override
+	 */
+	async query(msg, args) {
 		const query = args.query;
 		const youtube = new Youtube();
 		youtube.setKey(config.tokens.google);
@@ -32,7 +34,7 @@ module.exports = class YoutubeCommand extends Commando.Command {
 		return youtube.search(query, 1, (err, res) => {
 			if(err) {
 				winston.error(err);
-				return alerts.sendError('Something went wrong when searching for the video.');
+				throw new Error('Something went wrong when searching for the video.');
 			}
 
 			if(res.items.length === 0) {

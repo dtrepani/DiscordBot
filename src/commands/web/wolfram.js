@@ -1,13 +1,12 @@
 'use strict';
 
-const Discord = require('discord.js');
-const Commando = require('discord.js-commando');
-const winston = require('winston');
-const alerts = require('../../modules/alerts');
 const config = require('../../assets/config.json');
+const Discord = require('discord.js');
+const WebCommand = require('../../modules/web/base');
+const winston = require('winston');
 const wolfram = require('wolfram-alpha').createClient(config.tokens.wolfram);
 
-module.exports = class WolframCommand extends Commando.Command {
+module.exports = class WolframCommand extends WebCommand {
 	constructor(client) {
 		super(client, {
 			name: 'wolfram',
@@ -29,9 +28,11 @@ module.exports = class WolframCommand extends Commando.Command {
 		});
 	}
 
-	async run(msg, args) {
+	/**
+	 * @Override
+	 */
+	async query(msg, args) {
 		const query = args.query;
-		const delimiter = `❯ `;
 
 		return wolfram.query(query, (err, res) => {
 			if(err) throw new Error(err);
@@ -41,7 +42,7 @@ module.exports = class WolframCommand extends Commando.Command {
 				const embed = new Discord.RichEmbed();
 
 				res.forEach(item => {
-					const title = `${delimiter}${item.title}`;
+					const title = `${config.embed_prefix} ${item.title}`;
 					const text = item.subpods[0].text;
 					const img = item.subpods[0].image;
 
@@ -56,7 +57,7 @@ module.exports = class WolframCommand extends Commando.Command {
 				return msg.replyEmbed(embed, `Results for \`${query}\`:`);
 			} catch(e) {
 				winston.error(e);
-				return alerts.sendError(msg, 'Something went wrong when searching.');
+				throw new Error('Something went wrong when searching.');
 			}
 		});
 	}
