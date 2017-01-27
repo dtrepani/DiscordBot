@@ -1,6 +1,6 @@
 {
-  "name": "pkmn-discord-bot",
-  "version": "0.0.1",
+  "name": "timothy-bot",
+  "version": "1.0.1",
   "description": "",
   "author": "Kyuu",
   "files": [
@@ -8,7 +8,7 @@
   ],
   "main": "src/index.js",
   "engines": {
-    "node": ">=7.0.0"
+    "node": ">=7.4.0"
   },
   "scripts": {
     "start": "node --harmony src/index.js",

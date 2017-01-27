@@ -12,8 +12,8 @@ module.exports = class SayCommand extends Commando.Command {
 			name: 'say',
 			group: 'mod',
 			memberName: 'say',
-			description: stripIndents`
-				Speak through the bot. Message and guild name must be wrapped in quotations.
+			description: 'Speak through the bot. Message and guild name must be wrapped in quotations.',
+			details: stripIndents`
 				__text:__ Message to say through bot
 				__guild:__ Guild/server to say the message to; defaults to current guild
 				__channel:__ Channel to say message to; defaults to first channel

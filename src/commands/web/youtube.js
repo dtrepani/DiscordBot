@@ -11,7 +11,7 @@ module.exports = class YoutubeCommand extends Commando.Command {
 		super(client, {
 			name: 'youtube',
 			aliases: ['yt'],
-			group: 'util',
+			group: 'web',
 			memberName: 'youtube',
 			description: 'Search for videos on Youtube.',
 			args: [

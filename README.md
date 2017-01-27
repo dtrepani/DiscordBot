@@ -1,4 +1,4 @@
-# pkmn-discord-bot [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# pkmn-discord-bot [![Build Status][travis-image]][travis-url]
 > 
 
 ## Installation
@@ -8,19 +8,21 @@ Clone this repository, and run:
 $ npm install
 ```
 
-## Usage
+## Todo
 
-```sh
-$ npm run bot
-```
+[ ] Typing indicator on request await
+[ ] Random bird
+[ ] Show-off command to output commands to current channel
+[ ] Google images
+[ ] Refactor abstract lists to use async/await
+[ ] Mute (w/ mod-log support)
+[ ] Ban (w/ mod-log support)
+[ ] High res emoji command
+
+
 ## License
 
 Apache-2.0 © [Kyuu]()
 
-
-[npm-image]: https://badge.fury.io/js/pkmn-discord-bot.svg
-[npm-url]: https://npmjs.org/package/pkmn-discord-bot
 [travis-image]: https://travis-ci.org/finajo/DiscordBot.svg?branch=master
 [travis-url]: https://travis-ci.org/finajo/DiscordBot
-[daviddm-image]: https://david-dm.org/finajo/DiscordBot.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/finajo/DiscordBot

@@ -34,7 +34,7 @@ module.exports = class WikiCommand extends Commando.Command {
 			Object.assign(info, {
 				name: `wiki-${wikiName}`,
 				aliases: [`${wikiName}`, `${wikiName}-wiki`],
-				group: 'util',
+				group: 'web',
 				memberName: `wiki-${wikiName}`,
 				description: `Search ${wikiName} wikipedia.`
 			});

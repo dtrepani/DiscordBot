@@ -16,7 +16,7 @@ module.exports = class WolframCommand extends Commando.Command {
 				'wa',
 				'math'
 			],
-			group: 'util',
+			group: 'web',
 			memberName: 'wolfram',
 			description: 'Search Wolfram|Alpha or solve problems.',
 			args: [

@@ -73,10 +73,11 @@ client.setProvider(
 
 client.registry
 	.registerGroups([
+		['mod', 'Mod Only'],
+		['pkmn-spec', 'PKMN Specific'],
 		['fun', 'Fun'],
 		['tags', 'Tags'],
-		['pkmn-spec', 'PKMN Specific'],
-		['mod', 'Mod-Only']
+		['web', 'Web']
 	])
 	.registerDefaults()
 	.registerCommandsIn(path.join(__dirname, 'commands'));

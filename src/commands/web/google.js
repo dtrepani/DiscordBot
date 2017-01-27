@@ -10,7 +10,7 @@ module.exports = class GoogleCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'google',
-			group: 'util',
+			group: 'web',
 			memberName: 'google',
 			description: `Google!`,
 			args: [
