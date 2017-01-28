@@ -1,3 +1,6 @@
+# Keep server-side SQLite
+src/assets/settings.sqlite3*
+
 # Logs
 logs
 *.log

@@ -10,11 +10,13 @@ $ npm install
 
 ## Todo
 
-[ ] Show-off command to output commands to current channel
-[ ] Google images
-[ ] Mute (w/ mod-log support)
-[ ] Ban (w/ mod-log support)
-[ ] High res emoji command
+- [ ] Finish the mod log
+- [ ] Show-off command to output commands to current channel
+- [ ] Google images
+- [ ] Mute (w/ mod-log support)
+- [ ] Ban (w/ mod-log support)
+- [ ] High res emoji command
+- [ ] Goodshit command
 
 
 ## License

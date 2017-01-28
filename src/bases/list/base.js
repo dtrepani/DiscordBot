@@ -47,8 +47,8 @@ module.exports = class ListBaseCommand extends Commando.Command {
 
 			deleteMsg(msg, this.deleteMsgFlag);
 			return msg.reply(reply);
-		} catch(e) {
-			return alerts.sendError(msg, e);
+		} catch(err) {
+			return alerts.sendError(msg, err);
 		}
 	}
 

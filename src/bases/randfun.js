@@ -26,8 +26,8 @@ module.exports = class RandFunCommand extends Commando.Command {
 			try {
 				const res = await request(`https://imgur.com/r/${this.subreddit}/hot.json`);
 				this.randCache = JSON.parse(res).data;
-			} catch(e) {
-				winston.error(e);
+			} catch(err) {
+				winston.warn(`Error when requesting subreddit: ${err}`);
 			}
 		}
 

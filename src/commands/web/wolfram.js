@@ -55,8 +55,8 @@ module.exports = class WolframCommand extends WebCommand {
 				});
 
 				return msg.replyEmbed(embed, `Results for \`${query}\`:`);
-			} catch(e) {
-				winston.error(e);
+			} catch(anErr) {
+				winston.error(anErr);
 				throw new Error('Something went wrong when searching.');
 			}
 		});

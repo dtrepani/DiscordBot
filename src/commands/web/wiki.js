@@ -26,6 +26,7 @@ module.exports = class WikiCommand extends WebCommand {
 			Object.assign(info, {
 				name: 'wiki',
 				aliases: ['wikipedia'],
+				group: 'web',
 				memberName: 'wiki',
 				description: 'Search wikipedia.'
 			});
@@ -92,7 +93,7 @@ module.exports = class WikiCommand extends WebCommand {
 	async getImage(searchTerm, page) {
 		try {
 			return await page.mainImage();
-		} catch(e) {
+		} catch(err) {
 			return this.getImageThatMatchesSearch(searchTerm, page);
 		}
 	}
@@ -107,8 +108,8 @@ module.exports = class WikiCommand extends WebCommand {
 					return images[i];
 				}
 			}
-		} catch(e) {
-			winston.error(e);
+		} catch(err) {
+			winston.error(err);
 		}
 
 		return '';

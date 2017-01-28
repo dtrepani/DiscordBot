@@ -20,7 +20,7 @@ module.exports = class CatCommand extends Commando.Command {
 		try {
 			const res = await request('http://random.cat/meow');
 			img = JSON.parse(res).file;
-		} catch(e) {
+		} catch(err) {
 			img = 'http://i.imgur.com/Bai6JTL.jpg';
 		}
 

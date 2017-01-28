@@ -13,8 +13,8 @@ module.exports = class WebCommand extends Commando.Command {
 
 		try {
 			res = await this.query(msg, args);
-		} catch(e) {
-			res = alerts.sendError(e);
+		} catch(err) {
+			res = alerts.sendError(err);
 		}
 
 		msg.channel.stopTyping();

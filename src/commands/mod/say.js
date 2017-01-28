@@ -2,7 +2,7 @@
 
 const Commando = require('discord.js-commando');
 const winston = require('winston');
-const stripIndents = require('common-tags').stripIndents;
+const { stripIndents, oneLine } = require('common-tags');
 const alerts = require('../../modules/alerts');
 const deleteMsg = require('../../modules/delete-msg');
 
@@ -12,8 +12,9 @@ module.exports = class SayCommand extends Commando.Command {
 			name: 'say',
 			group: 'mod',
 			memberName: 'say',
-			description: 'Speak through the bot. Message and guild name must be wrapped in quotations.',
+			description: 'Speak through the bot. Message must be wrapped in quotations',
 			details: stripIndents`
+				Message and guild name must be wrapped in quotations.
 				__text:__ Message to say through bot
 				__guild:__ Guild/server to say the message to; defaults to current guild
 				__channel:__ Channel to say message to; defaults to first channel
@@ -57,7 +58,8 @@ module.exports = class SayCommand extends Commando.Command {
 		const guildMatch = guilds.find(guild => guild.name.toLowerCase() === args.guild.toLowerCase());
 
 		if(!guildMatch) {
-			return alerts.sendError(msg, `I'm not a member of the guild \`${args.guild}\`.`);
+			return alerts.sendError(msg, oneLine`I'm not a member of the guild \`${args.guild}\`.
+				Did you mean for me to say something here instead? Try wrapping your message in quotes.`);
 		}
 
 		return this.sendToChannel(msg, args, guildMatch);

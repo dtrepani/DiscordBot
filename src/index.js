@@ -1,12 +1,13 @@
 'use strict';
 
-const config = require('./assets/config.json');
-const Commando = require('discord.js-commando');
-const winston = require('winston');
-const path = require('path');
-const sqlite = require('sqlite');
 const { oneLine } = require('common-tags');
+const Commando = require('discord.js-commando');
+const config = require('./assets/config.json');
 const Logger = require('./events/logger');
+const path = require('path');
+const PushBullet = require('pushbullet');
+const sqlite = require('sqlite');
+const winston = require('winston');
 
 winston.configure({
 	transports: [
@@ -24,24 +25,39 @@ const client = new Commando.Client({
 	commandPrefix: config.prefix,
 	unknownCommandResponse: false
 });
-
+const pushbullet = new PushBullet(config.tokens.pushbullet);
 const logger = new Logger(client, path.join(__dirname, 'events/events')); // eslint-disable-line no-unused-vars
 
 // TODO: sqlite.clear(guild) when guild deleted
 client
 	.on('error', winston.error)
 	.on('warn', winston.warn)
-	.on('disconnect', () => { winston.warn('Disconnected!'); })
-	.on('reconnect', () => { winston.warn('Reconnecting...'); })
+	.on('disconnect', () => {
+		winston.warn('Disconnected!');
+		
+		/**
+		 * Restart Timothy using pm2 if he's been disconnected for more then a minute without reconnecting.
+		 * When Timothy has to restart himself, I want to know. Notify me if it happens.
+		 */
+		setTimeout(() => {
+			pushbullet.note('', 'Timothy disconnected!', '');
+			process.exit();
+		}, 60000);
+	})
+	.on('reconnect', () => {
+		clearTimeout();
+		winston.warn('Reconnecting...');
+	})
 	.on('ready', () => {
+		clearTimeout();
+		
 		winston.info(oneLine`
 			Client ready; logged in as
 			${client.user.username}#${client.user.discriminator} (${client.user.id})`
 		);
+
 		client.user.setGame('Pikmin Crossing: Fashion Wars 2')
-			.catch((err) => {
-				winston.warn(`Error setting game: ${err}`);
-			});
+			.catch((err) => winston.err(err));
 	})
 	.on('commandPrefixChange', (guild, prefix) => {
 		winston.info(oneLine`
