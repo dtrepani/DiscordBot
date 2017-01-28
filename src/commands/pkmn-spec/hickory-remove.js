@@ -1,6 +1,6 @@
 'use strict';
 
-const ListRemoveCommand = require('../../modules/list/list-remove.js');
+const ListRemoveCommand = require('../../bases/list/list-remove');
 
 module.exports = class HickoryRemoveCommand extends ListRemoveCommand {
 	constructor(client) {

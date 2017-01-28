@@ -2,7 +2,7 @@
 
 const config = require('../../assets/config.json');
 const Discord = require('discord.js');
-const WebCommand = require('../../modules/web/base');
+const WebCommand = require('../../bases/web');
 const winston = require('winston');
 const wolfram = require('wolfram-alpha').createClient(config.tokens.wolfram);
 

@@ -1,7 +1,7 @@
 'use strict';
 
 const config = require('../../assets/config.json');
-const WebCommand = require('../../modules/web/base');
+const WebCommand = require('../../bases/web');
 const winston = require('winston');
 const Youtube = require('youtube-node');
 

@@ -8,22 +8,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dff3a37d-17a3-4a52-af14-64914887352a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/modules/wiki/wiki-base.js" afterPath="$PROJECT_DIR$/src/commands/util/wiki.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.eslintrc" afterPath="$PROJECT_DIR$/.eslintrc" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/modules/list/base.js" afterPath="$PROJECT_DIR$/src/bases/list/base.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/modules/list/list-add.js" afterPath="$PROJECT_DIR$/src/bases/list/list-add.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/modules/list/list-remove.js" afterPath="$PROJECT_DIR$/src/bases/list/list-remove.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/modules/list/list-tags.js" afterPath="$PROJECT_DIR$/src/bases/list/list-tags.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/modules/list/list.js" afterPath="$PROJECT_DIR$/src/bases/list/list.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/modules/web/base.js" afterPath="$PROJECT_DIR$/src/bases/web.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/8ball.json" afterPath="$PROJECT_DIR$/src/assets/8ball.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/config.json" afterPath="$PROJECT_DIR$/src/assets/config.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/dgc.json" afterPath="$PROJECT_DIR$/src/assets/dgc.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/hickory.json" afterPath="$PROJECT_DIR$/src/assets/hickory.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/pkmn.json" afterPath="$PROJECT_DIR$/src/assets/pkmn.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/fun/cat.js" afterPath="$PROJECT_DIR$/src/commands/fun/cat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/fun/cleverbot.js" afterPath="$PROJECT_DIR$/src/commands/fun/cleverbot.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/fun/roll.js" afterPath="$PROJECT_DIR$/src/commands/fun/roll.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/mod/invite.js" afterPath="$PROJECT_DIR$/src/commands/mod/invite.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/mod/mod-log.js" afterPath="$PROJECT_DIR$/src/commands/mod/mod-log.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/mod/say.js" afterPath="$PROJECT_DIR$/src/commands/mod/say.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/fun/dog.js" afterPath="$PROJECT_DIR$/src/commands/fun/dog.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/pkmn-spec/dgc-add.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/dgc-add.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/pkmn-spec/dgc-remove.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/dgc-remove.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/pkmn-spec/dgc.js" afterPath="$PROJECT_DIR$/src/commands/pkmn-spec/dgc.js" />
@@ -42,29 +37,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/tags/tag-remove.js" afterPath="$PROJECT_DIR$/src/commands/tags/tag-remove.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/tags/tag-tags.js" afterPath="$PROJECT_DIR$/src/commands/tags/tag-tags.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/tags/tag.js" afterPath="$PROJECT_DIR$/src/commands/tags/tag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/util/google.js" afterPath="$PROJECT_DIR$/src/commands/util/google.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/util/nuke.js" afterPath="$PROJECT_DIR$/src/commands/util/nuke.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/util/wiki-bdo.js" afterPath="$PROJECT_DIR$/src/commands/util/wiki-bdo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/util/wiki-eso.js" afterPath="$PROJECT_DIR$/src/commands/util/wiki-eso.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/util/wiki-gw2.js" afterPath="$PROJECT_DIR$/src/commands/util/wiki-gw2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/util/wolfram.js" afterPath="$PROJECT_DIR$/src/commands/util/wolfram.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/util/youtube.js" afterPath="$PROJECT_DIR$/src/commands/util/youtube.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/base.js" afterPath="$PROJECT_DIR$/src/events/base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/event-embed.js" afterPath="$PROJECT_DIR$/src/events/event-embed.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/events/guild-member-add.js" afterPath="$PROJECT_DIR$/src/events/events/guild-member-add.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/events/guild-member-remove.js" afterPath="$PROJECT_DIR$/src/events/events/guild-member-remove.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/events/guild-member-update.js" afterPath="$PROJECT_DIR$/src/events/events/guild-member-update.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/events/message-delete.js" afterPath="$PROJECT_DIR$/src/events/events/message-delete.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/events/voice-state-update.js" afterPath="$PROJECT_DIR$/src/events/events/voice-state-update.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/logger.js" afterPath="$PROJECT_DIR$/src/events/logger.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.js" afterPath="$PROJECT_DIR$/src/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/alerts.js" afterPath="$PROJECT_DIR$/src/modules/alerts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/delete-msg.js" afterPath="$PROJECT_DIR$/src/modules/delete-msg.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/list/base.js" afterPath="$PROJECT_DIR$/src/modules/list/base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/list/list-add.js" afterPath="$PROJECT_DIR$/src/modules/list/list-add.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/list/list-remove.js" afterPath="$PROJECT_DIR$/src/modules/list/list-remove.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/list/list-tags.js" afterPath="$PROJECT_DIR$/src/modules/list/list-tags.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/list/list.js" afterPath="$PROJECT_DIR$/src/modules/list/list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/web/google.js" afterPath="$PROJECT_DIR$/src/commands/web/google.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/web/wiki.js" afterPath="$PROJECT_DIR$/src/commands/web/wiki.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/web/wolfram.js" afterPath="$PROJECT_DIR$/src/commands/web/wolfram.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commands/web/youtube.js" afterPath="$PROJECT_DIR$/src/commands/web/youtube.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -89,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="86" column="4" lean-forward="false" selection-start-line="86" selection-start-column="59" selection-end-line="86" selection-end-column="61" />
+              <caret line="87" column="4" lean-forward="false" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -105,51 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="message-delete.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="message-delete.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/events/events/message-delete.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mod-log.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/commands/mod/mod-log.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/events/base.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="33" column="38" lean-forward="false" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="invite.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/commands/mod/invite.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="24" column="5" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="guild-member-update.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/events/events/guild-member-update.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+            <state relative-caret-position="240">
+              <caret line="15" column="48" lean-forward="false" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -345,7 +281,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -386,131 +321,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="events" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="events" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="events" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="commands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DiscordBot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mod" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -550,7 +361,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
+              <option name="myItemId" value="bases" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -570,12 +381,13 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path" value="D:/Program Files/nodejs/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="js.eslint.eslintPackage" value="C:\Users\finap\git\DiscordBot\node_modules\eslint" />
     <property name="js-jscs-nodeInterpreter" value="D:\Program Files\nodejs\node.exe" />
@@ -589,19 +401,19 @@
     <property name="js.buildTools.gulp.gulp_package_dir" value="C:\Users\finap\git\DiscordBot\node_modules\gulp" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\finap\git\DiscordBot\src\bases" />
+      <recent name="C:\Users\finap\git\DiscordBot\src\commands\util" />
+      <recent name="C:\Users\finap\git\DiscordBot\src\events" />
+      <recent name="C:\Users\finap\git\DiscordBot\lib\assets" />
+      <recent name="C:\Users\finap\git\DiscordBot\lib" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\finap\git\DiscordBot\src\events\events" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\events" />
       <recent name="C:\Users\finap\git\DiscordBot\test" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\commands\util" />
       <recent name="C:\Users\finap\git\DiscordBot\lib\commands\fun" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\finap\git\DiscordBot\src\commands\util" />
-      <recent name="C:\Users\finap\git\DiscordBot\src\events" />
-      <recent name="C:\Users\finap\git\DiscordBot\lib\assets" />
-      <recent name="C:\Users\finap\git\DiscordBot\lib" />
-      <recent name="C:\Users\finap\git\DiscordBot\lib\events\events" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.start">
@@ -743,6 +555,7 @@
       <workItem from="1485460310411" duration="928000" />
       <workItem from="1485461414059" duration="24000" />
       <workItem from="1485461480159" duration="1260000" />
+      <workItem from="1485564918007" duration="510000" />
     </task>
     <task id="LOCAL-00001" summary="Added add to list command">
       <created>1484695588275</created>
@@ -860,7 +673,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="249306000" />
+    <option name="totallyTimeSpent" value="249816000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -926,14 +739,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/commands/pkmn-spec/guess-add.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/list/list-add.js">
+    <entry file="file://$PROJECT_DIR$/src/bases/list/list-add.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="25" column="87" lean-forward="false" selection-start-line="25" selection-start-column="87" selection-end-line="25" selection-end-column="87" />
@@ -1009,13 +815,7 @@
     <entry file="file://$PROJECT_DIR$/web.config" />
     <entry file="file://$PROJECT_DIR$/test/server.js" />
     <entry file="file://$PROJECT_DIR$/lib/events/events/guildMemberAdd.js" />
-    <entry file="file://$PROJECT_DIR$/src/commands/util/google.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="48" column="70" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="51" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commands/util/google.js" />
     <entry file="file://$PROJECT_DIR$/lib/events/events/command-run.js" />
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -1024,7 +824,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/list/list-tags.js">
+    <entry file="file://$PROJECT_DIR$/src/bases/list/list-tags.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="22" column="87" lean-forward="false" selection-start-line="22" selection-start-column="87" selection-end-line="22" selection-end-column="87" />
@@ -1035,13 +835,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="18" column="26" lean-forward="true" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/fun/cat.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="35" lean-forward="true" selection-start-line="3" selection-start-column="35" selection-end-line="4" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -1059,20 +852,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/util/wolfram.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="45" column="41" lean-forward="false" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/util/youtube.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="41" column="33" lean-forward="false" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commands/util/wolfram.js" />
+    <entry file="file://$PROJECT_DIR$/src/commands/util/youtube.js" />
     <entry file="file://$PROJECT_DIR$/src/commands/pkmn-spec/dgc.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
@@ -1094,7 +875,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/list/list-remove.js">
+    <entry file="file://$PROJECT_DIR$/src/bases/list/list-remove.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="185" column="26" lean-forward="false" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
@@ -1129,7 +910,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/list/base.js">
+    <entry file="file://$PROJECT_DIR$/src/bases/list/base.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="826">
           <caret line="83" column="4" lean-forward="false" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="4" />
@@ -1157,7 +938,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/list/list.js">
+    <entry file="file://$PROJECT_DIR$/src/bases/list/list.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1483">
           <caret line="95" column="4" lean-forward="false" selection-start-line="95" selection-start-column="4" selection-end-line="95" selection-end-column="4" />
@@ -1189,62 +970,16 @@
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="86" column="4" lean-forward="false" selection-start-line="86" selection-start-column="59" selection-end-line="86" selection-end-column="61" />
+          <caret line="87" column="4" lean-forward="false" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/events/events/message-delete.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/util/wiki.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/util/wiki-bdo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/util/wiki-gw2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/util/wiki-eso.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="41" lean-forward="false" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/util/wiki.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="39" lean-forward="true" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commands/mod/mod-log.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commands/util/wiki.js" />
+    <entry file="file://$PROJECT_DIR$/src/commands/util/wiki-bdo.js" />
+    <entry file="file://$PROJECT_DIR$/src/commands/util/wiki-gw2.js" />
+    <entry file="file://$PROJECT_DIR$/src/commands/util/wiki-eso.js" />
+    <entry file="file://$PROJECT_DIR$/src/commands/util/wiki.js" />
     <entry file="file://$PROJECT_DIR$/src/events/base.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="792">
@@ -1255,7 +990,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/commands/mod/invite.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="576">
           <caret line="24" column="5" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding />
         </state>
@@ -1263,8 +998,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/events/events/guild-member-update.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="648">
           <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commands/mod/mod-log.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="912">
+          <caret line="38" column="25" lean-forward="false" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+          <folding>
+            <element signature="e#954#1715#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commands/fun/cat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" column="48" lean-forward="true" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commands/fun/bird.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/events/message-delete.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" column="48" lean-forward="false" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
           <folding />
         </state>
       </provider>

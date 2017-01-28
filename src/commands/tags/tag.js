@@ -1,6 +1,6 @@
 'use strict';
 
-const ListCommand = require('../../modules/list/list.js');
+const ListCommand = require('../../bases/list/list');
 
 module.exports = class TagCommand extends ListCommand {
 	constructor(client) {

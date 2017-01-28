@@ -1,7 +1,7 @@
 'use strict';
 
 const Commando = require('discord.js-commando');
-const alerts = require('../../modules/alerts');
+const alerts = require('../modules/alerts');
 
 /**
  * Enables typing while processing HTTP requests

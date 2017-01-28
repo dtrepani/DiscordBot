@@ -10,8 +10,6 @@ $ npm install
 
 ## Todo
 
-[ ] Typing indicator on request await
-[ ] Random bird
 [ ] Show-off command to output commands to current channel
 [ ] Google images
 [ ] Refactor abstract lists to use async/await

@@ -4,8 +4,8 @@ const Commando = require('discord.js-commando');
 const winston = require('winston');
 const oneLine = require('common-tags').oneLine;
 const fs = require('fs');
-const deleteMsg = require('../delete-msg');
-const alerts = require('../alerts');
+const deleteMsg = require('../../modules/delete-msg');
+const alerts = require('../../modules/alerts');
 
 module.exports = class ListBaseCommand extends Commando.Command {
 	/**

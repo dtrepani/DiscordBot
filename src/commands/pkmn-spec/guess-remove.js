@@ -2,7 +2,7 @@
 
 const alerts = require('../../modules/alerts');
 const stripIndents = require('common-tags').stripIndents;
-const ListRemoveCommand = require('../../modules/list/list-remove.js');
+const ListRemoveCommand = require('../../bases/list/list-remove');
 
 module.exports = class GuessRemoveCommand extends ListRemoveCommand {
 	constructor(client) {

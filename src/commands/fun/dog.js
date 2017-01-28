@@ -1,24 +1,20 @@
 'use strict';
 
-const Commando = require('discord.js-commando');
-const randomPuppy = require('random-puppy');
-const deleteMsg = require('../../modules/delete-msg');
+const RandFunCommand = require('../../bases/randfun');
 
-module.exports = class DogCommand extends Commando.Command {
+module.exports = class DogCommand extends RandFunCommand {
 	constructor(client) {
-		super(client, {
-			name: 'dog',
-			aliases: ['dogs'],
-			group: 'fun',
-			memberName: 'dog',
-			description: 'wow such doge much want'
-		});
-	}
-
-	async run(msg) {
-		randomPuppy().then(res => {
-			deleteMsg(msg);
-			return msg.reply(`\`dog\`: ${res}`);
-		});
+		super(
+			client,
+			{
+				name: 'dog',
+				aliases: ['dogs'],
+				group: 'fun',
+				memberName: 'dog',
+				description: 'wow such doge much want'
+			},
+			'dogpictures',
+			'https://i.imgur.com/3cZP8w5.jpg'
+		);
 	}
 };

@@ -1,8 +1,8 @@
 'use strict';
 
 const Commando = require('discord.js-commando');
-const request = require('request');
 const deleteMsg = require('../../modules/delete-msg');
+const request = require('request-promise');
 
 module.exports = class CatCommand extends Commando.Command {
 	constructor(client) {
@@ -16,15 +16,15 @@ module.exports = class CatCommand extends Commando.Command {
 	}
 
 	async run(msg) {
-		request('http://random.cat/meow', (err, res, body) => {
-			let reply = `http://i.imgur.com/Bai6JTL.jpg`;
+		let img = '';
+		try {
+			const res = await request('http://random.cat/meow');
+			img = JSON.parse(res).file;
+		} catch(e) {
+			img = 'http://i.imgur.com/Bai6JTL.jpg';
+		}
 
-			if(!err && res.statusCode === 200) {
-				reply = JSON.parse(body).file;
-			}
-
-			deleteMsg(msg);
-			return msg.reply(`\`cat\`: ${reply}`);
-		});
+		deleteMsg(msg);
+		return msg.reply(`\`cat\`: ${img}`);
 	}
 };

@@ -4,7 +4,7 @@ const { oneLine, stripIndents } = require('common-tags');
 const config = require('../../assets/config.json');
 const Discord = require('discord.js');
 const htmlToText = require('html-to-text');
-const WebCommand = require('../../modules/web/base');
+const WebCommand = require('../../bases/web');
 const wiki = require('wikijs').default;
 const winston = require('winston');
 

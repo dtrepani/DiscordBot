@@ -3,7 +3,7 @@
 const Discord = require('discord.js');
 const { stripIndents } = require('common-tags');
 const google = require('google');
-const WebCommand = require('../../modules/web/base');
+const WebCommand = require('../../bases/web');
 const config = require('../../assets/config.json');
 
 module.exports = class GoogleCommand extends WebCommand {

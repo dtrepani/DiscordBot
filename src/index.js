@@ -54,7 +54,7 @@ client
 		winston.error(`Error in command ${cmd.groupID}:${cmd.memberName}`, err);
 	})
 	.on('commandRun', (cmd, promise, msg, args) => {
-		winston.info(oneLine`${msg.author.username}#${msg.author.discriminator} (${msg.author.id})
+		winston.verbose(oneLine`${msg.author.username}#${msg.author.discriminator} (${msg.author.id})
 			> ${msg.guild ? `${msg.guild.name} (${msg.guild.id})` : 'DM'}
 			>> ${cmd.groupID}:${cmd.memberName}
 			${

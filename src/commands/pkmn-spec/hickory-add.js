@@ -1,6 +1,6 @@
 'use strict';
 
-const ListAddCommand = require('../../modules/list/list-add.js');
+const ListAddCommand = require('../../bases/list/list-add');
 
 module.exports = class HickoryAddCommand extends ListAddCommand {
 	constructor(client) {

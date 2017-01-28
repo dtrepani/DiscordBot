@@ -1,6 +1,6 @@
 'use strict';
 
-const ListTagsCommand = require('../../modules/list/list-tags.js');
+const ListTagsCommand = require('../../bases/list/list-tags');
 
 module.exports = class PKMNTagsCommand extends ListTagsCommand {
 	constructor(client) {
