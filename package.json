@@ -1,6 +1,6 @@
 {
   "name": "timothy-bot",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "author": "Kyuu",
   "files": [
@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "node --harmony src/index.js",
+    "pm2": "pm2 start --node-args=\"--harmony\" harmony.js",
     "prepublish": "gulp prepublish",
     "test": "gulp"
   },

@@ -50,7 +50,7 @@ client
 	})
 	.on('ready', () => {
 		clearTimeout();
-		
+
 		winston.info(oneLine`
 			Client ready; logged in as
 			${client.user.username}#${client.user.discriminator} (${client.user.id})`
@@ -98,7 +98,7 @@ client.registry
 	.registerDefaults()
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 
-client.login(config.tokens.discord_test);
+client.login(config.tokens.discord);
 
 process.on('unhandledRejection', err => {
 	winston.error(`Uncaught Promise Error: \n ${err.stack}`);
