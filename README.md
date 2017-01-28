@@ -12,7 +12,6 @@ $ npm install
 
 [ ] Show-off command to output commands to current channel
 [ ] Google images
-[ ] Refactor abstract lists to use async/await
 [ ] Mute (w/ mod-log support)
 [ ] Ban (w/ mod-log support)
 [ ] High res emoji command

@@ -1,6 +1,6 @@
 'use strict';
 
-const commonTags = require('common-tags');
+const { oneLine, commaLists } = require('common-tags');
 const ListBaseCommand = require('./base');
 
 module.exports = class ListAddCommand extends ListBaseCommand {
@@ -19,7 +19,7 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 	 * @typedef {Object} ListInfo
 	 * @property {boolean} [readOnly = false] - Whether to set the list, which is not needed for read-only commands
 	 * @property {boolean} [isArrList = false] - Whether the list is an object or an array; used when providing a
-	 *                     default list to ListBaseCommand:getList()
+	 * 						default list to ListBaseCommand:getList()
 	 * @property {boolean} requireOptions - Whether or not options are required
 	 * @property {boolean} multipleOptions - Whether or not to treat args.options as an array
 	 * @property {boolean} urlOnly - Whether or not args.item should only be URLs
@@ -31,8 +31,9 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 	 * @param {string} listName - Name of list
 	 * @param {string} groupName - Name of group
 	 * @param {ListInfo} listInfo - How the command handles the list
+	 * @param {CommandInfo} [commandInfo = {}] - Override the default command info constructed
 	 */
-	constructor(client, listName, groupName, listInfo) {
+	constructor(client, listName, groupName, listInfo, commandInfo = {}) {
 		let info = {
 			name: `${listName}-add`,
 			aliases: [`add-${listName}`],
@@ -60,6 +61,7 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 		info = ListAddCommand.constructDescription(info, listName, listInfo);
 		info = ListAddCommand.constructExamples(info, listName, listInfo);
 
+		Object.assign(info, commandInfo);
 		super(client, listName, info, listInfo);
 
 		this.multipleOptions = listInfo.multipleOptions;
@@ -103,14 +105,7 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 	}
 
 	checkIfURLRequiredAndItemIsURL(item) {
-		if(this.urlOnly && !this.isUrl(item)) {
-			return {
-				error: true,
-				msg: `Item must be a valid URL beginning with "http".`
-			};
-		}
-
-		return { error: false };
+		if(this.urlOnly && !this.isUrl(item)) throw new Error(`Item must be a valid URL beginning with "http".`);
 	}
 
 	/**
@@ -127,74 +122,46 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 	}
 
 	getReplyForMultipleOptions(args, list) {
-		const res = this.checkIfURLRequiredAndItemIsURL(args.item);
-		if(res.error) return res;
+		this.checkIfURLRequiredAndItemIsURL(args.item);
 
 		args.options = args.options.split(' ');
 		return this.pushToTags(args, list);
 	}
 
 	getReplyForNoOptions(args, list) {
-		const res = this.checkIfURLRequiredAndItemIsURL(args.item);
-		if(res.error) return res;
+		this.checkIfURLRequiredAndItemIsURL(args.item);
 
-		if(list.includes(args.item)) {
-			return {
-				error: true,
-				msg: `\`${args.item}\` is already in \`${this.listName}\``
-			};
-		}
+		if(list.includes(args.item)) throw new Error(`\`${args.item}\` is already in \`${this.listName}\``);
 
 		list.push(args.item);
-
-		return {
-			error: false,
-			msg: commonTags.commaLists`\`${args.item}\` was added.`
-		};
+		return commaLists`\`${args.item}\` was added.`;
 	}
 
 	getReplyForSingleOption(args, list) {
 		if(!this.urlOnly && this.isUrl(args.item)) {
-			return {
-				error: true,
-				msg: commonTags.oneLine`Item must not be a URL. Did you perhaps mix up your arguments?
-							See examples in \`help ${this.listName}\``
-			};
+			throw new Error(oneLine`Item must not be a URL. Did you perhaps mix up your arguments?
+				See examples in \`help ${this.listName}\``);
 		}
 
 		if(!this.urlOnly) args.item = args.item.toLowerCase();
 
 		if(list[args.item] instanceof Array) {
 			if(list[args.item].includes(args.options)) {
-				return {
-					error: true,
-					msg: `\`${args.options}\` is already in \`${args.item}\``
-				};
+				throw new Error(`\`${args.options}\` is already in \`${args.item}\``);
 			}
 
 			list[args.item].push(args.options);
 		} else {
 			if(list.hasOwnProperty(args.item)) {
-				return {
-					error: true,
-					msg: `\`${args.item}\` already exists. Please use another value.`
-				};
+				throw new Error(`\`${args.item}\` already exists. Please use another value.`);
 			}
 
 			list[args.item] = args.options;
 		}
 
-		return {
-			error: false,
-			msg: commonTags.commaLists`\`${args.options}\` was added to \`${args.item}\``
-		};
+		return commaLists`\`${args.options}\` was added to \`${args.item}\``;
 	}
 
-	/**
-	 * @param {Array} args
-	 * @param {Object[]} list
-	 * @returns {Reply}
-	 */
 	pushToTags(args, list) {
 		const item = args.item;
 		const tags = args.options;
@@ -210,24 +177,14 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 		});
 
 		if(errorKeys.length === tags.length) {
-			return {
-				error: true,
-				msg: `\`${args.item}\` is already in \`${errorKeys.join(', ')}\``
-			};
+			throw new Error(`\`${args.item}\` is already in \`${errorKeys.join(', ')}\``);
 		}
 
 		if(errorKeys.length !== 0) {
-			return {
-				error: false,
-				msg: commonTags.oneLine`
-						\`${args.item}\` is already in \`${errorKeys.join(', ')}\`
-						but any tags not listed were added successfully.`
-			};
+			return oneLine`\`${args.item}\` is already in \`${errorKeys.join(', ')}\`
+						but any tags not listed were added successfully.`;
 		}
 
-		return {
-			error: false,
-			msg: `\`${item}\` was added with tags \`${tags.slice(0).join(', ')}\``
-		};
+		return `\`${item}\` was added with tags \`${tags.slice(0).join(', ')}\``;
 	}
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-const commonTags = require('common-tags');
+const { stripIndents, oneLine } = require('common-tags');
 const ListBaseCommand = require('./base');
 
 module.exports = class ListTagsCommand extends ListBaseCommand {
@@ -28,8 +28,9 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 	 * @param {string} listName - Name of list
 	 * @param {string} groupName - Name of group
 	 * @param {ListInfo} [listInfo = {}] - How the command handles the list
+	 * @param {CommandInfo} [commandInfo = {}] - Override the default command info constructed
 	 */
-	constructor(client, listName, groupName, listInfo = {}) {
+	constructor(client, listName, groupName, listInfo = {}, commandInfo = {}) {
 		const info = {
 			name: `${listName}-tags`,
 			aliases: [`tags-${listName}`],
@@ -37,6 +38,7 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 			memberName: `${listName}-tags`,
 			description: 'List the tags currently added.'
 		};
+		Object.assign(info, commandInfo);
 		super(client, listName, info, listInfo);
 	}
 
@@ -45,25 +47,15 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 	 */
 	getReply(args, list) {
 		if(list instanceof Array) {
-			return {
-				error: true,
-				msg: 'This list does not support tags. You should never see this message. Please contact @Kyuu#9284.'
-			};
+			throw new Error(oneLine`This list does not support tags. 
+				You should never see this message. Please contact <@${this.client.options.owner}>`);
 		}
 
 		const tags = list ? Object.keys(list) : [];
 
-		if(tags.length === 0) {
-			return {
-				error: false,
-				msg: 'There are no tags added currently.'
-			};
-		}
+		if(tags.length === 0) return 'There are no tags added currently.';
 
-		return {
-			error: false,
-			msg: commonTags.stripIndents`\`${this.listName}\` tags:
-				\`\`\`${tags.sort().join(', ')}\`\`\``
-		};
+		return stripIndents`\`${this.listName}\` tags:
+				\`\`\`${tags.sort().join(', ')}\`\`\``;
 	}
 };

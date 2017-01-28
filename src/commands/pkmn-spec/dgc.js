@@ -12,30 +12,25 @@ module.exports = class DGCCommand extends ListCommand {
 		);
 	}
 
+
+	/**
+	 * @Override
+	 */
 	getReply(args, list) {
 		let chanceForEchium = 50;
 
 		if(args.item) {
 			const item = parseFloat(args.item);
 
-			if(this.isNumber(item)) {
-				chanceForEchium = item;
-			} else {
-				return {
-					error: true,
-					msg: 'Value entered must be a number.'
-				};
-			}
+			if(this.isNumber(item)) chanceForEchium = item;
+			else throw new Error('Value entered must be a number.');
 		}
 
 		const rand = Math.floor(Math.random() * 100);
 		const subList = (rand <= chanceForEchium) ? 'echium' : 'dgc';
 		const res = super.getReply(args, list[subList]);
-		if(!res.error) {
-			res.msg = `\`${chanceForEchium}%\` chance for Echium: ${res.msg}`;
-		}
-
-		return res;
+		
+		return `\`${chanceForEchium}%\` chance for Echium: ${res}`;
 	}
 
 	isNumber(number) {

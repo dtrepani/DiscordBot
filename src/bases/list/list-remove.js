@@ -1,6 +1,6 @@
 'use strict';
 
-const commonTags = require('common-tags');
+const { oneLine, oneLineCommaLists } = require('common-tags');
 const ListBaseCommand = require('./base');
 
 module.exports = class ListRemoveCommand extends ListBaseCommand {
@@ -29,8 +29,9 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 	 * @param {string} listName - Name of list
 	 * @param {string} groupName - Name of group
 	 * @param {ListInfo} listInfo - How the command handles the list
+	 * @param {CommandInfo} [commandInfo = {}] - Override the default command info constructed
 	 */
-	constructor(client, listName, groupName, listInfo) {
+	constructor(client, listName, groupName, listInfo, commandInfo = {}) {
 		let info = {
 			name: `${listName}-remove`,
 			aliases: [
@@ -61,6 +62,7 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 		info = ListRemoveCommand.constructDescription(info, listName, listInfo);
 		info = ListRemoveCommand.constructExamples(info, listName, listInfo);
 
+		Object.assign(info, commandInfo);
 		super(client, listName, info, listInfo);
 
 		this.urlOnly = listInfo.urlOnly;
@@ -101,34 +103,17 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 	 * @Override
 	 */
 	getReply(args, list) {
-		if(this.urlOnly && !this.isUrl(args.item)) {
-			return {
-				error: true,
-				msg: `Item must be a valid URL beginning with "http".`
-			};
-		}
-
-		if(args.options) {
-			return this.removeFromGivenTags(args, list);
-		}
-
+		if(this.urlOnly && !this.isUrl(args.item)) throw new Error(`Item must be a valid URL beginning with "http".`);
+		if(args.options) return this.removeFromGivenTags(args, list);
 		return this.removeItemFromAll(args, list);
 	}
 
-	/**
-	 * @param {Object} args
-	 * @param {Object|Array} list
-	 * @returns {Reply}
-	 */
 	removeFromGivenTags(args, list) {
 		args.options = args.options.split(' ');
 
 		if(list instanceof Array) {
-			return {
-				error: true,
-				msg: commonTags.oneLine`\`${this.listName}\` does not support tags.
-					If the item you wish to remove has multiple words, please wrap them in quotation marks.`
-			};
+			throw new Error(oneLine`\`${this.listName}\` does not support tags.
+					If the item you wish to remove has multiple words, please wrap them in quotation marks.`);
 		}
 
 		const errorTags = [];
@@ -146,41 +131,25 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 		});
 
 		if(successfulTags.length === 0) {
-			return {
-				error: true,
-				msg: commonTags.oneLine`All the tags given (\`${args.options}\`) were either non-existent or
-					already did not contain \`${args.item}\``
-			};
+			throw new Error(oneLine`All the tags given (\`${args.options}\`) were either non-existent or
+			already did not contain \`${args.item}\``);
 		}
 
-		return {
-			error: false,
-			msg: commonTags.oneLineCommaLists`\`${args.item}\` was removed from
+		return oneLineCommaLists`\`${args.item}\` was removed from
 				\`${successfulTags}\`` +
 				((errorTags.length !== 0)
-					? `\n\n${commonTags.oneLineCommaLists`:no_entry_sign: But the tag(s) \`${errorTags}\` were
+					? `\n\n${oneLineCommaLists`:no_entry_sign: But the tag(s) \`${errorTags}\` were
 						either non-existent or already did not have the item.`}`
-					: ``)
-		};
+					: ``);
 	}
 
-	/**
-	 * @param {Object} args
-	 * @param {Object|Array} list
-	 * @returns {Reply}
-	 */
 	removeItemFromAll(args, list) {
 		const tagsRemovedFrom = [];
 
 		if(list instanceof Array) {
 			const itemIndex = list.indexOf(args.item);
 
-			if(itemIndex === -1) {
-				return {
-					error: true,
-					msg: `\`${args.item}\` is not in \`${this.listName}\``
-				};
-			}
+			if(itemIndex === -1) throw new Error(`\`${args.item}\` is not in \`${this.listName}\``);
 
 			list.splice(itemIndex, 1);
 		} else {
@@ -191,35 +160,31 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 			}
 		}
 
-		return {
-			error: false,
-			msg: `\`${args.item}\` was removed${
+		return `\`${args.item}\` was removed${
 				(tagsRemovedFrom.length > 1)
 					? ` from \`${tagsRemovedFrom.join(', ')}\``
-					: `.`}`
-		};
+					: `.`}`;
 	}
 
+	/**
+	 * @param {Array} list
+	 * @param {Object} args
+	 * @param {String} tag
+	 * @returns {Boolean} Whether the item was successfully removed from tag
+	 */
 	removeItemFromTag(list, args, tag) {
 		if(!this.isUrl(args.item)) {
 			args.item = args.item.toLowerCase();
 		}
 
 		if(list[tag] && (typeof list[tag] === 'string' || list[tag] instanceof String)) {
-			if(tag !== args.item) {
-				return false;
-			}
-
+			if(tag !== args.item) return false;
 			delete list[args.item];
 		} else {
 			const itemIndex = list[tag].indexOf(args.item);
-
-			if(itemIndex === -1) {
-				return false;
-			}
+			if(itemIndex === -1) return false;
 
 			list[tag].splice(itemIndex, 1);
-
 			if(list[tag].length === 0) {
 				delete list[tag];
 			}
