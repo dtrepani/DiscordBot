@@ -1,10 +1,10 @@
 'use strict';
 
+const { oneLine } = require('common-tags');
 const Commando = require('discord.js-commando');
-const winston = require('winston');
-const { stripIndents, oneLine } = require('common-tags');
-const alerts = require('../../modules/alerts');
 const deleteMsg = require('../../modules/delete-msg');
+const sendError = require('../../modules/send-error');
+const winston = require('winston');
 
 module.exports = class SayCommand extends Commando.Command {
 	constructor(client) {
@@ -12,16 +12,12 @@ module.exports = class SayCommand extends Commando.Command {
 			name: 'say',
 			group: 'mod',
 			memberName: 'say',
-			description: 'Speak through the bot. Message must be wrapped in quotations',
-			details: stripIndents`
-				Message and guild name must be wrapped in quotations.
-				__text:__ Message to say through bot
-				__guild:__ Guild/server to say the message to; defaults to current guild
-				__channel:__ Channel to say message to; defaults to first channel
-			`,
+			description: 'Speak through Timothy.',
+			details: oneLine`Remember that multi-word arguments must be wrapped in quotations. 
+				Careful what you say though. Some people can look at who is making Timothy say what. ;)`,
 			examples: [
 				`~say "I'm saying something!"`,
-				`~say ";)" "A Guild Here!" "general"`
+				`~say ";)" "Pit of Darkness" "island-of-trash"`
 			],
 
 			args: [
@@ -58,25 +54,25 @@ module.exports = class SayCommand extends Commando.Command {
 		const guildMatch = guilds.find(guild => guild.name.toLowerCase() === args.guild.toLowerCase());
 
 		if(!guildMatch) {
-			return alerts.sendError(msg, oneLine`I'm not a member of the guild \`${args.guild}\`.
+			return sendError(msg, oneLine`I'm not a member of the guild **${args.guild}**.
 				Did you mean for me to say something here instead? Try wrapping your message in quotes.`);
 		}
 
-		return this.sendToChannel(msg, args, guildMatch);
+		return this._sendToChannel(msg, args, guildMatch);
 	}
 
-	sendToChannel(msg, args, guildMatch) {
+	_sendToChannel(msg, args, guildMatch) {
 		let channel = guildMatch.channels.first();
 
 		if(args.channel) {
 			channel = guildMatch.channels.find(aChannel => aChannel.name.toLowerCase() === args.channel.toLowerCase());
 
 			if(!channel) {
-				return alerts.sendError(msg, `\`${args.channel}\` is not a valid channel in \`${args.guild}\``);
+				return sendError(msg, `**${args.channel}** is not a valid channel in **${args.guild}**`);
 			}
 		}
 
-		msg.reply(`I posted the message to \`${args.guild}\``)
+		msg.reply(`I posted the message to **${args.guild}**`)
 			.catch(winston.error);
 
 		return guildMatch.channels.first().sendMessage(args.text);

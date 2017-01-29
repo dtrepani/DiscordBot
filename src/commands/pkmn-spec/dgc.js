@@ -1,5 +1,6 @@
 'use strict';
 
+const { isNumber } = require('../../modules/type-checks');
 const ListCommand = require('../../bases/list/list');
 
 module.exports = class DGCCommand extends ListCommand {
@@ -12,28 +13,22 @@ module.exports = class DGCCommand extends ListCommand {
 		);
 	}
 
-
 	/**
 	 * @Override
 	 */
-	getReply(args, list) {
+	_getReply(args, list) {
 		let chanceForEchium = 50;
 
 		if(args.item) {
 			const item = parseFloat(args.item);
-
-			if(this.isNumber(item)) chanceForEchium = item;
-			else throw new Error('Value entered must be a number.');
+			if(!isNumber(item)) throw new Error('Value entered must be a number.');
+			chanceForEchium = item;
 		}
 
 		const rand = Math.floor(Math.random() * 100);
 		const subList = (rand <= chanceForEchium) ? 'echium' : 'dgc';
-		const res = super.getReply(args, list[subList]);
+		const res = super._getReply(args, list[subList]);
 		
-		return `\`${chanceForEchium}%\` chance for Echium: ${res}`;
-	}
-
-	isNumber(number) {
-		return (!isNaN(number) && isFinite(number));
+		return `${chanceForEchium}% chance for Echium: ${res}`;
 	}
 };

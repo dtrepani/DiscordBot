@@ -1,10 +1,11 @@
 'use strict';
 
-const Discord = require('discord.js');
 const { stripIndents } = require('common-tags');
+const cleanReply = require('../../modules/clean-reply');
+const config = require('../../assets/config.json');
+const Discord = require('discord.js');
 const google = require('google');
 const WebCommand = require('../../bases/web');
-const config = require('../../assets/config.json');
 
 module.exports = class GoogleCommand extends WebCommand {
 	constructor(client) {
@@ -26,7 +27,7 @@ module.exports = class GoogleCommand extends WebCommand {
 	/**
 	 * @Override
 	 */
-	async query(msg, args) {
+	async _query(msg, args) {
 		const query = args.query;
 		google.resultsPerPage = 5;
 
@@ -49,7 +50,7 @@ module.exports = class GoogleCommand extends WebCommand {
 				);
 			});
 
-			return msg.replyEmbed(embed, `Top results for \`${query}\`:`);
+			return cleanReply(msg, { embed: embed, content: `Top results:` });
 		});
 	}
 };

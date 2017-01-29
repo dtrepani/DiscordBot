@@ -1,6 +1,6 @@
 'use strict';
 
-const alerts = require('../../modules/alerts');
+const sendError = require('../../modules/send-error');
 const stripIndents = require('common-tags').stripIndents;
 const ListRemoveCommand = require('../../bases/list/list-remove');
 
@@ -19,7 +19,7 @@ module.exports = class GuessRemoveCommand extends ListRemoveCommand {
 
 	async run(msg, args) {
 		if(args.item === `i'll`) {
-			return alerts.sendError(msg, stripIndents`
+			return sendError(msg, stripIndents`
 				You're trying to remove the tag \`i'll\`. Please wrap your tag in quotations, like so:
 				\`remove-guess "i'll die" http://i.imgur.com/V8hvLx7.png\`
 			`);

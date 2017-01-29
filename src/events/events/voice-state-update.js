@@ -20,27 +20,27 @@ module.exports = class VoiceStateUpdateEvent extends EventLog {
 				icon_url: before.user.avatarURL // eslint-disable-line camelcase
 			}
 		};
-		const descriptors = this.getChangedDescriptors(before, after);
+		const descriptors = this._getChangedDescriptors(before, after);
 		if(!descriptors) return;
 		Object.assign(embed, descriptors);
 
-		EventEmbed.sendVoiceEmbed(this.getLogChannel(before.guild), before.user.id, embed);
+		EventEmbed.sendVoiceEmbed(this._getLogChannel(before.guild), before.user.id, embed);
 	}
 
-	getChangedDescriptors(before, after) {
+	_getChangedDescriptors(before, after) {
 		if(before.voiceChannelID === after.voiceChannelID) return false;
 
 		if(!before.voiceChannelID) {
-			return { description: `${after.user} entered voice channel ${this.getVoiceChannel(after)}` };
+			return { description: `${after.user} entered voice channel ${this._getVoiceChannel(after)}` };
 		}
 
 		if(!after.voiceChannelID) {
-			return { description: `${before.user} left voice channel ${this.getVoiceChannel(before)}` };
+			return { description: `${before.user} left voice channel ${this._getVoiceChannel(before)}` };
 		}
 
 		return {
-			description: oneLine`${before.user} moved from ${this.getVoiceChannel(before)}
-				to ${this.getVoiceChannel(after)}`
+			description: oneLine`${before.user} moved from ${this._getVoiceChannel(before)}
+				to ${this._getVoiceChannel(after)}`
 		};
 	}
 
@@ -48,7 +48,7 @@ module.exports = class VoiceStateUpdateEvent extends EventLog {
 	 * @param {GuildMember} member
 	 * @returns {GuildChannel}
 	 */
-	getVoiceChannel(member) {
+	_getVoiceChannel(member) {
 		return member.guild.channels.get(member.voiceChannelID);
 	}
 };

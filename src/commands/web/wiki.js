@@ -1,6 +1,8 @@
 'use strict';
 
+const { capitalizeFirstLetter, toTitleCase } = require('../../modules/string-format');
 const { oneLine, stripIndents } = require('common-tags');
+const cleanReply = require('../../modules/clean-reply');
 const config = require('../../assets/config.json');
 const Discord = require('discord.js');
 const htmlToText = require('html-to-text');
@@ -42,44 +44,36 @@ module.exports = class WikiCommand extends WebCommand {
 
 		super(client, info);
 		this.wikiName = wikiName;
-		this.options = options;
+		this._options = options;
 	}
 
 	/**
 	 * @Override
 	 */
-	async query(msg, args) {
-		args = this.toTitleCase(args);
+	async _query(msg, args) {
+		args = toTitleCase(args);
 
 		try {
-			const page = await wiki(this.options).page(args);
+			const page = await wiki(this._options).page(args);
 
 			if(page.raw.hasOwnProperty('missing')) {
-				return await this.getSearchResults(msg, args);
+				return await this._getSearchResults(msg, args);
 			}
 
-			const img = await this.getImage(args, page);
-			const summary = await this.getSummary(page);
+			const img = await this._getImage(args, page);
+			const summary = await this._getSummary(page);
 
-			return msg.replyEmbed(
-				this.getEmbed(page, summary, img),
-				`From the ${this.wikiName ? this.wikiName.toUpperCase() : ''}wiki: <${page.raw.fullurl}>`
-			);
+			return cleanReply(msg, {
+				embed: this._constructEmbed(page, summary, img),
+				content: `<${page.raw.fullurl}>`
+			});
 		} catch(err) {
 			winston.error(err);
 			throw new Error(err);
 		}
 	}
 
-	capitalizeFirstLetter(string) {
-		return string.charAt(0).toUpperCase() + string.slice(1);
-	}
-
-	toTitleCase(string) {
-		return string.replace(/\w\S*/g, text => text.charAt(0).toUpperCase() + text.substr(1).toLowerCase());
-	}
-
-	getEmbed(page, summary, img) {
+	_constructEmbed(page, summary, img) {
 		const embed = new Discord.RichEmbed({
 			title: page.raw.title,
 			url: page.raw.fullurl,
@@ -90,17 +84,17 @@ module.exports = class WikiCommand extends WebCommand {
 		return embed;
 	}
 
-	async getImage(searchTerm, page) {
+	async _getImage(searchTerm, page) {
 		try {
 			return await page.mainImage();
 		} catch(err) {
-			return this.getImageThatMatchesSearch(searchTerm, page);
+			return this._getImageThatMatchesSearch(searchTerm, page);
 		}
 	}
 
-	async getImageThatMatchesSearch(searchTerm, page) {
+	async _getImageThatMatchesSearch(searchTerm, page) {
 		try {
-			const re = new RegExp(this.toWebName(searchTerm), 'i');
+			const re = new RegExp(this._toWebName(searchTerm), 'i');
 			const images = await page.images();
 
 			for(let i = 0; i < images.length; i++) {
@@ -115,10 +109,10 @@ module.exports = class WikiCommand extends WebCommand {
 		return '';
 	}
 
-	async getSearchResults(msg, searchTerm) {
+	async _getSearchResults(msg, searchTerm) {
 		try {
 			const delimiter = `\n${config.embed_bullet} `;
-			const search = await wiki(this.options).search(searchTerm);
+			const search = await wiki(this._options).search(searchTerm);
 
 			if(search.results.length === 0) {
 				return msg.reply(`The article does not exist.`);
@@ -129,7 +123,7 @@ module.exports = class WikiCommand extends WebCommand {
 				${delimiter}${search.results.splice(0, 5).join(delimiter)}
 			`);
 		} catch(err) {
-			const baseUrl = this.options.apiUrl.split('/', 3).join('/');
+			const baseUrl = this._options.apiUrl.split('/', 3).join('/');
 			winston.warn(err);
 			return msg.reply(oneLine`
 				An article by that exact name doesn't exist and this wiki doesn't allow bot searches for
@@ -146,7 +140,7 @@ module.exports = class WikiCommand extends WebCommand {
 	 * @param {String} html
 	 * @returns {Integer}
 	 */
-	getSummaryStartInd(html) {
+	_getSummaryStartInd(html) {
 		const strongInd = html.indexOf('<strong');
 		const bInd = html.indexOf('<b>');
 
@@ -156,15 +150,15 @@ module.exports = class WikiCommand extends WebCommand {
 		return Math.min(strongInd, bInd);
 	}
 
-	async getSummary(page) {
+	async _getSummary(page) {
 		try {
 			const summary = await page.summary();
 			if(summary) {
-				return this.stripLength(summary);
+				return this._stripLength(summary);
 			}
 
 			let html = await page.html();
-			const summaryStartInd = this.getSummaryStartInd(html);
+			const summaryStartInd = this._getSummaryStartInd(html);
 			if(summaryStartInd !== -1) {
 				html = html.slice(summaryStartInd);
 			}
@@ -176,14 +170,14 @@ module.exports = class WikiCommand extends WebCommand {
 				preserveNewlines: true
 			});
 
-			if(summaryStartInd !== -1) html = this.capitalizeFirstLetter(html);
-			return this.parseEndOfSummary(html);
+			if(summaryStartInd !== -1) html = capitalizeFirstLetter(html);
+			return this._parseEndOfSummary(html);
 		} catch(err) {
 			throw new Error(err);
 		}
 	}
 
-	parseEndOfSummary(summary) {
+	_parseEndOfSummary(summary) {
 		const contentsSectionInd = summary.indexOf('CONTENTS');
 		if(contentsSectionInd !== -1) {
 			summary = summary.slice(0, contentsSectionInd);
@@ -192,10 +186,10 @@ module.exports = class WikiCommand extends WebCommand {
 			if(nextParagraphInd !== -1) summary = summary.slice(0, nextParagraphInd);
 		}
 
-		return this.stripLength(summary);
+		return this._stripLength(summary);
 	}
 
-	stripLength(summary) {
+	_stripLength(summary) {
 		const contd = '... [continued]';
 		const maxLength = 800 - contd.length;
 
@@ -206,7 +200,7 @@ module.exports = class WikiCommand extends WebCommand {
 		return summary;
 	}
 
-	toWebName(searchTerm) {
+	_toWebName(searchTerm) {
 		return searchTerm.replace(/ /g, '_').replace(/'/g, '%27');
 	}
 };

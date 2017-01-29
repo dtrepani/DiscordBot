@@ -14,7 +14,7 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 	 * @param {GuildMember} before - User before the change
 	 * @param {GuildMember} after - User after the change
 	 */
-	run(before, after) {
+	_run(before, after) {
 		const embed = {
 			author: {
 				name: `${after.user.username}#${after.user.discriminator}`,
@@ -22,7 +22,7 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 			}
 		};
 
-		const descriptors = this.getChangedDescriptors(before, after);
+		const descriptors = this._getChangedDescriptors(before, after);
 		if(!descriptors) {
 			winston.debug(before);
 			winston.debug(after);
@@ -33,7 +33,7 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 		EventEmbed.sendUserEmbed(this.getLogChannel(before.guild), before.user.id, embed);
 	}
 
-	getChangedDescriptors(before, after) {
+	_getChangedDescriptors(before, after) {
 		let statChanged = '';
 		let changedVal = '';
 

@@ -1,11 +1,11 @@
 'use strict';
 
+const { oneLine } = require('common-tags');
+const cleanReply = require('../../modules/clean-reply');
 const Commando = require('discord.js-commando');
-const winston = require('winston');
-const oneLine = require('common-tags').oneLine;
 const fs = require('fs');
-const deleteMsg = require('../../modules/delete-msg');
-const alerts = require('../../modules/alerts');
+const sendError = require('../../modules/send-error');
+const winston = require('winston');
 
 module.exports = class ListBaseCommand extends Commando.Command {
 	/**
@@ -30,53 +30,55 @@ module.exports = class ListBaseCommand extends Commando.Command {
 	 */
 	constructor(client, listName, commandInfo, listInfo) {
 		super(client, commandInfo);
-		this.listName = listName;
-		this.isArrList = listInfo.isArrList || false;
-		this.readOnly = listInfo.readOnly || false;
-		this.deleteMsgFlag = listInfo.deleteMsg || true;
+
+		listInfo = Object.assign({
+			readOnly: false,
+			deleteMsg: true,
+			isArrList: false
+		}, listInfo);
+
+		this._listName = listName;
+		this._isArrList = listInfo.isArrList;
+		this._readOnly = listInfo.readOnly;
+		this._deleteMsg = listInfo.deleteMsg;
 	}
 
 	async run(msg, args) {
 		try {
-			const list = this.getList();
-			const reply = this.getReply(args, list);
+			const list = this._getList();
+			const reply = this._getReply(args, list);
 
-			if(!this.readOnly) {
-				this.setList(list);
+			if(!this._readOnly) {
+				this._setList(list);
 			}
 
-			deleteMsg(msg, this.deleteMsgFlag);
-			return msg.reply(reply);
+			return cleanReply(msg, reply);
 		} catch(err) {
-			return alerts.sendError(msg, err);
+			return sendError(msg, err);
 		}
 	}
 
-	getList() {
-		const path = 'src/assets/${this.listName}.json';
+	_getList() {
+		const path = `src/assets/${this._listName}.json`;
 		let defaultList;
 
 		try {
 			fs.accessSync(path, fs.constants.F_OK);
 			defaultList = JSON.parse(fs.readFileSync(path));
 		} catch(err) {
-			defaultList = (this.isArrList) ? {} : [];
+			defaultList = (this._isArrList) ? [] : {};
 		}
 
 		return this.client.provider.get(
 			'global',
-			this.listName,
+			this._listName,
 			defaultList
 		);
 	}
 
-	setList(list) {
-		this.client.provider.set('global', this.listName, list)
+	_setList(list) {
+		this.client.provider.set('global', this._listName, list)
 			.catch(winston.error);
-	}
-
-	isUrl(item) {
-		return (item.search(/https?:\/\/[^ \/\.]+\.[^ \/\.]+/) !== -1); // eslint-disable-line no-useless-escape
 	}
 
 	/**
@@ -84,10 +86,10 @@ module.exports = class ListBaseCommand extends Commando.Command {
 	 * @abstract
 	 * @param {Array} args
 	 * @param {Object|Array} list
-	 * @returns {Reply}
+	 * @returns {String}
 	 */
-	getReply(args, list) { // eslint-disable-line no-unused-vars
+	_getReply(args, list) { // eslint-disable-line no-unused-vars
 		throw new Error(oneLine`ListBase:getReply() was not overridden.
-                This error should never happen. Please contact <@${this.client.options.owner}>`);
+			This error should never happen. Please contact <@${this.client.options.owner}>`);
 	}
 };

@@ -1,5 +1,6 @@
 'use strict';
 
+const { isUrl } = require('../../modules/type-checks');
 const { oneLine, commaLists } = require('common-tags');
 const ListBaseCommand = require('./base');
 
@@ -58,16 +59,17 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 		info.args[1].prompt = (listInfo.multipleOptions)
 			? 'What tags would you like?'
 			: 'With what value?';
-		info = ListAddCommand.constructDescription(info, listName, listInfo);
-		info = ListAddCommand.constructExamples(info, listName, listInfo);
+		info = ListAddCommand._constructDescription(info, listName, listInfo);
+		info = ListAddCommand._constructExamples(info, listName, listInfo);
 
 		Object.assign(info, commandInfo);
 		super(client, listName, info, listInfo);
 
-		this.multipleOptions = listInfo.multipleOptions;
+		this._multipleOptions = listInfo.multipleOptions;
+		this._urlOnly = listInfo.urlOnly;
 	}
 
-	static constructDescription(info, listName, listInfo) {
+	static _constructDescription(info, listName, listInfo) {
 		info.description = `Add ${(listInfo.urlOnly) ? `a URL ` : `an item `}`;
 
 		if(listInfo.requireOptions) {
@@ -77,20 +79,17 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 		}
 
 		info.description += `to the ${listName} list.`;
-
 		return info;
 	}
 
-	static constructExamples(info, listName, listInfo) {
+	static _constructExamples(info, listName, listInfo) {
 		const command = `add-${listName}`;
 		const exampleUrl = `\`http://i.imgur.com/f75Pzvn.jpg\``;
 		const examples = info.examples;
 
 		if(!listInfo.requireOptions) {
 			/* Always push URL example so user knows they can use URLs. */
-			if(!listInfo.urlOnly) {
-				examples.push(`${command} "snippet of text"`);
-			}
+			if(!listInfo.urlOnly) examples.push(`${command} "snippet of text"`);
 			examples.push(`${command} ${exampleUrl}`);
 		} else if(listInfo.multipleOptions) {
 			examples.push(`${command} ${exampleUrl} kyuu lhu email`);
@@ -104,46 +103,46 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 		return info;
 	}
 
-	checkIfURLRequiredAndItemIsURL(item) {
-		if(this.urlOnly && !this.isUrl(item)) throw new Error(`Item must be a valid URL beginning with "http".`);
+	_checkIfURLRequiredAndItemIsURL(item) {
+		if(this._urlOnly && !isUrl(item)) {
+			throw new Error(oneLine`\`${item}\` must be a valid URL beginning with "http". 
+				Make sure your arguments are in the right order.`);
+		}
 	}
 
 	/**
 	 * @Override
 	 */
-	getReply(args, list) {
+	_getReply(args, list) {
 		if(args.options) {
-			if(this.multipleOptions) {
-				return this.getReplyForMultipleOptions(args, list);
+			if(this._multipleOptions) {
+				return this._getReplyForMultipleOptions(args, list);
 			}
-			return this.getReplyForSingleOption(args, list);
+			return this._getReplyForSingleOption(args, list);
 		}
-		return this.getReplyForNoOptions(args, list);
+		return this._getReplyForNoOptions(args, list);
 	}
 
-	getReplyForMultipleOptions(args, list) {
-		this.checkIfURLRequiredAndItemIsURL(args.item);
-
+	_getReplyForMultipleOptions(args, list) {
+		this._checkIfURLRequiredAndItemIsURL(args.item);
 		args.options = args.options.split(' ');
-		return this.pushToTags(args, list);
+		return this._pushToTags(args, list);
 	}
 
-	getReplyForNoOptions(args, list) {
-		this.checkIfURLRequiredAndItemIsURL(args.item);
-
-		if(list.includes(args.item)) throw new Error(`\`${args.item}\` is already in \`${this.listName}\``);
-
+	_getReplyForNoOptions(args, list) {
+		this._checkIfURLRequiredAndItemIsURL(args.item);
+		if(list.includes(args.item)) throw new Error(`\`${args.item}\` is already in "${this._listName}"`);
 		list.push(args.item);
-		return commaLists`\`${args.item}\` was added.`;
+		return commaLists`\`${args.item}\` was added to "${this._listName}"`;
 	}
 
-	getReplyForSingleOption(args, list) {
-		if(!this.urlOnly && this.isUrl(args.item)) {
+	_getReplyForSingleOption(args, list) {
+		if(!this._urlOnly && isUrl(args.item)) {
 			throw new Error(oneLine`Item must not be a URL. Did you perhaps mix up your arguments?
-				See examples in \`help ${this.listName}\``);
+				See examples in \`${this.client.options.commandPrefix}help ${this._listName}\``);
 		}
 
-		if(!this.urlOnly) args.item = args.item.toLowerCase();
+		if(!this._urlOnly) args.item = args.item.toLowerCase();
 
 		if(list[args.item] instanceof Array) {
 			if(list[args.item].includes(args.options)) {
@@ -162,7 +161,7 @@ module.exports = class ListAddCommand extends ListBaseCommand {
 		return commaLists`\`${args.options}\` was added to \`${args.item}\``;
 	}
 
-	pushToTags(args, list) {
+	_pushToTags(args, list) {
 		const item = args.item;
 		const tags = args.options;
 		const errorKeys = [];

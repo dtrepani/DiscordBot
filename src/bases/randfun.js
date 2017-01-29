@@ -1,7 +1,7 @@
 'use strict';
 
 const Commando = require('discord.js-commando');
-const deleteMsg = require('../modules/delete-msg');
+const cleanReply = require('../modules/clean-reply');
 const request = require('request-promise');
 const winston = require('winston');
 
@@ -15,32 +15,30 @@ module.exports = class RandFunCommand extends Commando.Command {
 	constructor(client, commandInfo, subreddit, defaultImg) {
 		super(client, commandInfo);
 
-		this.randCache = [];
-		this.name = commandInfo.name;
-		this.subreddit = subreddit;
-		this.defaultImg = defaultImg;
+		this._randCache = [];
+		this._subreddit = subreddit;
+		this._defaultImg = defaultImg;
 	}
 
 	async run(msg) {
-		if(this.randCache.length === 0) {
+		if(this._randCache.length === 0) {
 			try {
-				const res = await request(`https://imgur.com/r/${this.subreddit}/hot.json`);
-				this.randCache = JSON.parse(res).data;
+				const res = await request(`https://imgur.com/r/${this._subreddit}/hot.json`);
+				this._randCache = JSON.parse(res).data;
 			} catch(err) {
 				winston.warn(`Error when requesting subreddit: ${err}`);
 			}
 		}
 
-		deleteMsg(msg);
-		return msg.reply(`\`${this.name}\`: ${this.getRandomImage()}`);
+		return cleanReply(msg, this._getRandomImage());
 	}
 
-	getRandomImage() {
-		if(this.randCache.length === 0) {
-			return this.defaultImg;
+	_getRandomImage() {
+		if(this._randCache.length === 0) {
+			return this._defaultImg;
 		}
 
-		const randImg = this.randCache[Math.floor(Math.random() * this.randCache.length)];
+		const randImg = this._randCache[Math.floor(Math.random() * this._randCache.length)];
 		const extension = randImg.ext.replace(/\?.*/, '');
 		return `http://imgur.com/${randImg.hash}${extension}`;
 	}

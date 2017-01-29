@@ -36,7 +36,7 @@ module.exports = class EventLog {
 
 				if(!modLogSettings.enabled) return;
 
-				this.run(...args);
+				this._run(...args);
 			} catch(err) {
 				winston.error(`No Guild Found: \n ${err.stack}`);
 				winston.debug(args);
@@ -44,16 +44,20 @@ module.exports = class EventLog {
 		});
 	}
 
-	getLogChannel(guild) {
+	_getLogChannel(guild) {
 		const modLogSettings = this.client.provider.get(guild, 'mod_log', {});
 		return guild.channels.get(modLogSettings.channelID);
+	}
+
+	_isLogChannel(msg) {
+		return (this._getLogChannel(msg.guild) === msg.channel);
 	}
 
 	/**
 	 * Function to run when the event is triggered.
 	 * @abstract
 	 */
-	run(...args) { // eslint-disable-line no-unused-vars
+	_run(...args) { // eslint-disable-line no-unused-vars
 		throw new Error(`${this.constructor.name} doesn't have a run() method.`);
 	}
 };

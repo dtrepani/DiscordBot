@@ -1,5 +1,5 @@
 const Commando = require('discord.js-commando');
-const alerts = require('../../modules/alerts');
+const sendError = require('../../modules/send-error');
 
 module.exports = class NukeCommand extends Commando.Command {
 	constructor(client) {
@@ -63,7 +63,7 @@ module.exports = class NukeCommand extends Commando.Command {
 			break;
 		case 'user':
 			if(!args.member) {
-				alerts.sendError(`Please provide a user (@User) to filter.`);
+				sendError(`Please provide a user (@User) to filter.`);
 			}
 			messageFilter = message => message.author.id === args.member.user.id;
 			break;

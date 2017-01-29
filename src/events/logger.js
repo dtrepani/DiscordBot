@@ -1,8 +1,9 @@
 'use strict';
 
+const { camelCaseToDash } = require('../modules/string-format');
 const EventLog = require('./base');
-const winston = require('winston');
 const path = require('path');
+const winston = require('winston');
 
 /**
  * When enabled in a guild, the Logger posts events to the guild's specified channel (#mod-log by default)
@@ -24,11 +25,11 @@ module.exports = class Logger {
 
 		for(const wsEvent of Object.values(wsEventObjs)) {
 			this.wsEvents.push(wsEvent);
-			this.registerEvent(wsEvent);
+			this._registerEvent(wsEvent);
 		}
 	}
 
-	registerEvent(wsEvent) {
+	_registerEvent(wsEvent) {
 		if(typeof wsEvent === 'function') {
 			wsEvent = new wsEvent(this.client); // eslint-disable-line new-cap
 		}
@@ -51,16 +52,12 @@ module.exports = class Logger {
 				continue;
 			}
 
-			const pathName = path.join(this.dir, `${this.camelCaseToDash(wsEvent.name)}.js`);
+			const pathName = path.join(this.dir, `${camelCaseToDash(wsEvent.name)}.js`);
 			if(require.cache[pathName]) {
 				delete require.cache[pathName];
 			}
 		}
 
 		this.registerEvents();
-	}
-
-	camelCaseToDash(str) {
-		return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 	}
 };

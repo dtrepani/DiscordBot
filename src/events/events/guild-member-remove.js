@@ -11,7 +11,7 @@ module.exports = class GuildMemberRemoveEvent extends EventLog {
 	/**
 	 * @param {GuildMember} member - User that left the guild
 	 */
-	run(member) {
+	_run(member) {
 		const embed = {
 			description: `${member} Left :cry:`,
 			author: {
@@ -21,6 +21,6 @@ module.exports = class GuildMemberRemoveEvent extends EventLog {
 			thumbnail: { url: member.user.avatarURL }
 		};
 
-		EventEmbed.sendUserEmbed(this.getLogChannel(member.guild), member.user.id, embed);
+		EventEmbed.sendUserEmbed(this._getLogChannel(member.guild), member.user.id, embed);
 	}
 };

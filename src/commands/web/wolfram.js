@@ -1,5 +1,6 @@
 'use strict';
 
+const cleanReply = require('../../modules/clean-reply');
 const config = require('../../assets/config.json');
 const Discord = require('discord.js');
 const WebCommand = require('../../bases/web');
@@ -31,12 +32,12 @@ module.exports = class WolframCommand extends WebCommand {
 	/**
 	 * @Override
 	 */
-	async query(msg, args) {
+	async _query(msg, args) {
 		const query = args.query;
 
 		return wolfram.query(query, (err, res) => {
 			if(err) throw new Error(err);
-			if(res.length === 0) return msg.reply(`There were no results for \`${query}\``);
+			if(res.length === 0) return cleanReply(msg, `There were no results.`);
 
 			try {
 				const embed = new Discord.RichEmbed();
@@ -46,7 +47,7 @@ module.exports = class WolframCommand extends WebCommand {
 					const text = item.subpods[0].text;
 					const img = item.subpods[0].image;
 
-					if(text && this.isNotTooLong(text)) {
+					if(text && this._isNotTooLong(text)) {
 						embed.addField(title, text);
 					} else if(img) {
 						embed.addField(title, img);
@@ -54,7 +55,7 @@ module.exports = class WolframCommand extends WebCommand {
 					}
 				});
 
-				return msg.replyEmbed(embed, `Results for \`${query}\`:`);
+				return cleanReply(msg, { embed: embed, content: `Results:` });
 			} catch(anErr) {
 				winston.error(anErr);
 				throw new Error('Something went wrong when searching.');
@@ -67,7 +68,7 @@ module.exports = class WolframCommand extends WebCommand {
 	 * @param {String} text
 	 * @returns {boolean}
 	 */
-	isNotTooLong(text) {
+	_isNotTooLong(text) {
 		return (text.length < 1024);
 	}
 

@@ -1,20 +1,21 @@
 'use strict';
 
 const Commando = require('discord.js-commando');
-const alerts = require('../modules/alerts');
+const sendError = require('../modules/send-error');
 
 /**
  * Enables typing while processing HTTP requests
  */
 module.exports = class WebCommand extends Commando.Command {
 	async run(msg, args) {
+		/** @var {Promise} */
 		let res = {};
 		msg.channel.startTyping();
 
 		try {
-			res = await this.query(msg, args);
+			res = await this._query(msg, args);
 		} catch(err) {
-			res = alerts.sendError(err);
+			res = sendError(err);
 		}
 
 		msg.channel.stopTyping();
@@ -26,7 +27,7 @@ module.exports = class WebCommand extends Commando.Command {
 	 * @param {CommandoMessage} msg
 	 * @param {*} args
 	 */
-	async query(msg, args) { // eslint-disable-line no-unused-vars
+	async _query(msg, args) { // eslint-disable-line no-unused-vars
 		throw new Error(`${this.constructor.name} doesn't have a query() method.`);
 	}
 };

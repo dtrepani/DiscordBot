@@ -16,15 +16,14 @@ module.exports = class DGCAddCommand extends ListAddCommand {
 		);
 	}
 
-
 	/**
 	 * @Override
 	 */
-	getReply(args, list) {
+	_getReply(args, list) {
 		if(!list.hasOwnProperty(args.item.toLowerCase())) {
 			throw new Error(`The only tags available are "echium" or "dgc".`);
 		}
 
-		return super.getReply(args, list);
+		return super._getReply(args, list);
 	}
 };

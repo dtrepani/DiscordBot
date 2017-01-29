@@ -1,5 +1,6 @@
 'use strict';
 
+const cleanReply = require('../../modules/clean-reply');
 const config = require('../../assets/config.json');
 const WebCommand = require('../../bases/web');
 const winston = require('winston');
@@ -26,7 +27,7 @@ module.exports = class YoutubeCommand extends WebCommand {
 	/**
 	 * @Override
 	 */
-	async query(msg, args) {
+	async _query(msg, args) {
 		const query = args.query;
 		const youtube = new Youtube();
 		youtube.setKey(config.tokens.google);
@@ -38,14 +39,14 @@ module.exports = class YoutubeCommand extends WebCommand {
 			}
 
 			if(res.items.length === 0) {
-				return msg.reply('No results for that search.');
+				return cleanReply(msg, 'No results for that search.');
 			}
 
-			return msg.reply(this.getUrl(res.items[0]));
+			return cleanReply(msg, this._getUrl(res.items[0]));
 		});
 	}
 
-	getUrl(result) {
+	_getUrl(result) {
 		switch(result.id.kind) {
 		case 'youtube#playlist':
 			return `http://www.youtube.com/playlist?list=${result.id.playlistId}`;

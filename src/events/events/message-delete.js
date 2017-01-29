@@ -1,8 +1,8 @@
 'use strict';
 
-const EventLog = require('../base');
-const EventEmbed = require('../event-embed');
 const config = require('../../assets/config.json');
+const EventEmbed = require('../event-embed');
+const EventLog = require('../base');
 
 module.exports = class MessageDeleteEvent extends EventLog {
 	constructor(client) {
@@ -12,8 +12,8 @@ module.exports = class MessageDeleteEvent extends EventLog {
 	/**
 	 * @param {GuildMessage} msg - Message that was deleted
 	 */
-	run(msg) {
-		if(this.isCommand(msg) || this.isLogChannel(msg)) return;
+	_run(msg) {
+		if(this._isCommand(msg) || this._isLogChannel(msg)) return;
 
 		const member = msg.member;
 		const embed = {
@@ -33,30 +33,40 @@ module.exports = class MessageDeleteEvent extends EventLog {
 		if(msg.attachments.size > 0) {
 			embed.fields.push({
 				name: `${config.embed_prefix} Attachments`,
-				value: this.getAttachments(msg.attachments)
+				value: this._getAttachments(msg.attachments)
 			});
 		}
 
-		EventEmbed.sendMessageEmbed(this.getLogChannel(msg.guild), member.user.id, embed);
+		EventEmbed.sendMessageEmbed(this._getLogChannel(msg.guild), member.user.id, embed);
 	}
 
-	getAttachments(attachments) {
-		return attachments.reduce((attachmentsStr, attachment) => {
+	_getAttachments(attachments) {
+		return attachments.reduce((prevAttachments, attachment) => {
 			const attachmentInfo = `${config.embed_bullet} ${attachment.filename} ${attachment.filesize}B`;
 
 			// Don't start with a newline
-			if(attachmentsStr === '') return attachmentInfo;
-			return `${attachmentsStr}\n${attachmentInfo}`;
+			if(prevAttachments === '') return attachmentInfo;
+			return `${prevAttachments}\n${attachmentInfo}`;
 		}, '');
 	}
 
-	isCommand(msg) {
-		if(!msg.content) return false;
-		const firstChar = msg.content[0];
-		return (firstChar === (this.client.commandPrefix || config.prefix));
-	}
+	/**
+	 * Check if the message is a command. Does not include the "say" command. This is so that guilds with the mod log
+	 * setup will be able to see who is making the bot say what.
+	 * @param {CommandMessage} msg
+	 * @returns {boolean} Whether the message is a command
+	 */
+	_isCommand(msg) {
+		msg = msg.content;
+		if(!msg) return false;
 
-	isLogChannel(msg) {
-		return (this.getLogChannel(msg.guild) === msg.channel);
+		const botMention = `<@${this.client.user.id}> `;
+		const prefix = `${this.client.commandPrefix}`;
+		const cmd = `(\\S+)`;
+		const re = new RegExp(`^(${botMention}|${prefix})${cmd}`, 'i');
+		const matches = msg.match(re);
+
+		if(matches[2] === 'say') return false;
+		return (matches !== null);
 	}
 };

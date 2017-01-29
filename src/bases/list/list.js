@@ -1,5 +1,6 @@
 'use strict';
 
+const { isString } = require('../../modules/type-checks');
 const { oneLine } = require('common-tags');
 const ListBaseCommand = require('./base');
 
@@ -12,7 +13,7 @@ module.exports = class ListCommand extends ListBaseCommand {
 	 */
 
 	/**
-	 * @typedef {Object} CommandClient
+	 * @typedef {Object} CommandoClient
 	 * @see module:discord.js-commando
 	 */
 
@@ -47,42 +48,37 @@ module.exports = class ListCommand extends ListBaseCommand {
 		};
 
 		if(!listInfo.requireItem) info.args[0].default = '';
-		info = ListCommand.constructDescription(info, listName, listInfo);
+		info = ListCommand._constructDescription(info, listName, listInfo);
 
 		Object.assign(info, commandInfo);
 		super(client, listName, info, listInfo);
 
-		this.requireItem = listInfo.requireItem;
+		this._requireItem = listInfo.requireItem;
 	}
 
-	static constructDescription(info, listName, listInfo) {
+	static _constructDescription(info, listName, listInfo) {
 		info.description = 'Get an item ';
-
-		if(listInfo.requireItem) {
-			info.description = 'Get an item ';
-		}
-
-		info.description += `from the ${listName} list.`;
-
+		if(listInfo.requireItem) info.description = 'Get an item ';
+		info.description += `from the "${listName}" list.`;
 		return info;
 	}
 
 	/**
 	 * @Override
 	 */
-	getReply(args, list) {
+	_getReply(args, list) {
 		if(list instanceof Array) {
-			if(this.requireItem) {
-				return this.handleItemOnArrList(args, list);
+			if(this._requireItem) {
+				return this._handleItemOnArrList(args, list);
 			}
 
-			return this.getRandomItemFromArrList(list);
+			return this._getRandomItemFromArrList(list);
 		} else if(args.item) {
 			args.item = args.item.toLowerCase();
-			return this.getRandomItemFromTag(args, list);
+			return this._getRandomItemFromTag(args, list);
 		}
 
-		return this.getRandomItem(list);
+		return this._getRandomItem(list);
 	}
 
 	/**
@@ -90,27 +86,26 @@ module.exports = class ListCommand extends ListBaseCommand {
  	 * @param {Object} args
  	 * @param {Object|Array} list
 	 */
-	handleItemOnArrList(args, list) { // eslint-disable-line no-unused-vars
-		throw new Error(oneLine`ListCommand:handleItemOnArrList() was not overridden.
+	_handleItemOnArrList(args, list) { // eslint-disable-line no-unused-vars
+		throw new Error(oneLine`ListCommand:_handleItemOnArrList() was not overridden.
 				This error should never happen. Please contact <@${this.client.options.owner}>`);
 	}
 
-	getRandomItem(list) {
+	_getRandomItem(list) {
 		const keys = Object.keys(list);
-		const randKey = this.getRandomItemFromArrList(keys);
-		return this.getRandomItemFromArrList(list[randKey]);
+		const randKey = this._getRandomItemFromArrList(keys);
+		return this._getRandomItemFromArrList(list[randKey]);
 	}
 
-	getRandomItemFromTag(args, list) {
+	_getRandomItemFromTag(args, list) {
 		if(!list.hasOwnProperty(args.item)) throw new Error(`\`${args.item}\` is not a valid tag.`);
-		return `\`${this.listName} ${args.item}\`: ${this.getRandomItemFromArrList(list[args.item])}`;
+		return this._getRandomItemFromArrList(list[args.item]);
 	}
 
-	getRandomItemFromArrList(arrList) {
-		if(typeof arrList === 'string' || arrList instanceof String) return arrList;
-		return ((arrList && arrList.length > 0)
+	_getRandomItemFromArrList(arrList) {
+		if(isString(arrList)) return arrList;
+		return (arrList && arrList.length > 0)
 			? arrList[Math.floor(Math.random() * arrList.length)]
-			: ''
-		);
+			: '';
 	}
 };

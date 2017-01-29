@@ -1,8 +1,9 @@
 'use strict';
 
+const cleanReply = require('../../modules/clean-reply');
 const Commando = require('discord.js-commando');
 const { oneLine } = require('common-tags');
-const alerts = require('../../modules/alerts');
+const sendError = require('../../modules/send-error');
 
 module.exports = class ModLogCommand extends Commando.Command {
 	constructor(client) {
@@ -55,12 +56,14 @@ module.exports = class ModLogCommand extends Commando.Command {
 
 			return this.client.provider.set(guild, 'mod_log', modLogSettings)
 				.then(() => {
-					if(args.enabled) return msg.reply(`Logging is now enabled in ${guild.channels.get(channelID)}`);
-					return msg.reply('Logging is now disabled.');
+					if(args.enabled) {
+						return cleanReply(msg, `Logging is now enabled in ${guild.channels.get(channelID)}`);
+					}
+					return cleanReply(msg, 'Logging is now disabled.');
 				})
 				.catch(err => { throw new Error(err); });
 		} catch(err) {
-			return alerts.sendError(msg, err);
+			return sendError(msg, err);
 		}
 	}
 };

@@ -1,5 +1,6 @@
 'use strict';
 
+const { isString, isUrl } = require('../../modules/type-checks');
 const { oneLine, oneLineCommaLists } = require('common-tags');
 const ListBaseCommand = require('./base');
 
@@ -19,7 +20,7 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 	 * @typedef {Object} ListInfo
 	 * @property {boolean} [readOnly = false] - Whether to set the list, which is not needed for read-only commands
 	 * @property {boolean} [isArrList = false] - Whether the list is an object or an array; used when providing a
-	 *                     default list to ListBaseCommand:getList()
+	 * 						default list to ListBaseCommand:getList()
 	 * @property {boolean} requireOptions - Whether or not options are required
 	 * @property {boolean} urlOnly - Whether or not args.item should only be URLs
 	 */
@@ -59,37 +60,30 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 		};
 
 		if(!listInfo.requireOptions) info.args[1].default = '';
-		info = ListRemoveCommand.constructDescription(info, listName, listInfo);
-		info = ListRemoveCommand.constructExamples(info, listName, listInfo);
+		info = ListRemoveCommand._constructDescription(info, listName, listInfo);
+		info = ListRemoveCommand._constructExamples(info, listName, listInfo);
 
 		Object.assign(info, commandInfo);
 		super(client, listName, info, listInfo);
 
-		this.urlOnly = listInfo.urlOnly;
+		this._urlOnly = listInfo.urlOnly;
 	}
 
-	static constructDescription(info, listName, listInfo) {
+	static _constructDescription(info, listName, listInfo) {
 		info.description = `Remove ${(listInfo.urlOnly) ? `a URL ` : `an item `}`;
-
-		if(listInfo.requireOptions) {
-			info.description += 'from its corresponding tags ';
-		}
-
-		info.description += `from the ${listName} list.`;
-
+		if(listInfo.requireOptions) info.description += 'from its corresponding tags ';
+		info.description += `from the "${listName}" list.`;
 		return info;
 	}
 
-	static constructExamples(info, listName, listInfo) {
+	static _constructExamples(info, listName, listInfo) {
 		const command = `remove-${listName}`;
 		const exampleUrl = `\`http://i.imgur.com/f75Pzvn.jpg\``;
 		const examples = info.examples;
 
 		if(!listInfo.requireOptions) {
 			/* Always push URL example so user knows they can use URLs. */
-			if(!listInfo.urlOnly) {
-				examples.push(`${command} lenny`);
-			}
+			if(!listInfo.urlOnly) examples.push(`${command} lenny`);
 			examples.push(`${command} ${exampleUrl}`);
 		} else {
 			examples.push(`${command} ${exampleUrl} kyuu lhu email`);
@@ -102,17 +96,17 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 	/**
 	 * @Override
 	 */
-	getReply(args, list) {
-		if(this.urlOnly && !this.isUrl(args.item)) throw new Error(`Item must be a valid URL beginning with "http".`);
-		if(args.options) return this.removeFromGivenTags(args, list);
-		return this.removeItemFromAll(args, list);
+	_getReply(args, list) {
+		if(this._urlOnly && !isUrl(args.item)) throw new Error(`Item must be a valid URL beginning with "http".`);
+		if(args.options) return this._removeFromGivenTags(args, list);
+		return this._removeItemFromAll(args, list);
 	}
 
-	removeFromGivenTags(args, list) {
+	_removeFromGivenTags(args, list) {
 		args.options = args.options.split(' ');
 
 		if(list instanceof Array) {
-			throw new Error(oneLine`\`${this.listName}\` does not support tags.
+			throw new Error(oneLine`"${this._listName}" does not support tags.
 					If the item you wish to remove has multiple words, please wrap them in quotation marks.`);
 		}
 
@@ -123,7 +117,7 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 			tag = tag.toLowerCase();
 
 			if(list.hasOwnProperty(tag)) {
-				if(this.removeItemFromTag(list, args, tag)) successfulTags.push(tag);
+				if(this._removeItemFromTag(list, args, tag)) successfulTags.push(tag);
 				else errorTags.push(tag);
 			} else {
 				errorTags.push(tag);
@@ -143,20 +137,16 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 					: ``);
 	}
 
-	removeItemFromAll(args, list) {
+	_removeItemFromAll(args, list) {
 		const tagsRemovedFrom = [];
 
 		if(list instanceof Array) {
 			const itemIndex = list.indexOf(args.item);
-
-			if(itemIndex === -1) throw new Error(`\`${args.item}\` is not in \`${this.listName}\``);
-
+			if(itemIndex === -1) throw new Error(`\`${args.item}\` is not in "${this._listName}"`);
 			list.splice(itemIndex, 1);
 		} else {
 			for(const tag in list) {
-				if(this.removeItemFromTag(list, args, tag)) {
-					tagsRemovedFrom.push(tag);
-				}
+				if(this._removeItemFromTag(list, args, tag)) tagsRemovedFrom.push(tag);
 			}
 		}
 
@@ -172,12 +162,12 @@ module.exports = class ListRemoveCommand extends ListBaseCommand {
 	 * @param {String} tag
 	 * @returns {Boolean} Whether the item was successfully removed from tag
 	 */
-	removeItemFromTag(list, args, tag) {
-		if(!this.isUrl(args.item)) {
+	_removeItemFromTag(list, args, tag) {
+		if(!isUrl(args.item)) {
 			args.item = args.item.toLowerCase();
 		}
 
-		if(list[tag] && (typeof list[tag] === 'string' || list[tag] instanceof String)) {
+		if(isString(list[tag])) {
 			if(tag !== args.item) return false;
 			delete list[args.item];
 		} else {

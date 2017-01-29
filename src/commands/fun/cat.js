@@ -1,7 +1,7 @@
 'use strict';
 
 const Commando = require('discord.js-commando');
-const deleteMsg = require('../../modules/delete-msg');
+const cleanReply = require('../../modules/clean-reply');
 const request = require('request-promise');
 
 module.exports = class CatCommand extends Commando.Command {
@@ -24,7 +24,6 @@ module.exports = class CatCommand extends Commando.Command {
 			img = 'http://i.imgur.com/Bai6JTL.jpg';
 		}
 
-		deleteMsg(msg);
-		return msg.reply(`\`cat\`: ${img}`);
+		return cleanReply(msg, img);
 	}
 };

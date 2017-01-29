@@ -1,15 +1,9 @@
 'use strict';
 
-const { stripIndents, oneLine } = require('common-tags');
+const { oneLine } = require('common-tags');
 const ListBaseCommand = require('./base');
 
 module.exports = class ListTagsCommand extends ListBaseCommand {
-	/**
-	 * @typedef {Object} Reply
-	 * @property {boolean} error - Whether or not an error occurred
-	 * @property (string} msg - The message to reply with
-	 */
-
 	/**
 	 * @typedef {Object} CommandClient
 	 * @see module:discord.js-commando
@@ -36,7 +30,7 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 			aliases: [`tags-${listName}`],
 			group: groupName,
 			memberName: `${listName}-tags`,
-			description: 'List the tags currently added.'
+			description: `List the tags currently in use to ${listName}.`
 		};
 		Object.assign(info, commandInfo);
 		super(client, listName, info, listInfo);
@@ -45,7 +39,7 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 	/**
 	 * @Override
 	 */
-	getReply(args, list) {
+	_getReply(args, list) {
 		if(list instanceof Array) {
 			throw new Error(oneLine`This list does not support tags. 
 				You should never see this message. Please contact <@${this.client.options.owner}>`);
@@ -53,9 +47,7 @@ module.exports = class ListTagsCommand extends ListBaseCommand {
 
 		const tags = list ? Object.keys(list) : [];
 
-		if(tags.length === 0) return 'There are no tags added currently.';
-
-		return stripIndents`\`${this.listName}\` tags:
-				\`\`\`${tags.sort().join(', ')}\`\`\``;
+		if(tags.length === 0) return 'There are no tags in use currently.';
+		return `\`\`\`${tags.sort().join(', ')}\`\`\``;
 	}
 };

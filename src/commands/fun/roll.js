@@ -1,7 +1,9 @@
 'use strict';
 
+const { isNumber } = require('../../modules/type-checks');
+const cleanReply = require('../../modules/clean-reply');
 const Commando = require('discord.js-commando');
-const alerts = require('../../modules/alerts');
+const sendError = require('../../modules/send-error');
 
 module.exports = class RollCommand extends Commando.Command {
 	/**
@@ -32,16 +34,16 @@ module.exports = class RollCommand extends Commando.Command {
 
 	async run(msg, args) {
 		try {
-			const rollInfo = this.parseRoll(args.roll);
-			const diceRolls = this.rollAllDice(rollInfo);
+			const rollInfo = this._parseRoll(args.roll);
+			const diceRolls = this._rollAllDice(rollInfo);
 			const rollTotal = diceRolls.reduce((roll1, roll2) => (roll1 + roll2), 0);
 			const diceRollsStr = ((diceRolls.length > 1)
 				? `[${diceRolls.join(' + ')}]`
 				: ``);
 
-			return msg.reply(`${rollTotal.toLocaleString()} :game_die: ${diceRollsStr}`);
+			return cleanReply(msg, `${rollTotal.toLocaleString()} :game_die: ${diceRollsStr}`);
 		} catch(err) {
-			return alerts.sendError(msg, err);
+			return sendError(msg, err);
 		}
 	}
 
@@ -49,14 +51,14 @@ module.exports = class RollCommand extends Commando.Command {
 	 * @param {String} roll
 	 * @returns {RollInfo}
 	 */
-	parseRoll(roll) {
+	_parseRoll(roll) {
 		const dInd = roll.indexOf('d');
 		if(dInd === -1) throw new Error(`Rolls must be in the format of ${this.format}.`);
 
 		const numOfDice = parseInt(roll.substr(0, dInd));
 		const numSidedDice = parseInt(roll.substr(dInd + 1));
 
-		if(isNaN(numOfDice) || isNaN(numSidedDice)) {
+		if(!isNumber(numOfDice) || !isNumber(numSidedDice)) {
 			throw new Error(`One or both of those aren't numbers! Please use the format ${this.format}.`);
 		}
 
@@ -66,22 +68,21 @@ module.exports = class RollCommand extends Commando.Command {
 		};
 	}
 
-
 	/**
 	 * @param {RollInfo} rollInfo
 	 * @returns {integer} Each dice roll
 	 */
-	rollAllDice(rollInfo) {
+	_rollAllDice(rollInfo) {
 		const diceRolls = [];
 
 		for(let i = 0; i < rollInfo.numOfDice; i++) {
-			diceRolls.push(this.rollSingleDice(rollInfo.numSidedDice));
+			diceRolls.push(this._rollSingleDice(rollInfo.numSidedDice));
 		}
 
 		return diceRolls;
 	}
 
-	rollSingleDice(numSidedDice) {
+	_rollSingleDice(numSidedDice) {
 		return Math.floor(Math.random() * numSidedDice) + 1;
 	}
 };
