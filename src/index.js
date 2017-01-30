@@ -3,7 +3,7 @@
 const { oneLine } = require('common-tags');
 const Commando = require('discord.js-commando');
 const config = require('./assets/config.json');
-const Logger = require('./events/logger');
+const EventLogger = require('./events/event-logger');
 const path = require('path');
 const PushBullet = require('pushbullet');
 const sqlite = require('sqlite');
@@ -26,20 +26,21 @@ const client = new Commando.Client({
 	unknownCommandResponse: false
 });
 const pushbullet = new PushBullet(config.tokens.pushbullet);
-const logger = new Logger(client, path.join(__dirname, 'events/events')); // eslint-disable-line no-unused-vars
+
+EventLogger.init(client, path.join(__dirname, 'events/events'));
 
 client
 	.on('error', winston.error)
 	.on('warn', winston.warn)
-	.on('disconnect', () => {
-		winston.warn('Disconnected!');
+	.on('disconnect', event => {
+		winston.warn(`Disconnected! [${event.code}]: ${event.reason || 'Unknown reason'}`);
 		
 		/**
 		 * Restart Timothy using pm2 if he's been disconnected for more then a minute without reconnecting.
 		 * When Timothy has to restart himself, I want to know. Notify me if it happens.
 		 */
 		setTimeout(() => {
-			pushbullet.note('', 'Timothy disconnected!', '');
+			pushbullet.note('', 'Timothy disconnected!', `[${event.code}]: ${event.reason || 'Unknown reason'}`);
 			process.exit();
 		}, 60000);
 	})
