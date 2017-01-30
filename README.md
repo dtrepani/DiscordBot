@@ -15,7 +15,6 @@ $ npm install
 - [ ] Mute (w/ mod-log support)
 - [ ] Ban (w/ mod-log support)
 - [ ] High res emoji command
-- [ ] Goodshit command
 
 
 ## License

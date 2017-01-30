@@ -6,7 +6,7 @@ const Commando = require('discord.js-commando');
 const sendError = require('../../modules/send-error');
 const winston = require('winston');
 
-module.exports = class SayCommand extends Commando.Command {
+module.exports = class SayGuildCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'say-guild',

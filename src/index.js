@@ -99,7 +99,7 @@ client.registry
 	.registerDefaults()
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 
-client.login(config.tokens.discord);
+client.login(config.tokens.discord_dev);
 
 process.on('unhandledRejection', err => {
 	winston.error(`Uncaught Promise Error: \n ${err.stack}`);

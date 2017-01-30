@@ -40,6 +40,6 @@ module.exports = class RandFunCommand extends Commando.Command {
 
 		const randImg = this._randCache[Math.floor(Math.random() * this._randCache.length)];
 		const extension = randImg.ext.replace(/\?.*/, '');
-		return `http://imgur.com/${randImg.hash}${extension}`;
+		return `http://i.imgur.com/${randImg.hash}${extension}`;
 	}
 };
