@@ -3,7 +3,6 @@
 const { oneLine } = require('common-tags');
 const EventLog = require('../base');
 const EventEmbed = require('../event-embed');
-const winston = require('winston');
 const config = require('../../assets/config.json');
 
 module.exports = class GuildMemberUpdateEvent extends EventLog {
@@ -16,45 +15,36 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 	 * @param {GuildMember} after - User after the change
 	 */
 	_run(before, after) {
+		const descriptors = this._getChangedDescriptors(before, after);
+		if(!descriptors) return;
 		const embed = {
 			author: {
 				name: `${after.user.username}#${after.user.discriminator}`,
 				icon_url: after.user.avatarURL // eslint-disable-line camelcase
 			}
 		};
-
-		const descriptors = this._getChangedDescriptors(before, after);
-		if(!descriptors) {
-			winston.debug(before);
-			winston.debug(after);
-			return;
-		}
-
 		Object.assign(embed, descriptors);
 		EventEmbed.sendUserEmbed(this._getLogChannel(before.guild), before.user.id, embed);
 	}
 
 	_getChangedDescriptors(before, after) {
 		if(before.user.username !== after.user.username) {
-			return this._constructEmbed('Username', before.user.nickname, after.user.nickname);
+			return this._constructEmbed('username', before.user, before.user.nickname, after.user.nickname);
 		}
 
 		if(before.nickname !== after.nickname) {
-			return this._constructEmbed('Nickname', before.nickname, after.nickname);
+			return this._constructEmbed('nickname', before.user, before.nickname, after.nickname);
 		}
 
 		if(!before.roles.equals(after.roles)) {
 			if(before.roles.size > after.roles.size) {
 				return {
-					description: oneLine`${before.user} was removed from the 
-						\`${this._getRoleDiff(before, after).name}\` role.`
+					description: oneLine`${before.user} was removed from role: 
+						${this._getRoleDiff(before, after).name} ⚔`
 				};
 			}
 			
-			return {
-				description: oneLine`${before.user} was added to the 
-					\`${this._getRoleDiff(after, before).name}\` role.`
-			};
+			return { description: `${before.user} was added to role: ${this._getRoleDiff(after, before).name} ⚔` };
 		}
 
 		return false;
@@ -66,13 +56,14 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 
 	/**
 	 * @param {String} statChanged - Stat that was changed
+	 * @param {User} user
 	 * @param {?*} beforeVal - Value before the change
 	 * @param {?*} afterVal - Value after the change
 	 * @returns {Embed}
 	 */
-	_constructEmbed(statChanged, beforeVal, afterVal) {
+	_constructEmbed(statChanged, user, beforeVal, afterVal) {
 		return {
-			description: `${before.user} ${statChanged} Changed`,
+			description: `${user}'s ${statChanged} changed 👥`,
 			fields: [
 				{
 					name: `${config.embed_prefix} Before`,

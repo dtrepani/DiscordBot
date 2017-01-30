@@ -1,5 +1,6 @@
 'use strict';
 
+const Discord = require('discord.js');
 const winston = require('winston');
 
 module.exports = class EventLog {
@@ -31,7 +32,7 @@ module.exports = class EventLog {
 	register() {
 		this.client.on(this.name, (...args) => {
 			try {
-				const guild = args[0].guild || args[1].guild;
+				const guild = this._getGuild(...args);
 				const modLogSettings = this.client.provider.get(guild, 'mod_log', {});
 
 				if(!modLogSettings.enabled) return;
@@ -42,6 +43,14 @@ module.exports = class EventLog {
 				winston.debug(args);
 			}
 		});
+	}
+
+	_getGuild(...args) {
+		for(let i = 0; i < args.length; i++) {
+			if(args[i] instanceof Discord.Guild) return args[i];
+			if(args[i].guild instanceof Discord.Guild) return args[i].guild;
+		}
+		return null;
 	}
 
 	_getLogChannel(guild) {
@@ -58,6 +67,6 @@ module.exports = class EventLog {
 	 * @abstract
 	 */
 	_run(...args) { // eslint-disable-line no-unused-vars
-		throw new Error(`${this.constructor.name} doesn't have a run() method.`);
+		throw new Error(`${this.constructor.name} doesn't have a _run() method.`);
 	}
 };

@@ -28,7 +28,6 @@ const client = new Commando.Client({
 const pushbullet = new PushBullet(config.tokens.pushbullet);
 const logger = new Logger(client, path.join(__dirname, 'events/events')); // eslint-disable-line no-unused-vars
 
-// TODO: sqlite.clear(guild) when guild deleted
 client
 	.on('error', winston.error)
 	.on('warn', winston.warn)
@@ -81,8 +80,9 @@ client
 					: ''
 			}
 		`);
-	});
-
+	})
+	.on('guildDelete', (guild) => client.provider.clear(guild));
+	
 client.setProvider(
 	sqlite.open(path.join(__dirname, config.db)).then(db => new Commando.SQLiteProvider(db))
 ).catch(winston.error);

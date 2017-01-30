@@ -13,7 +13,7 @@ module.exports = class GuildMemberRemoveEvent extends EventLog {
 	 */
 	_run(member) {
 		const embed = {
-			description: `${member} Left :cry:`,
+			description: `${member} left the guild 😢`,
 			author: {
 				name: `${member.user.username}#${member.user.discriminator}`,
 				icon_url: member.user.avatarURL // eslint-disable-line camelcase

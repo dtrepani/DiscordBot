@@ -6,11 +6,19 @@ const Discord = require('discord.js');
 
 module.exports = class EventEmbed {
 	/**
+	 * Embed for general events
+	 * @see _sendEmbed()
+	 */
+	static sendGeneralEmbed(channel, id, embedInfo) {
+		EventEmbed._sendEmbed('#52b069', channel, id, embedInfo);
+	}
+
+	/**
 	 * Embed for user-related events
 	 * @see _sendEmbed()
 	 */
 	static sendUserEmbed(channel, id, embedInfo) {
-		EventEmbed._sendEmbed('#eacb00', channel, id, embedInfo);
+		EventEmbed._sendEmbed('#e2b212', channel, id, embedInfo);
 	}
 
 	/**
@@ -18,23 +26,30 @@ module.exports = class EventEmbed {
 	 * @see _sendEmbed()
 	 */
 	static sendMessageEmbed(channel, id, embedInfo) {
-		this._sendEmbed('#cb0f0f', channel, id, embedInfo);
+		this._sendEmbed('#c83122', channel, id, embedInfo);
 	}
 
 	/**
 	 * Embed for text channel-related events
 	 * @see _sendEmbed()
 	 */
-	static sendChannelEmbed(channel, id, embedInfo) {
+	static sendTextChannelEmbed(channel, id, embedInfo) {
 		EventEmbed._sendEmbed('#67a4e2', channel, id, embedInfo);
 	}
 
 	/**
+	 * Embed for user-related events that take place in a voice channel
+	 * @see _sendEmbed()
+	 */
+	static sendVoiceChannelUserEmbed(channel, id, embedInfo) {
+		EventEmbed._sendEmbed('#8e72e2', channel, id, embedInfo);
+	}
+	/**
 	 * Embed for voice channel-related events
 	 * @see _sendEmbed()
 	 */
-	static sendVoiceEmbed(channel, id, embedInfo) {
-		EventEmbed._sendEmbed('#8e72e2', channel, id, embedInfo);
+	static sendVoiceChannelEmbed(channel, id, embedInfo) {
+		EventEmbed._sendEmbed('#d36dbf', channel, id, embedInfo);
 	}
 
 	/**
@@ -50,6 +65,6 @@ module.exports = class EventEmbed {
 		embed.setFooter(`ID: ${id}`);
 		embed.setTimestamp(new Date());
 
-		channel.sendEmbed(embed);
+		if(channel) channel.sendEmbed(embed);
 	}
 };

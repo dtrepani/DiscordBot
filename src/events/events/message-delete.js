@@ -21,7 +21,7 @@ module.exports = class MessageDeleteEvent extends EventLog {
 				name: `${member.user.username}#${member.user.discriminator}`,
 				icon_url: member.user.avatarURL // eslint-disable-line camelcase
 			},
-			description: `Message by ${member} deleted in ${msg.channel}`,
+			description: `Message by ${member} deleted in ${msg.channel} 🗑️`,
 			fields: [
 				{
 					name: `${config.embed_prefix} Message Content`,
@@ -66,7 +66,7 @@ module.exports = class MessageDeleteEvent extends EventLog {
 		const re = new RegExp(`^(${botMention}|${prefix})${cmd}`, 'i');
 		const matches = msg.match(re);
 
-		if(matches[2] === 'say') return false;
+		if(matches !== null && matches[2] === 'say') return false;
 		return (matches !== null);
 	}
 };
