@@ -208,7 +208,7 @@ module.exports = class HelpCommand extends Command {
 		let fieldInd = 0;
 
 		for(let i = 0; i < commands.length; i++) {
-			const cmd = `${commands[i]}${delimiter}`;
+			const cmd = `${commands[i]}${i === (commands.length - 1) ? '' : delimiter}`;
 			if(fieldValues[fieldInd].length + cmd.length > maxLen) {
 				fieldInd++;
 				fieldValues[fieldInd] = '';
