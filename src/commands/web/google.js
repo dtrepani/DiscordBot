@@ -11,16 +11,8 @@ module.exports = class GoogleCommand extends WebCommand {
 	constructor(client) {
 		super(client, {
 			name: 'google',
-			group: 'web',
 			memberName: 'google',
-			description: `Google!`,
-			args: [
-				{
-					key: 'query',
-					prompt: 'What do you want to search for?',
-					type: 'string'
-				}
-			]
+			description: `Google!`
 		});
 	}
 

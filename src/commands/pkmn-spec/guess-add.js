@@ -14,7 +14,8 @@ module.exports = class GuessAddCommand extends ListAddCommand {
 				requireOptions: true,
 				multipleOptions: false,
 				urlOnly: true
-			}
+			},
+			{ examples: [`add-guess "i'll die" \`http://i.imgur.com/V8hvLx7.png\`"`] }
 		);
 	}
 

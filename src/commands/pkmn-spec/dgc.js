@@ -1,6 +1,7 @@
 'use strict';
 
 const { isNumber } = require('../../modules/type-checks');
+const { oneLine } = require('common-tags');
 const ListCommand = require('../../bases/list/list');
 
 module.exports = class DGCCommand extends ListCommand {
@@ -9,7 +10,14 @@ module.exports = class DGCCommand extends ListCommand {
 			client,
 			'dgc',
 			'pkmn-spec',
-			{ requireItem: false }
+			{ requireItem: false },
+			{
+				description: oneLine`Take your chances with dark green cucumbers (dgc). 
+					Will you get a dark green cucumber or an actual dark green cucumber?`,
+				details: oneLine`Of course, you could always cheat and skew your chances. The higher the number, the
+					higher the chance for Echium.`,
+				examples: ['dgc', 'dgc 80']
+			}
 		);
 	}
 

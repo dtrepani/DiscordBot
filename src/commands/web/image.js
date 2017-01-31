@@ -12,16 +12,8 @@ module.exports = class ImageCommand extends WebCommand {
 		super(client, {
 			name: 'image',
 			aliases: ['google-images', 'google-image', 'img'],
-			group: 'web',
 			memberName: 'image',
-			description: 'Search for an image on Google.',
-			args: [
-				{
-					key: 'query',
-					prompt: 'What do you want to search for?',
-					type: 'string'
-				}
-			]
+			description: 'Search for an image on Google.'
 		});
 	}
 

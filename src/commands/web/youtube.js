@@ -11,16 +11,8 @@ module.exports = class YoutubeCommand extends WebCommand {
 		super(client, {
 			name: 'youtube',
 			aliases: ['yt'],
-			group: 'web',
 			memberName: 'youtube',
-			description: 'Search for videos on Youtube.',
-			args: [
-				{
-					key: 'query',
-					prompt: 'What do you want to search for?',
-					type: 'string'
-				}
-			]
+			description: 'Search for videos on Youtube.'
 		});
 	}
 

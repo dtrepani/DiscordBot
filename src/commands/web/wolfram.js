@@ -16,16 +16,8 @@ module.exports = class WolframCommand extends WebCommand {
 				'wa',
 				'math'
 			],
-			group: 'web',
 			memberName: 'wolfram',
-			description: 'Search Wolfram|Alpha or solve problems.',
-			args: [
-				{
-					key: 'query',
-					prompt: 'What do you want to search for or solve?',
-					type: 'string'
-				}
-			]
+			description: 'Search Wolfram|Alpha or solve problems.'
 		});
 	}
 

@@ -22,24 +22,22 @@ module.exports = class WikiCommand extends WebCommand {
 	 * @param {WikiOptions} [options = {}]
 	 */
 	constructor(client, wikiName = '', options = {}) {
-		const info = { group: 'util' };
+		let info = {};
 
 		if(wikiName === '') {
-			Object.assign(info, {
+			info = {
 				name: 'wiki',
 				aliases: ['wikipedia'],
-				group: 'web',
 				memberName: 'wiki',
 				description: 'Search wikipedia.'
-			});
+			};
 		} else {
-			Object.assign(info, {
+			info = {
 				name: `wiki-${wikiName}`,
 				aliases: [`${wikiName}`, `${wikiName}-wiki`],
-				group: 'web',
 				memberName: `wiki-${wikiName}`,
 				description: `Search ${wikiName} wikipedia.`
-			});
+			};
 		}
 
 		super(client, info);
@@ -51,16 +49,16 @@ module.exports = class WikiCommand extends WebCommand {
 	 * @Override
 	 */
 	async _query(msg, args) {
-		args = toTitleCase(args);
+		const query = toTitleCase(args.query);
 
 		try {
-			const page = await wiki(this._options).page(args);
+			const page = await wiki(this._options).page(query);
 
 			if(page.raw.hasOwnProperty('missing')) {
-				return await this._getSearchResults(msg, args);
+				return await this._getSearchResults(msg, query);
 			}
 
-			const img = await this._getImage(args, page);
+			const img = await this._getImage(query, page);
 			const summary = await this._getSummary(page);
 
 			return cleanReply(msg, {

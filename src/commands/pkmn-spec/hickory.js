@@ -8,7 +8,8 @@ module.exports = class HickoryCommand extends ListCommand {
 			client,
 			'hickory',
 			'pkmn-spec',
-			{ requireItem: false }
+			{ requireItem: false },
+			{ description: `lol hickory` }
 		);
 	}
 };

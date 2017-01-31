@@ -12,6 +12,12 @@ module.exports = class DGCAddCommand extends ListAddCommand {
 				requireOptions: true,
 				multipleOptions: false,
 				urlOnly: true
+			},
+			{
+				examples: [
+					'add-dgc echium `http://i.imgur.com/ZcmfAIp.png`',
+					'add-dgc dgc `http://i.imgur.com/4jQkiR0.jpg`'
+				]
 			}
 		);
 	}

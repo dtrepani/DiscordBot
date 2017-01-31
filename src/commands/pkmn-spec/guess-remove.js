@@ -13,7 +13,8 @@ module.exports = class GuessRemoveCommand extends ListRemoveCommand {
 			{
 				requireOptions: false,
 				urlOnly: false
-			}
+			},
+			{ examples: [`remove-guess "i'll die"`] }
 		);
 	}
 

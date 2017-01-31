@@ -1,11 +1,12 @@
 'use strict';
 
+const { Command } = require('discord.js-commando');
 const { stripIndents, oneLine } = require('common-tags');
 const cleanReply = require('../../modules/clean-reply');
-const { Command } = require('discord.js-commando');
 const config = require('../../assets/config.json');
 const Discord = require('discord.js');
 const sendError = require('../../modules/send-error');
+const winston = require('winston');
 
 /**
  * The default help command does not support outputting to server. It has no methods outside the
@@ -57,6 +58,7 @@ module.exports = class HelpCommand extends Command {
 				`Unable to identify command. Use ${msg.usage(null, null, null)} to view the list of all commands.`
 			);
 		} catch(err) {
+			winston.error(err);
 			return sendError(msg, err);
 		}
 	}
@@ -65,16 +67,22 @@ module.exports = class HelpCommand extends Command {
 		const bullet = config.embed_bullet;
 		const prefix = config.embed_prefix;
 		const help = new Discord.RichEmbed({
-			title: `COMMAND: ${command.name}${command.guildOnly ? ' (Server Only)' : ''}`,
+			title: `__${command.name}__`,
 			description: `${command.description}`,
 			fields: [
 				{
-					name: `${prefix} Format`,
-					value: msg.anyUsage(`${command.name}${command.format ? ` ${command.format}` : ''}`)
+					name: `${prefix} Server Only`,
+					value: command.guildOnly ? 'Yes' : 'No',
+					inline: true
 				},
 				{
 					name: `${prefix} Group`,
-					value: `${command.group.name} (\`${command.groupID}:${command.memberName}\`)`
+					value: `${command.group.name} (\`${command.groupID}:${command.memberName}\`)`,
+					inline: true
+				},
+				{
+					name: `${prefix} Format`,
+					value: msg.anyUsage(`${command.name}${command.format ? ` ${command.format}` : ''}`)
 				}
 			]
 		});
@@ -91,15 +99,8 @@ module.exports = class HelpCommand extends Command {
 	}
 
 	async _showAllCommandsInChannel(msg) {
-		const help = this._constructCommandsHelp(
-			msg,
-			false,
-			true,
-			commands => commands.map(cmd => `${cmd.name}`).join(', ')
-		);
-		const messages = [];
-		messages.push(await msg.say(help, { split: true }));
-		return messages;
+		const help = this._constructCommandsHelp(msg, false, true, ', ', cmd => `${cmd.name}`);
+		return msg.embed(help);
 	}
 
 	async _showCommandsInDM(msg, showAllCommands) {
@@ -107,13 +108,14 @@ module.exports = class HelpCommand extends Command {
 			msg,
 			true,
 			showAllCommands,
-			commands => commands.map(cmd => `${config.embed_bullet} **${cmd.name}:** ${cmd.description}`).join('\n')
+			'\n',
+			cmd => `${config.embed_bullet} **${cmd.name}**: ${cmd.description}`
 		);
 
 		const messages = [];
 		try {
 			if(msg.channel.type !== 'dm') messages.push(await cleanReply(msg, 'Sent you a DM with information.'));
-			messages.push(await msg.direct(help, { split: true }));
+			messages.push(await msg.author.sendEmbed(help));
 		} catch(err) {
 			messages.push(await cleanReply(msg, 'Unable to send you the help DM. You probably have DMs disabled.'));
 		}
@@ -123,7 +125,7 @@ module.exports = class HelpCommand extends Command {
 	/**
 	 * How the commands within a command group are formatted for displaying in help.
 	 * @callback cmdFormatCallback
-	 * @param {Array<Command>} commands - Commands to be formatted
+	 * @param {Command} cmd - Command to be formatted
 	 * @returns {string}
 	 */
 
@@ -132,56 +134,111 @@ module.exports = class HelpCommand extends Command {
 	 * @param {CommandMessage} msg
 	 * @param {boolean} sendingToDM - Whether the help is going to a DM
 	 * @param {boolean} showAllCommands
+	 * @param {string} delimiter - How to separate commands when made into a string
 	 * @param {cmdFormat} callback
 	 * @returns {string}
 	 */
-	_constructCommandsHelp(msg, sendingToDM, showAllCommands, callback) {
+	_constructCommandsHelp(msg, sendingToDM, showAllCommands, delimiter, callback) {
+		const title = showAllCommands
+			? 'All Commands'
+			: `Available Commands In ${msg.guild || 'This DM'}`;
 		const usagePrefix = msg.guild ? msg.guild.commandPrefix : null;
 		const moreInfo = sendingToDM
 			? stripIndents`
 				To run a command in this DM, simply use ${Command.usage('command', null, null)} with no prefix.
 				Use ${this.usage('all', null, null)} to view a list of *all* commands, not just available ones.`
 			: `Use ${this.usage('', null, null)} to view a list of commands with their descriptions.`;
-		const title = showAllCommands
-			? 'All commands'
-			: `Available commands in ${msg.guild || 'this DM'}`;
-
-		return stripIndents`
+		const description = stripIndents`
 			${oneLine`
 				To run a command in ${msg.guild || 'any server'},
 				use ${Command.usage('command', usagePrefix, this.client.user)}.
 				For example, ${Command.usage('prefix', usagePrefix, this.client.user)}.`}
-
 			${moreInfo}
-			Use ${this.usage('<command>', null, null)} to view detailed information about a specific command.
+			Use ${this.usage('<command>', null, null)} to view detailed information about a specific command.`;
+		const help = new Discord.RichEmbed({
+			title: `__${title}__`,
+			description: description,
+			fields: this._getCmdGroupsFields(msg, showAllCommands, delimiter, callback)
+		});
+		help.setColor(this._embedColor);
 
-			__**${title.toUpperCase()}**__
-
-			${this._getCmdGroupsWithCmdsList(msg, showAllCommands, callback)}`;
+		return help;
 	}
 
 	/**
 	 * Format command groups and their respective commands into a list.
 	 * @param {CommandMessage} msg
 	 * @param {boolean} showAllCommands
+	 * @param {string} delimiter
 	 * @param {cmdFormatCallback} callback
 	 * @returns {string}
 	 */
-	_getCmdGroupsWithCmdsList(msg, showAllCommands, callback) {
+	_getCmdGroupsFields(msg, showAllCommands, delimiter, callback) {
 		let groups = this.client.registry.groups;
 		if(showAllCommands) groups = groups.filter(grp => grp.commands.some(cmd => cmd.isUsable(msg)));
 
-		const groupsWithCmds = groups.map(grp => {
+		const fieldInfoForGroups = groups.map(group => {
 			const commands = showAllCommands
-					? grp.commands
-					: grp.commands.filter(cmd => cmd.isUsable(msg));
-
-			return stripIndents`
-				**${config.embed_prefix} ${grp.name}**
-				${callback(commands)}`;
+					? group.commands
+					: group.commands.filter(cmd => cmd.isUsable(msg));
+			return this._getFieldInfoForGroup(group, commands.map(callback), delimiter);
 		});
 		
-		return groupsWithCmds.join('\n\n');
+		return this._constructEmbedFields(fieldInfoForGroups);
+	}
+
+	/**
+	 * @typedef {Object} FieldInfo
+	 * @property {string} name - Field name
+	 * @property {Array<string>} values - List of commands, separated into multiple fields if
+	 * 										max length of one is over 1024
+	 */
+
+	/**
+	 * Fields can only have a max length of 1024. If a field goes over the limit, construct a new field to continue
+	 * the commands. Once all groups have been mapped, call _constructEmbedFields() to properly construct the fields.
+	 * @param {CommandGroup} group
+	 * @param {Array<string>} commands
+	 * @param {string} delimiter
+	 * @returns {FieldInfo}
+	 */
+	_getFieldInfoForGroup(group, commands, delimiter) {
+		const maxLen = 1024;
+		const fieldValues = [''];
+		let fieldInd = 0;
+
+		for(let i = 0; i < commands.length; i++) {
+			const cmd = `${commands[i]}${delimiter}`;
+			if(fieldValues[fieldInd].length + cmd.length > maxLen) {
+				fieldInd++;
+				fieldValues[fieldInd] = '';
+			}
+
+			fieldValues[fieldInd] += cmd;
+		}
+
+		return {
+			name: `${config.embed_prefix} ${group.name}`,
+			values: fieldValues
+		};
+	}
+
+	/**
+	 * @see _getFieldInfoForGroup()
+	 * @param {Array<FieldInfo>} fieldsInfo
+	 * @returns {Array<{name: string, value: string}>} Array of Embed fields
+	 */
+	_constructEmbedFields(fieldsInfo) {
+		const fields = [];
+		fieldsInfo.forEach(groupInfo => {
+			for(let i = 0; i < groupInfo.values.length; i++) {
+				fields.push({
+					name: (i === 0) ? groupInfo.name : `	​`,
+					value: groupInfo.values[i]
+				});
+			}
+		});
+		return fields;
 	}
 
 	// eslint-disable-next-line valid-jsdoc
