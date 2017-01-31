@@ -96,7 +96,9 @@ client.registry
 		['tags', 'Tags'],
 		['web', 'Web']
 	])
-	.registerDefaults()
+	.registerDefaultTypes()
+	.registerDefaultGroups()
+	.registerDefaultCommands({ help: false })
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 
 client.login(config.tokens.discord_dev);

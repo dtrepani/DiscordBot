@@ -41,7 +41,9 @@ module.exports = (msg, resInfo = {}, options = {}) => {
 		throw new Error('Content may not be empty if there is no embed.');
 	}
 
-	const res = `\`${msg.cleanContent}\`: ${resInfo.content}`;
+	const res = (msg.channel.type !== 'dm')
+		? `\`${msg.cleanContent}\`: ${resInfo.content}`
+		: resInfo.content;
 
 	if(resInfo.delMsg) deleteMsg(msg, resInfo.delDelay);
 	if(embedIsEmpty()) return msg.reply(res, options);
