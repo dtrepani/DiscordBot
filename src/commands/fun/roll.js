@@ -9,11 +9,11 @@ module.exports = class RollCommand extends Commando.Command {
 	/**
 	 * @typedef {Object} RollInfo
 	 * @property {int} numOfDice
-	 * @property {int} numSidedDice
+	 * @property {int} numOfSides
 	 */
 
 	constructor(client) {
-		const format = '[# of dice]d[#-sided dice]';
+		const format = '[# of dice]d[# of sides]';
 
 		super(client, {
 			name: 'roll',
@@ -56,15 +56,15 @@ module.exports = class RollCommand extends Commando.Command {
 		if(dInd === -1) throw new Error(`Rolls must be in the format of ${this.format}.`);
 
 		const numOfDice = parseInt(roll.substr(0, dInd));
-		const numSidedDice = parseInt(roll.substr(dInd + 1));
+		const numOfSides = parseInt(roll.substr(dInd + 1));
 
-		if(!isNumber(numOfDice) || !isNumber(numSidedDice)) {
+		if(!isNumber(numOfDice) || !isNumber(numOfSides)) {
 			throw new Error(`One or both of those aren't numbers! Please use the format ${this.format}.`);
 		}
 
 		return {
 			numOfDice: numOfDice,
-			numSidedDice: numSidedDice
+			numOfSides: numOfSides
 		};
 	}
 
@@ -76,13 +76,13 @@ module.exports = class RollCommand extends Commando.Command {
 		const diceRolls = [];
 
 		for(let i = 0; i < rollInfo.numOfDice; i++) {
-			diceRolls.push(this._rollSingleDice(rollInfo.numSidedDice));
+			diceRolls.push(this._rollSingleDice(rollInfo.numOfSides));
 		}
 
 		return diceRolls;
 	}
 
-	_rollSingleDice(numSidedDice) {
-		return Math.floor(Math.random() * numSidedDice) + 1;
+	_rollSingleDice(numOfSides) {
+		return Math.floor(Math.random() * numOfSides) + 1;
 	}
 };

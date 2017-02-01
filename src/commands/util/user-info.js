@@ -29,6 +29,12 @@ module.exports = class UserInfoCommand extends Commando.Command {
 		const member = args.member;
 		const prefix = config.embed_prefix;
 		const bullet = config.embed_bullet;
+		const statusMap = {
+			online: `Online :green_heart:`,
+			offline: `Offline :black_heart:`,
+			idle: `Idle :yellow_heart:`,
+			dnd: `Do Not Disturb :heart:`
+		};
 		const embed = {
 			author: {
 				name: `${member.user.username}#${member.user.discriminator}`,
@@ -41,7 +47,7 @@ module.exports = class UserInfoCommand extends Commando.Command {
 				{
 					name: `${prefix} Personal Details`,
 					value: stripIndents`
-							${bullet} **Status**: ${this._getPresence(member)}
+							${bullet} **Status**: ${statusMap[member.user.presence.status]}
 							${bullet} **Current Game**: ${member.user.presence.game
 								? member.user.presence.game.name
 								: 'None'}
@@ -62,20 +68,5 @@ module.exports = class UserInfoCommand extends Commando.Command {
 		};
 
 		return cleanReply(msg, { embed: embed }, { disableEveryone: true });
-	}
-
-	_getPresence(member) {
-		switch(member.user.presence.status) {
-		case 'online':
-			return `Online :green_heart:`;
-		case 'offline':
-			return `Offline :black_heart:`;
-		case 'idle':
-			return `Idle :yellow_heart:`;
-		case 'dnd':
-			return `Do Not Disturb :heart:`;
-		default:
-			return 'None';
-		}
 	}
 };

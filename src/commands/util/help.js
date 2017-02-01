@@ -233,7 +233,7 @@ module.exports = class HelpCommand extends Command {
 		fieldsInfo.forEach(groupInfo => {
 			for(let i = 0; i < groupInfo.values.length; i++) {
 				fields.push({
-					name: (i === 0) ? groupInfo.name : `	​`,
+					name: (i === 0) ? groupInfo.name : config.zero_width_space,
 					value: groupInfo.values[i]
 				});
 			}

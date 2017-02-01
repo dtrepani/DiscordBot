@@ -92,7 +92,7 @@ module.exports = class WikiCommand extends WebCommand {
 
 	async _getImageThatMatchesSearch(searchTerm, page) {
 		try {
-			const re = new RegExp(this._toWebName(searchTerm), 'i');
+			const re = new RegExp(this._toFileName(searchTerm), 'i');
 			const images = await page.images();
 
 			for(let i = 0; i < images.length; i++) {
@@ -198,7 +198,7 @@ module.exports = class WikiCommand extends WebCommand {
 		return summary;
 	}
 
-	_toWebName(searchTerm) {
+	_toFileName(searchTerm) {
 		return searchTerm.replace(/ /g, '_').replace(/'/g, '%27');
 	}
 };
