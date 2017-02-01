@@ -36,9 +36,9 @@ module.exports = (msg, resInfo = {}, options = {}) => {
 		delMsg: true
 	}, formatResInfo());
 
-	if(resInfo.content === '' && embedIsEmpty()) {
-		winston.error(`ReplyToCmd: Embed and content were empty for ${msg.cleanContent}`);
-		throw new Error('Content may not be empty if there is no embed.');
+	if(resInfo.content === '' && embedIsEmpty() && !options.file) {
+		winston.error(`ReplyToCmd: Embed, content, and file were empty for ${msg.cleanContent}`);
+		throw new Error('Content or file may not be empty if there is no embed.');
 	}
 
 	const res = (msg.channel.type !== 'dm')
