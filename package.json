@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "node --harmony src/index.js",
-    "pm2": "pm2 start --node-args='--harmony' src/index.js",
+    "pm2": "pm2 start --name timothy --node-args='--harmony' src/index.js",
     "prepublish": "gulp prepublish",
     "test": "gulp"
   },

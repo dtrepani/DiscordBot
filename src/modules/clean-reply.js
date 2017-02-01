@@ -59,7 +59,7 @@ module.exports = (msg, resInfo = {}, options = {}) => {
 	}
 
 	/**
-	 * Quoting messages should be as accurate as possible. With custom args display, it's necessary to concat the 
+	 * Quoting messages should be as accurate as possible. With custom args display, it's necessary to concat the
 	 * command name onto the custom args. Using the default command name when the user did not use that specific name
 	 * should be avoided to make the quote accurate. Parse the content to find the exact command used before
 	 * joining with the custom args display.
