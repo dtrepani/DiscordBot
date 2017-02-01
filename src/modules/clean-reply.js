@@ -21,6 +21,8 @@ const deleteMsg = require('./delete-msg');
  * @param {?RichEmbed} embed - Embed to attach to message
  * @param {?boolean} [delMsg = true] - Whether to delete the message
  * @param {?integer} [delDelay = 2000] - Delay (in ms) before deleting message
+ * @param {?string} argsDisplay - Override the command args display. Useful if the sanitized content
+ * 								 of the args is too verbose. Not relevant if the message is a DM.
  */
 
 /**
@@ -33,7 +35,8 @@ module.exports = (msg, resInfo = {}, options = {}) => {
 	resInfo = Object.assign({
 		content: '',
 		embed: {},
-		delMsg: true
+		delMsg: true,
+		argsDisplay: ''
 	}, formatResInfo());
 
 	if(resInfo.content === '' && embedIsEmpty() && !options.file) {
@@ -41,9 +44,11 @@ module.exports = (msg, resInfo = {}, options = {}) => {
 		throw new Error('Content or file may not be empty if there is no embed.');
 	}
 
-	const res = (msg.channel.type !== 'dm')
-		? `\`${msg.cleanContent}\`: ${resInfo.content}`
-		: resInfo.content;
+	let res = resInfo.content;
+	if(msg.channel.type !== 'dm') {
+		if(resInfo.argsDisplay !== '') res = constructResCustomDisplay();
+		else res = `\`${msg.cleanContent}\`: ${res}`;
+	}
 
 	if(resInfo.delMsg) deleteMsg(msg, resInfo.delDelay);
 	if(embedIsEmpty()) return msg.reply(res, options);
@@ -51,6 +56,19 @@ module.exports = (msg, resInfo = {}, options = {}) => {
 
 	function embedIsEmpty() {
 		return (resInfo.embed instanceof Object && Object.keys(resInfo.embed).length === 0);
+	}
+
+	/**
+	 * Quoting messages should be as accurate as possible. With custom args display, it's necessary to concat the 
+	 * command name onto the custom args. Using the default command name when the user did not use that specific name
+	 * should be avoided to make the quote accurate. Parse the content to find the exact command used before
+	 * joining with the custom args display.
+	 * @returns {string}
+	 */
+	function constructResCustomDisplay() {
+		const re = new RegExp(`^(.+)${msg.argString}`);
+		const cmdUsed = msg.cleanContent.match(re)[1];
+		return `\`${cmdUsed} ${resInfo.argsDisplay}\`: ${res}`;
 	}
 
 	/**
