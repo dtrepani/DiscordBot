@@ -3,6 +3,7 @@
 
 const { CommandMessage } = require('discord.js-commando');
 const cleanReply = require('../../src/modules/clean-reply');
+const winston = require('winston');
 const sinon = require('sinon');
 const chai = require('chai');
 const expect = chai.expect;
@@ -86,6 +87,8 @@ describe('cleanReply', () => {
 	});
 
 	it('should throw error', () => {
+		const winstonError = sb.stub(winston, 'error').returns(Promise.resolve());
 		expect(() => cleanReply(sb.msg, '')).to.throw(Error);
+		expect(winstonError).to.have.been.calledOnce;
 	});
 });
