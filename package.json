@@ -17,6 +17,8 @@
     "test": "gulp"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "eslint": "^3.1.1",
     "eslint-config-xo-space": "^0.15.0",
     "gulp": "^3.9.0",
@@ -27,7 +29,10 @@
     "gulp-mocha": "^3.0.1",
     "gulp-nsp": "^2.1.0",
     "gulp-plumber": "^1.0.0",
-    "mocha": "^3.2.0"
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.8.0"
   },
   "repository": {
     "type": "git",

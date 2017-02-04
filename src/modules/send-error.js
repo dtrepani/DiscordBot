@@ -11,10 +11,7 @@ const { oneLine } = require('common-tags');
 module.exports = (msg, err) => {
 	if(!(err instanceof Object)) {
 		if(!isString(err)) throw new TypeError(`Parameter 'err' must be an Error object or a string.`);
-		err = {
-			name: 'Error',
-			message: err
-		};
+		err = new Error(err);
 	}
 
 	const punctuation = (['.', '!', '?'].indexOf(err.message.slice(-1)) !== -1) ? '' : '.';

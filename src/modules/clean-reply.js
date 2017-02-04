@@ -45,17 +45,21 @@ module.exports = (msg, resInfo = {}, options = {}) => {
 	}
 
 	let res = resInfo.content;
-	if(msg.channel.type !== 'dm') {
+	if(!isDM()) {
 		if(resInfo.argsDisplay !== '') res = constructResCustomDisplay();
 		else res = `\`${msg.cleanContent}\`: ${res}`;
 	}
 
-	if(resInfo.delMsg) deleteMsg(msg, resInfo.delDelay);
+	if(!isDM() && resInfo.delMsg) deleteMsg(msg, resInfo.delDelay);
 	if(embedIsEmpty()) return msg.reply(res, options);
 	return msg.replyEmbed(resInfo.embed, res, options);
 
 	function embedIsEmpty() {
 		return (resInfo.embed instanceof Object && Object.keys(resInfo.embed).length === 0);
+	}
+
+	function isDM() {
+		return (msg.channel.type === 'dm' || msg.channel.type === 'group');
 	}
 
 	/**

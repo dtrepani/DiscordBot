@@ -7,6 +7,26 @@
 		{
 			"type": "node2",
 			"request": "launch",
+			"name": "Mocha Tests",
+			"cwd": "${workspaceRoot}",
+			"runtimeExecutable": "${workspaceRoot}/node_modules/.bin/mocha",
+			"windows": {
+				"runtimeExecutable": "${workspaceRoot}/node_modules/.bin/mocha.cmd"
+			},
+			"runtimeArgs": [
+				"-u",
+				"tdd",
+				"--timeout",
+				"999999",
+				"--colors",
+				"--harmony",
+				"${workspaceRoot}/test/**/*spec.js"
+			],
+			"internalConsoleOptions": "openOnSessionStart"
+		},
+		{
+			"type": "node2",
+			"request": "launch",
 			"name": "Launch Program",
 			"program": "${workspaceRoot}/src/index.js",
 			"cwd": "${workspaceRoot}",
