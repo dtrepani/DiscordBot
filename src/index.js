@@ -9,16 +9,18 @@ const PushBullet = require('pushbullet');
 const sqlite = require('sqlite');
 const winston = require('winston');
 
-winston.configure({
-	transports: [
-		new winston.transports.Console({
-			level: 'debug',
-			handleExceptions: true,
-			colorize: true,
-			prettyPrint: true
-		})
-	]
-});
+if(process.env.NODE_ENV !== 'test') { // eslint-disable-line no-process-env
+	winston.configure({
+		transports: [
+			new winston.transports.Console({
+				level: 'debug',
+				handleExceptions: true,
+				colorize: true,
+				prettyPrint: true
+			})
+		]
+	});
+}
 
 const client = new Commando.Client({
 	owner: config.owner,

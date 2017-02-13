@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-expressions, no-invalid-this */
 'use strict';
+process.env.NODE_ENV === 'test'; // eslint-disable-line no-process-env
 
-const { CommandMessage } = require('discord.js-commando');
+const { Client, CommandMessage } = require('discord.js-commando');
 const cleanReply = require('../../src/modules/clean-reply');
-const winston = require('winston');
 const sinon = require('sinon');
 const chai = require('chai');
 const expect = chai.expect;
@@ -19,7 +19,7 @@ describe('cleanReply', () => {
 	beforeEach(() => {
 		sb.message = {
 			cleanContent: '~foo bar',
-			client: { commandPrefix: '~' },
+			client: new Client({ commandPrefix: '~' }),
 			channel: { type: 'text' }
 		};
 		sb.command = { name: 'foo' };
@@ -30,7 +30,7 @@ describe('cleanReply', () => {
 
 	it('should delete message', () => {
 		const delMsg = sb.stub(CommandMessage.prototype, 'delete').returns(Promise.resolve());
-		sb.stub(CommandMessage.prototype, 'reply').returns(Promise.resolve());
+		sb.stub(CommandMessage.prototype, 'reply');
 
 		cleanReply(sb.msg, 'foo');
 
@@ -39,7 +39,7 @@ describe('cleanReply', () => {
 
 	it('should not delete message', () => {
 		const delMsg = sb.stub(CommandMessage.prototype, 'delete').returns(Promise.resolve());
-		sb.stub(CommandMessage.prototype, 'reply').returns(Promise.resolve());
+		sb.stub(CommandMessage.prototype, 'reply');
 
 		cleanReply(sb.msg, { content: 'foo', delMsg: false });
 
@@ -50,7 +50,7 @@ describe('cleanReply', () => {
 		sb.msg.message.channel.type = 'dm';
 
 		const delMsg = sb.stub(CommandMessage.prototype, 'delete').returns(Promise.resolve());
-		sb.stub(CommandMessage.prototype, 'reply').returns(Promise.resolve());
+		sb.stub(CommandMessage.prototype, 'reply');
 
 		cleanReply(sb.msg, 'foo');
 
@@ -59,7 +59,7 @@ describe('cleanReply', () => {
 
 	it('should reply to message normally', () => {
 		sb.stub(CommandMessage.prototype, 'delete').returns(Promise.resolve());
-		const reply = sb.stub(CommandMessage.prototype, 'reply').returns(Promise.resolve());
+		const reply = sb.stub(CommandMessage.prototype, 'reply');
 
 		cleanReply(sb.msg, 'foo');
 		
@@ -68,7 +68,7 @@ describe('cleanReply', () => {
 
 	it('should reply to message with embed', () => {
 		sb.stub(CommandMessage.prototype, 'delete').returns(Promise.resolve());
-		const replyEmbed = sb.stub(CommandMessage.prototype, 'replyEmbed').returns(Promise.resolve());
+		const replyEmbed = sb.stub(CommandMessage.prototype, 'replyEmbed');
 
 		cleanReply(sb.msg, { embed: { title: 'foo' } });
 		
@@ -87,8 +87,6 @@ describe('cleanReply', () => {
 	});
 
 	it('should throw error', () => {
-		const winstonError = sb.stub(winston, 'error').returns(Promise.resolve());
 		expect(() => cleanReply(sb.msg, '')).to.throw(Error);
-		expect(winstonError).to.have.been.calledOnce;
 	});
 });
