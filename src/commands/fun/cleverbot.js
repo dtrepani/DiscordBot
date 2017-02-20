@@ -33,7 +33,7 @@ module.exports = class CleverbotCommand extends Commando.Command {
 
 	async run(msg, args) {
 		try {
-			let query = `http://www.cleverbot.com/getreply?key=${config.tokens.cleverbot}&input=${args.text}`;
+			let query = `http://www.cleverbot.com/getreply?key=${config.tokens.cleverbot}&input=${encodeURIComponent(args.text)}`; // eslint-disable-line max-len
 			if(this.cs !== '') query += `&cs=${this.cs}`;
 
 			const res = JSON.parse(await request.get(query));

@@ -5,11 +5,10 @@ const Commando = require('discord.js-commando');
 const config = require('./assets/config.json');
 const EventLogger = require('./events/event-logger');
 const path = require('path');
-const PushBullet = require('pushbullet');
 const sqlite = require('sqlite');
 const winston = require('winston');
 
-if(process.env.NODE_ENV !== 'test') { // eslint-disable-line no-process-env
+if(process.env.NODE_ENV !== 'test') {
 	winston.configure({
 		transports: [
 			new winston.transports.Console({
@@ -27,7 +26,6 @@ const client = new Commando.Client({
 	commandPrefix: config.prefix,
 	unknownCommandResponse: false
 });
-const pushbullet = new PushBullet(config.tokens.pushbullet);
 
 EventLogger.init(client, path.join(__dirname, 'events/events'));
 
@@ -37,12 +35,8 @@ client
 	.on('disconnect', event => {
 		winston.warn(`Disconnected! [${event.code}]: ${event.reason || 'Unknown reason'}`);
 		
-		/**
-		 * Restart Timothy using pm2 if he's been disconnected for more then a minute without reconnecting.
-		 * When Timothy has to restart himself, I want to know. Notify me if it happens.
-		 */
+		/** Restart Timothy using pm2 if he's been disconnected for more then a minute without reconnecting. */
 		setTimeout(() => {
-			pushbullet.note('', 'Timothy disconnected!', `[${event.code}]: ${event.reason || 'Unknown reason'}`);
 			process.exit();
 		}, 60000);
 	})
@@ -103,7 +97,7 @@ client.registry
 	.registerDefaultCommands({ help: false })
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 
-client.login(config.tokens.discord_dev);
+client.login(config[process.env.NODE_ENV || 'development'].discord_token);
 
 process.on('unhandledRejection', err => {
 	winston.error(`Uncaught Promise Error: \n ${err.stack}`);

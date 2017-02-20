@@ -1,4 +1,6 @@
-module.exports = () => { // eslint-disable-line arrow-body-style
+module.exports = () => {
+	process.env.NODE_ENV = 'test'; // eslint-disable-line no-process-env
+
 	return {
 		files: [
 			'src/**/*.js'

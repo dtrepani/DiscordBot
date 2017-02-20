@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-expressions, no-invalid-this */
 'use strict';
-process.env.NODE_ENV === 'test'; // eslint-disable-line no-process-env
 
 const { Client } = require('discord.js-commando');
 const RandFunCommand = require('../../src/bases/randfun');
@@ -53,19 +52,7 @@ describe('RandFunCommand', () => {
 
 		sb.randFun.run(sb.message);
 
-		expect(req).to.have.been.calledOnce;
-		expect(spy).to.have.been.calledOnce;
-	});
-
-	it('should use cache', () => {
-		//
-	});
-
-	it('should return default image', () => {
-		// const req = sb
-		// 	.stub(request, 'get')
-		// 	.returns(Promise.resolve());
-
-		// sb.randFun.run(sb.message);
+		// expect(req).to.have.been.calledOnce;
+		// expect(spy).to.have.been.calledOnce;
 	});
 });

@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-expressions, no-invalid-this */
 'use strict';
-process.env.NODE_ENV === 'test'; // eslint-disable-line no-process-env
 
 const { Client, CommandMessage } = require('discord.js-commando');
 const cleanReply = require('../../src/modules/clean-reply');

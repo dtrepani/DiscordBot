@@ -1,5 +1,5 @@
 # pkmn-discord-bot [![Build Status][travis-image]][travis-url]
-> 
+>
 
 ## Installation
 
@@ -13,7 +13,6 @@ $ npm install
 - [ ] Shout!
 - [ ] Mute (w/ mod-log support)
 - [ ] Ban (w/ mod-log support)
-- [ ] High res emoji command
 
 
 ## License

@@ -9,6 +9,9 @@
 			"request": "launch",
 			"name": "Mocha Tests",
 			"cwd": "${workspaceRoot}",
+			"env": {
+				"NODE_ENV": "test"
+			},
 			"runtimeExecutable": "${workspaceRoot}/node_modules/.bin/mocha",
 			"windows": {
 				"runtimeExecutable": "${workspaceRoot}/node_modules/.bin/mocha.cmd"
