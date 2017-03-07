@@ -9,10 +9,11 @@ module.exports = class ColorCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'color',
+			aliases: ['set-color', 'role-color'],
 			group: 'util',
 			memberName: 'color',
 			description: `Set your role's color.`,
-			examples: ['color #ffffff', 'color #ffffff "The Coolest Role"'],
+			examples: ['color #ffffff', 'color #ffffff "Role Name Here"'],
 			guildOnly: true,
 			args: [
 				{
@@ -72,7 +73,7 @@ module.exports = class ColorCommand extends Commando.Command {
 		}
 
 		return role.setColor(color)
-			.then(aRole => cleanReply(msg, `"${aRole.name}" set to ${color}`))
+			.then(aRole => cleanReply(msg, `Role "${aRole.name}" set to color ${color}`))
 			// eslint-disable-next-line handle-callback-err, no-unused-vars
 			.catch(err => sendError(msg, oneLine`That role is above me so I cannot change its color.
 					Contact the server's owner about moving my rank up.`));
