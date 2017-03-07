@@ -43,6 +43,7 @@
     "request-promise": "^4.1.1",
     "require-all": "^2.1.0",
     "sqlite": "^2.3.0",
+    "sqlite3": "^3.1.8",
     "twemoji": "^2.2.5",
     "uws": "^0.12.0",
     "wikijs": "^1.1.1",
