@@ -6,7 +6,7 @@ const sendError = require('../modules/send-error');
 
 module.exports = class ColorTemplateCommand extends Command {
 	constructor(client, commandInfo) {
-		commandInfo = Object.assign(commandInfo, {
+		commandInfo = Object.assign({
 			guildOnly: true,
 			args: [
 				{
@@ -26,7 +26,7 @@ module.exports = class ColorTemplateCommand extends Command {
 					default: false
 				}
 			]
-		});
+		}, commandInfo);
 		super(client, commandInfo);
 	}
 
@@ -34,9 +34,9 @@ module.exports = class ColorTemplateCommand extends Command {
 		try {
 			this.checkIfColorIsHex(args);
 
-			const role = this.getRole(msg, args);
+			const role = await this.getRole(msg, args);
 			this.afterRoleHook(msg, args, role);
-			return this.setColor(msg, args.color, role);
+			return this.setColor(msg, args, role);
 		} catch(err) {
 			return sendError(msg, err);
 		}
@@ -57,10 +57,10 @@ module.exports = class ColorTemplateCommand extends Command {
 	/**
 	 * @abstract
 	 * @param {CommandoMessage} msg
-	 * @param {string} color
+	 * @param {*} args
 	 * @param {Role} role
 	 */
-	afterSetColor(msg, color, role) {} // eslint-disable-line no-unused-vars, no-empty-function
+	afterSetColor(msg, args, role) {} // eslint-disable-line no-unused-vars, no-empty-function
 
 	checkIfColorIsHex(args) {
 		if(!args.forceColor && args.color.search(/^#[0-9a-f]{6}$/i) === -1) {
@@ -71,28 +71,23 @@ module.exports = class ColorTemplateCommand extends Command {
 		}
 	}
 
-	getRole(msg, args) {
-		const useAllRoles = this.userCanChangeAnyRole(msg.member);
-		const roles = useAllRoles ? msg.guild.roles : msg.member.roles;
-		const role = roles.find(aRole => aRole.name.toLowerCase() === args.roleName.toLowerCase());
-
-		if(!role) {
-			throw new Error(
-				`"${args.roleName}" is not ${useAllRoles
-					? 'a valid role'
-					: `one of your roles. Your roles: \`${roles.map(aRole => aRole.name).join(', ')}\``}`
-			);
-		}
-		return role;
+	/**
+	 * @abstract
+	 * @param {CommandoMessage} msg
+	 * @param {*} args
+	 * @returns {Role} - Role to set the color of
+	 */
+	async getRole(msg, args) { // eslint-disable-line no-unused-vars
+		throw new Error(`${this.constructor.name} doesn't have a getRole() method.`);
 	}
 
-	setColor(msg, color, role) {
+	setColor(msg, args, role) {
 		if(role.name === '@everyone') {
 			throw new Error(`Cannot change the color of the "everyone" role.`);
 		}
 
-		return role.setColor(color)
-			.then(aRole => this.afterSetColor(msg, color, aRole))
+		return role.setColor(args.color)
+			.then(aRole => this.afterSetColor(msg, args, aRole))
 			// eslint-disable-next-line handle-callback-err, no-unused-vars
 			.catch(err => sendError(msg, oneLine`There was a problem setting the color.
 				The role given is likely above me so I cannot change its color.

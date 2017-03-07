@@ -13,33 +13,76 @@ module.exports = class SplatCommand extends ColorTemplateCommand {
 			group: 'fun',
 			memberName: 'splat',
 			description: `Splat your friends with a color for 30 seconds.`,
-			examples: ['splat #ffffff "Role Name Here"']
+			examples: ['splat #ffffff "Role Name Here"'],
+			args: [
+				{
+					key: 'color',
+					prompt: 'What color (hex value only)?',
+					type: 'string'
+				},
+				{
+					key: 'member',
+					prompt: 'Splat which user?',
+					type: 'member'
+				},
+				{
+					key: 'forceColor',
+					prompt: 'Force your color selection? ',
+					type: 'boolean',
+					default: false
+				}
+			]
 		});
 	}
 
 	/** @override */
-	afterRoleHook(msg, args, role) {
-		this._prevColor = role.color;
+	async getRole(msg, args) {
+		const user = args.member.user;
+		this._roleName = `Splat ${user.username}#${user.discriminator}`;
+		const guild = msg.guild;
+		let role = guild.roles.find('name', this._roleName);
+
+		if(!role) {
+			role = await guild.createRole({ name: this._roleName });
+			const rolePos = guild.member(this.client.user).highestRole.position - 1;
+			if(rolePos > role.position) {
+				// TODO: NEVER use a spinlock. Except when role position refuses to take due to bugged code in library.
+				// This is such a bad idea.
+				while(rolePos !== role.position) {
+					role = await role.setPosition(rolePos);
+				}
+			}
+		}
+		
+		args.member.addRole(role);
+		return role;
 	}
 
 	/** @override */
-	afterSetColor(msg, color, role) {
-		const that = this;
-		cleanReply(msg, { embed: this.getSplatEmbed(msg, color, role) });
+	afterSetColor(msg, args, role) {
+		cleanReply(msg, { embed: this.getSplatEmbed(msg, args) });
 
 		this.client.setTimeout(() => {
-			role.setColor(that._prevColor)
-				.then(aRole => msg.say(`"${aRole.name}" is back to their original color! 🎉`))
+			role.delete()
+				.then(() => msg.say(
+					`${args.member.nickname || args.member.user.username} is back to their original color! 🎉`)
+				)
 				.catch(winston.error);
 		}, 30000);
 	}
 
-	getSplatEmbed(msg, color, role) {
+	getSplatEmbed(msg, args) {
 		const splatEmbed = new Discord.RichEmbed({
-			description: `**${role} was splat by ${msg.member}!**`,
-			footer: { text: `${this._prevColor} ➔ ${color}`, icon_url: 'http://i.imgur.com/Nsj5Q24.png' } // eslint-disable-line camelcase, max-len
+			title: 'SPLAT!',
+			description: `**${args.member} was splat by ${msg.member}!**`,
+			thumbnail: { url: 'http://i.imgur.com/Nsj5Q24.png' }
 		});
-		splatEmbed.setColor(color);
+		splatEmbed.setColor(args.color);
 		return splatEmbed;
+	}
+	
+	/** @override */
+	userCanChangeAnyRole(user) { // eslint-disable-line no-unused-vars
+		return true;
 	}
 };
