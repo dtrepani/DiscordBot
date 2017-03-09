@@ -9,7 +9,7 @@ module.exports = class BirdCommand extends RandFunCommand {
 			{
 				name: 'bird',
 				aliases: ['birds', 'birb', 'birb'],
-				group: 'fun',
+				group: 'fun-img',
 				memberName: 'bird',
 				description: 'Birb!!!!!!'
 			},

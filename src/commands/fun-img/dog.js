@@ -9,7 +9,7 @@ module.exports = class DogCommand extends RandFunCommand {
 			{
 				name: 'dog',
 				aliases: ['dogs'],
-				group: 'fun',
+				group: 'fun-img',
 				memberName: 'dog',
 				description: 'wow such doge much want'
 			},

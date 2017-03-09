@@ -68,7 +68,7 @@ module.exports = class SplatCommand extends ColorTemplateCommand {
 					`${args.member.nickname || args.member.user.username} is back to their original color! 🎉`)
 				)
 				.catch(winston.error);
-		}, 30000);
+		}, 60000);
 	}
 
 	getSplatEmbed(msg, args) {

@@ -89,6 +89,7 @@ client.registry
 		['mod', 'Mod Only'],
 		['pkmn-spec', 'PKMN Specific'],
 		['fun', 'Fun'],
+		['fun-img', 'Fun: Random Images'],
 		['tags', 'Tags'],
 		['web', 'Web']
 	])

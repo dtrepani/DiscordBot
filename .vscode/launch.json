@@ -5,7 +5,7 @@
 	"version": "1.0.0",
 	"configurations": [
 		{
-			"type": "node2",
+			"type": "node",
 			"request": "launch",
 			"name": "Mocha Tests",
 			"cwd": "${workspaceRoot}",
@@ -28,7 +28,7 @@
 			"internalConsoleOptions": "openOnSessionStart"
 		},
 		{
-			"type": "node2",
+			"type": "node",
 			"request": "launch",
 			"name": "Launch Program",
 			"program": "${workspaceRoot}/src/index.js",
@@ -36,7 +36,7 @@
 			"runtimeArgs": ["--harmony"]
 		},
 		{
-			"type": "node2",
+			"type": "node",
 			"request": "attach",
 			"name": "Attach to Process",
 			"port": 5858
