@@ -117,7 +117,11 @@ module.exports = class HelpCommand extends Command {
 			if(msg.channel.type !== 'dm') messages.push(await cleanReply(msg, 'Sent you a DM with information.'));
 			messages.push(await msg.author.sendEmbed(help));
 		} catch(err) {
-			messages.push(await cleanReply(msg, 'Unable to send you the help DM. You probably have DMs disabled.'));
+			messages.push(await cleanReply(
+				msg,
+				oneLine`Unable to send you the help DM. You probably have DMs disabled. 
+					Alternatively, you can use \`help here\` to post the commands here.`
+			));
 		}
 		return messages;
 	}
