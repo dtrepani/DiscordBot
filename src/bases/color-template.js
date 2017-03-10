@@ -88,8 +88,7 @@ module.exports = class ColorTemplateCommand extends Command {
 
 		return role.setColor(args.color)
 			.then(aRole => this.afterSetColor(msg, args, aRole))
-			// eslint-disable-next-line handle-callback-err, no-unused-vars
-			.catch(err => sendError(msg, oneLine`There was a problem setting the color.
+			.catch(() => sendError(msg, oneLine`There was a problem setting the color.
 				The role given is likely above me so I cannot change its color.
 				Contact the server's owner about moving my rank up.`));
 	}

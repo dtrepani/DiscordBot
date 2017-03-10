@@ -1,11 +1,11 @@
 'use strict';
 
 const { Command } = require('discord.js-commando');
+const { isJarpyNickname } = require('../../modules/type-checks');
 const { oneLine } = require('common-tags');
 const cleanReply = require('../../modules/clean-reply');
 const Discord = require('discord.js');
 const sendError = require('../../modules/send-error');
-const winston = require('winston');
 
 module.exports = class JarpyCommand extends Command {
 	constructor(client) {
@@ -41,28 +41,41 @@ module.exports = class JarpyCommand extends Command {
 
 		try {
 			const origNickname = args.member.nickname;
-			const hearts = '💕';
 
-			this.setJarpies(args, hearts);
+			await this.setJarpies(args);
 			cleanReply(msg, { embed: this.getJarpyEmbed(msg.member, args.member) });
 			
-			return this.clearJarpies(msg, args.member, origNickname, hearts);
+			return this.clearJarpies(msg, args.member, origNickname);
 		} catch(err) {
-			winston.error(err);
-			return sendError(msg, oneLine`I can't jarpy that user. 
-				Ask the server's owner to move my role rank up. If you're trying to jarpy the server owner,
-				I'm unable to do that no matter what.`);
+			return sendError(msg, oneLine`I can't jarpy that user. Ask the server's owner to move my role rank up.`);
 		}
 	}
 
-	clearJarpies(msg, member, origNickname, hearts) {
-		if(!this.userWasAlreadyJarpied(origNickname, hearts)) {
+	clearJarpies(msg, member, origNickname) {
+		/**
+		* People may spam the jarpy command on a user. Because the original nickname of the user is saved per command
+		* call, this could result in the original nickname being overridden with the jarpy version. To stop this, if the
+		* beginning and ending of a nickname match the hearts string, don't return the original nickname. The original
+		* jarpy command call will take care of that. Doesn't account for the original nickname already matching the
+		* hearts string.
+		 */
+		if(!isJarpyNickname(origNickname)) {
 			this.client.setTimeout(() =>
 				member.setNickname(origNickname || '')
 					.then(() => msg.say(`${member.nickname || member.user.username}'s jarpies have worn off. 💔`))
-					.catch(winston.error)
 			, 60000);
 		}
+	}
+
+	getJarpyEmbed(jarpier, jarpiee) {
+		const embed = new Discord.RichEmbed({
+			title: '💕💕💕💕💕💕💕💕',
+			description: `**${jarpiee} just got jarpied by ${jarpier}!**`,
+			thumbnail: { url: 'http://i.imgur.com/qo5bOag.png' }
+		});
+		embed.setColor('#E494A0');
+
+		return embed;
 	}
 
 	getNicknameWithHearts(nickname, hearts) {
@@ -77,48 +90,14 @@ module.exports = class JarpyCommand extends Command {
 		return `${hearts} ${nickname} ${hearts}`;
 	}
 
-	getJarpyEmbed(jarpier, jarpiee) {
-		const embed = new Discord.RichEmbed({
-			title: '💕💕💕💕💕💕💕💕',
-			description: `**${jarpiee} just got jarpied by ${jarpier}!**`,
-			thumbnail: { url: 'http://i.imgur.com/qo5bOag.png' }
-		});
-		embed.setColor('#E494A0');
-
-		return embed;
-	}
-
-	setJarpies(args, hearts) {
+	async setJarpies(args) {
+		const hearts = '💕';
 		let nicknameWithHearts = args.member.nickname || args.member.user.username;
 
 		for(let i = 0; i < args.numOfThrows; i++) {
 			nicknameWithHearts = this.getNicknameWithHearts(nicknameWithHearts, hearts);
 		}
 		
-		args.member.setNickname(nicknameWithHearts);
-	}
-
-	/**
-	 * People may spam the jarpy command on a user. Because the original nickname of the user is saved per command call,
-	 * this could result in the original nickname being overridden with the jarpy version. To stop this, if the
-	 * beginning and ending of a nickname match the hearts string, don't return the original nickname. The original
-	 * jarpy command call will take care of that. Doesn't account for the original nickname already matching the hearts
-	 * string.
-	 * @param {string} nickname
-	 * @param {string} hearts
-	 * @returns {boolean}
-	 */
-	userWasAlreadyJarpied(nickname, hearts) {
-		if(!nickname) {
-			return false;
-		}
-
-		// +1 accounts for the space on either side of the nickname.
-		const heartsLength = hearts.length + 1;
-
-		const startOfNick = nickname.substr(0, heartsLength);
-		const endOfNick = nickname.substr(nickname.length - heartsLength);
-
-		return (startOfNick === `${hearts} ` && endOfNick === ` ${hearts}`);
+		await args.member.setNickname(nicknameWithHearts);
 	}
 };
