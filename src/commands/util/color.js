@@ -12,7 +12,7 @@ module.exports = class ColorCommand extends ColorTemplateCommand {
 			group: 'util',
 			memberName: 'color',
 			description: `Set your role's color.`,
-			examples: ['color #ffffff', 'color #ffffff "Role Name Here"']
+			examples: ['color #ffffff', 'color #ffffff "Role Name Here"', 'color blue']
 		});
 	}
 

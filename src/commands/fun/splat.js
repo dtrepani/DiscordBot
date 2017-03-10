@@ -13,7 +13,7 @@ module.exports = class SplatCommand extends ColorTemplateCommand {
 			group: 'fun',
 			memberName: 'splat',
 			description: `Splat your friends with a color for 30 seconds.`,
-			examples: ['splat #ffffff "Role Name Here"'],
+			examples: ['splat #ffffff @Kyuu#9384', 'splat blue @Kyuu#9384'],
 			args: [
 				{
 					key: 'color',

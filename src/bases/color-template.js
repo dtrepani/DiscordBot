@@ -7,6 +7,9 @@ const sendError = require('../modules/send-error');
 module.exports = class ColorTemplateCommand extends Command {
 	constructor(client, commandInfo) {
 		commandInfo = Object.assign({
+			details: oneLine`Available color names: default, aqua, green, blue, purple, pink, yellow, orange, red, grey.
+				All colors listed also have a "dark_x" variant, like dark_blue. Hex colors are also available, prefixed
+				with "#".`,
 			guildOnly: true,
 			args: [
 				{
@@ -28,11 +31,37 @@ module.exports = class ColorTemplateCommand extends Command {
 			]
 		}, commandInfo);
 		super(client, commandInfo);
+
+		this._colors = {
+			DEFAULT: '#000000',
+			AQUA: '#1ABC9C',
+			GREEN: '#2ECC71',
+			BLUE: '#3498DB',
+			PURPLE: '#9B59B6',
+			PINK: '#E91E63',
+			YELLOW: '#F1C40F',
+			ORANGE: '#E67E22',
+			RED: '#DC3B2B',
+			GREY: '#979C9F',
+			DARK_GREY: '#607D8B',
+			DARK_AQUA: '#11806A',
+			DARK_GREEN: '#1F8B4C',
+			DARK_BLUE: '#206694',
+			DARK_PURPLE: '#71368A',
+			DARK_PINK: '#AD1457',
+			DARK_YELLOW: '#C27C0E',
+			DARK_ORANGE: '#A84300',
+			DARK_RED: '#971F13'
+		};
 	}
 
 	async run(msg, args) {
 		try {
-			this.checkIfColorIsHex(args);
+			this.checkIfColorIsValid(args);
+
+			if(!this.isHexColor(args.color)) {
+				args.color = this._colors[args.color.toUpperCase()];
+			}
 
 			const role = await this.getRole(msg, args);
 			this.afterRoleHook(msg, args, role);
@@ -62,13 +91,19 @@ module.exports = class ColorTemplateCommand extends Command {
 	 */
 	afterSetColor(msg, args, role) {} // eslint-disable-line no-unused-vars, no-empty-function
 
-	checkIfColorIsHex(args) {
-		if(!args.forceColor && args.color.search(/^#[0-9a-f]{6}$/i) === -1) {
+	checkIfColorIsValid(args) {
+		if(!args.forceColor &&
+			!this.isHexColor(args.color) &&
+			!this._colors.hasOwnProperty(args.color.toUpperCase())) {
 			throw new Error(
-				oneLine`\`${args.color}\` is not a valid hex value. Make sure your value is prefixed with '#'.
+				oneLine`\`${args.color}\` is not a valid color. If it's a hex value, make sure it's prefixed with '#'.
 					If you're using shorthand hex, please expand it.`
 			);
 		}
+	}
+
+	isHexColor(color) {
+		return color.search(/^#[0-9a-f]{6}$/i) !== -1;
 	}
 
 	/**
