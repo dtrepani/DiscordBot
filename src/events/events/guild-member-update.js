@@ -1,5 +1,6 @@
 'use strict';
 
+const { isJarpyNickname, isSplatRole } = require('../../modules/type-checks');
 const { oneLine } = require('common-tags');
 const EventLog = require('../base');
 const EventEmbed = require('../event-embed');
@@ -27,16 +28,22 @@ module.exports = class GuildMemberUpdateEvent extends EventLog {
 		EventEmbed.sendUserEmbed(this._getLogChannel(before.guild), before.user.id, embed);
 	}
 
+	_isJarpyNickname(before, after) {
+		return (isJarpyNickname(before.nickname) || isJarpyNickname(after.nickname));
+	}
+
 	_getChangedDescriptors(before, after) {
 		if(before.user.username !== after.user.username) {
 			return this._constructEmbed('username', before.user, before.user.nickname, after.user.nickname);
 		}
 
-		if(before.nickname !== after.nickname) {
+		if(before.nickname !== after.nickname && !this._isJarpyNickname(before, after)) {
 			return this._constructEmbed('nickname', before.user, before.nickname, after.nickname);
 		}
 
 		if(!before.roles.equals(after.roles)) {
+			if((before.roles.find(isSplatRole) || after.roles.find(isSplatRole))) return false;
+
 			if(before.roles.size > after.roles.size) {
 				return {
 					description: oneLine`${before.user} was removed from role: 

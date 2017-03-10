@@ -2,6 +2,7 @@
 
 const EventLog = require('../base');
 const EventEmbed = require('../event-embed');
+const { isSplatRole } = require('../../modules/type-checks');
 
 module.exports = class RoleCreateEvent extends EventLog {
 	constructor(client) {
@@ -12,6 +13,8 @@ module.exports = class RoleCreateEvent extends EventLog {
 	 * @param {Role} role - Role created
 	 */
 	_run(role) {
+		if(isSplatRole(role)) return;
+
 		const embed = {
 			author: {
 				name: `${role.guild.name}`,
