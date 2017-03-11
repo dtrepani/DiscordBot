@@ -57,14 +57,14 @@ module.exports = class MessageDeleteEvent extends EventLog {
 	 * @returns {boolean} Whether the message is a command
 	 */
 	_isCommand(msg) {
-		msg = msg.content;
-		if(!msg) return false;
+		const content = msg.content;
+		if(!content) return false;
 
 		const botMention = `<@${this.client.user.id}> `;
 		const prefix = `${this.client.commandPrefix}`;
 		const cmd = `(\\S+)`;
 		const re = new RegExp(`^(${botMention}|${prefix})${cmd}`, 'i');
-		const matches = msg.match(re);
+		const matches = content.match(re);
 
 		if(matches !== null && matches[2] === 'say') return false;
 		return (matches !== null);
