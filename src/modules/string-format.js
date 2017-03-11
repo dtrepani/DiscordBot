@@ -17,7 +17,8 @@ module.exports = {
 		const otherEmojis = {
 			'!': '\u2757',
 			'?': '\u2753',
-			'.': '\u23fa'
+			'.': '\u23fa',
+			'❤': '❤'
 		};
 
 		if(otherEmojis.hasOwnProperty(char)) {

@@ -1,9 +1,10 @@
 'use strict';
 
 const { charToEmoji } = require('../../modules/string-format');
-const { isEmoji } = require('../../modules/type-checks');
+const { isNumber, isEmoji } = require('../../modules/type-checks');
 const { Command } = require('discord.js-commando');
-const cleanReply = require('../../modules/clean-reply');
+const { oneLine, stripIndents } = require('common-tags');
+const config = require('../../assets/config.json');
 const sendError = require('../../modules/send-error');
 const winston = require('winston');
 
@@ -20,30 +21,58 @@ module.exports = class ReactCommand extends Command {
 			name: 'react',
 			group: 'util',
 			memberName: 'react',
-			description: `Add reactions to a message. Don't use if you don't know how to get message IDs.`,
-			examples: ['react 289859024097378304 nerd pls'],
+			description: `Add reactions to a message.`,
+			details: stripIndents`Add reactions to a message. Letters will automatically be converted to emojis.
+				${oneLine`Specify how far back the message is you want to react to (with 0 being the latest), 
+				either relevant to all messages or to the user to whom you want to react. **See examples.**`}
+				Alternatively, supply the message ID (only accessible via developer options).
+				${oneLine`For a more precise reaction, you can specify the number of messages back`}`,
+			examples: [
+				`To react to latest message: \`react :heart:\``,
+				`To react to message above latest message: \`react :doge: 1\``,
+				`To react to Kyuu's latest message: \`react "love u" 0 @Kyuu#9384\``,
+				`To react to Kyuu's fourth (latest + 3) latest message: \`react "love u :heart:" 3 @Kyuu#9384\``,
+				`To react using message ID: \`react "love u" 289859024097378304\``
+			],
 			args: [
-				{
-					key: 'msgID',
-					prompt: 'What message would you like to react to (ID)?',
-					type: 'string'
-				},
 				{
 					key: 'reaction',
 					prompt: 'How would you like to react?',
 					type: 'string'
+				},
+				{
+					key: 'msgInfo',
+					prompt: oneLine`Which message are you reacting to (0 is the latest)?
+						(How many messages back, relevant to all messages or user; or the message ID)`,
+					type: 'string',
+					default: 0
+				},
+				{
+					key: 'member',
+					prompt: 'Which user are you reacting to?',
+					type: 'member',
+					default: ''
 				}
 			]
 		});
 	}
 
 	async run(msg, args) {
+		if(args.msgInfo && !isNumber(args.msgInfo)) {
+			return sendError(
+				msg,
+				new TypeError(oneLine`Please provide a number or message ID. 
+					If you did include the number (or just using \`react "reaction here"\`) and are still receiving
+					this message, make sure your reaction is wrapped in quotes.`)
+			);
+		}
+
 		const msgToReactTo = await this.getMessageToReactTo(msg, args);
 
 		if(!msgToReactTo) {
 			return sendError(
 				msg,
-				`I couldn't find a message with that ID. It may be too far back for me to add reactions to.`
+				`No message found matching that description. It may be too far back for me to add reactions to.`
 			);
 		}
 
@@ -62,7 +91,7 @@ module.exports = class ReactCommand extends Command {
 	}
 
 	/**
-	 * @param {CommandoMessage} msg
+	 * @param {CommandMessage} msg
 	 * @param {string} reaction - Substring of the remaining message
 	 * @param {integer} i - Index of spot in reaction
 	 * @returns {EmojiInfo}
@@ -85,7 +114,7 @@ module.exports = class ReactCommand extends Command {
 	}
 
 	/**
-	 * @param {CommandoMessage} msg
+	 * @param {CommandMessage} msg
 	 * @param {string} reaction - Substring of the remaining message
 	 * @param {integer} i - Index of spot in reaction
 	 * @returns {EmojiInfo}
@@ -104,7 +133,31 @@ module.exports = class ReactCommand extends Command {
 	}
 
 	async getMessageToReactTo(msg, args) {
-		const messages = await msg.channel.fetchMessages({ limit: 30 });
-		return messages.get(args.msgID);
+		let messages = await msg.channel.fetchMessages({ limit: 100 });
+
+		if(args.msgInfo && args.msgInfo.length === 18) {
+			return messages.get(args.msgInfo);
+		}
+
+		if(args.member) {
+			messages = await messages.filter(message => message.author.id === args.member.id);
+		}
+
+		messages = (await this.removeReactMessages(msg, messages)).array();
+		if(messages.length === 0) return null;
+		return messages[args.msgInfo];
+	}
+
+	/**
+	 * We don't want to react to the command message or any other react commands.
+	 * @param {CommandoMessage} msg
+	 * @param {Collection<Messages>} messages
+	 * @returns {Collection<Messages>}
+	 */
+	async removeReactMessages(msg, messages) {
+		return await messages.filter(message => {
+			const re = new RegExp(`^${msg.guild.commandPrefix}react.*$`, 'i');
+			return !(message.id === msg.id || (message.content && re.test(message.content)));
+		});
 	}
 };
