@@ -1,6 +1,7 @@
 'use strict';
 
 const { Command } = require('discord.js-commando');
+const { stripIndents } = require('common-tags');
 const cleanReply = require('../../modules/clean-reply');
 
 module.exports = class SpankCommand extends Command {
@@ -29,7 +30,8 @@ module.exports = class SpankCommand extends Command {
 	async run(msg, args) {
 		return cleanReply(
 			msg,
-			`${args.member}, bend over and accept your punishment by ${msg.member}!\nhttp://i.imgur.com/Sqw0WvF.gif`
+			stripIndents`${args.member}, bend over bitch and accept your punishment from ${msg.member}!
+				http://i.imgur.com/Sqw0WvF.gif`
 		);
 	}
 };

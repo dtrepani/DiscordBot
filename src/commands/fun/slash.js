@@ -29,7 +29,7 @@ module.exports = class SlashCommand extends Command {
 	async run(msg, args) {
 		return cleanReply(
 			msg,
-			`${args.member}, you've been SLASHED by the mighty ${msg.member}!!\nhttp://i.imgur.com/YWHdIKL.gif`
+			`${args.member}, you've been slashed by the mighty ${msg.member}! SLASH!\nhttp://i.imgur.com/YWHdIKL.gif`
 		);
 	}
 };
