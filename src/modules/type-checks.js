@@ -1,9 +1,18 @@
 'use strict';
 
 module.exports = {
-	isUrl: item => (item.search(/https?:\/\/[^ /.]+\.[^ /.]+/) !== -1),
+	isUrl: item => (item.search(/https?:\/\/[^ \/\.]+\.[^ \/\.]+/) !== -1), // eslint-disable-line no-useless-escape
 	isString: str => typeof str === 'string' || str instanceof String,
 	isNumber: number => (!isNaN(number) && isFinite(number)),
+	isEmoji: emoji => {
+		const emojiRanges = [
+			'\ud83c[\udf00-\udfff]',
+			'\ud83d[\udc00-\ude4f]',
+			'\ud83d[\ude80-\udeff]'
+		];
+		const reEmoji = new RegExp(emojiRanges.join('|'));
+		return reEmoji.test(emoji);
+	},
 	isSplatRole: role => {
 		const splatPrefix = 'Splat ';
 		return role.name.substr(0, splatPrefix.length) === splatPrefix;

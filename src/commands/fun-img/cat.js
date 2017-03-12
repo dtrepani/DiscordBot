@@ -9,7 +9,7 @@ module.exports = class CatCommand extends Commando.Command {
 		super(client, {
 			name: 'cat',
 			aliases: ['cats'],
-			group: 'fun',
+			group: 'fun-img',
 			memberName: 'cat',
 			description: 'Cats! So many cats!'
 		});
