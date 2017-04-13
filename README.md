@@ -3,7 +3,6 @@
 
 ## Todo
 
-- [ ] Shout!
 - [ ] Mute (w/ mod-log support)
 - [ ] Ban (w/ mod-log support)
 
