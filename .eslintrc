@@ -114,7 +114,6 @@
         "spaced-comment": "error",
         "unicode-bom": "error",
 
-        "arrow-body-style": "error",
         "arrow-spacing": "error",
         "no-confusing-arrow": "error",
         "no-const-assign": "error",
