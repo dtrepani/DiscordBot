@@ -38,19 +38,29 @@ module.exports = class RemindTemplateCommand extends Command {
 	}
 
 	async run(msg, args) {
-		const now = moment();
-		const timeInfo = chrono.parse(args.reminder);
-		const reminder = {
-			time: moment(timeInfo[0].start.date()),
-			title: this.getReminderTitle(args.reminder, timeInfo),
-			remindee: this.getRemindee(msg, args)
-		};
-		
-		if(reminder.time.isBefore(now)) {
-			return await sendError(msg, `I can't set a reminder that's in the past.`);
-		}
+		try {
+			this.preReminderHook(msg, args);
 
-		return await this.sendMessages(msg, reminder);
+			const now = moment();
+			const timeInfo = chrono.parse(args.reminder);
+			const reminder = {
+				time: moment(timeInfo[0].start.date()),
+				title: this.getReminderTitle(args.reminder, timeInfo),
+				remindee: this.getRemindee(msg, args)
+			};
+			
+			if(reminder.time.isBefore(now)) {
+				return await sendError(msg, `I can't set a reminder that's in the past.`);
+			}
+
+			if(reminder.time.diff(now, 'years', true) > 1) {
+				return await sendError(msg, 'I draw the line at one year.');
+			}
+
+			return await this.sendMessages(msg, reminder);
+		} catch(err) {
+			return await sendError(msg, err);
+		}
 	}
 
 	/**
@@ -83,6 +93,13 @@ module.exports = class RemindTemplateCommand extends Command {
 		return reminderTitle;
 	}
 
+	/**
+	 * @abstract
+	 * @param {CommandMessage} msg
+	 * @param {*} args
+	 */
+	preReminderHook(msg, args) {} // eslint-disable-line no-unused-vars, no-empty-function
+
 	async sendMessages(msg, reminder) {
 		const confirmation = await cleanReply(
 			msg,
@@ -97,9 +114,32 @@ module.exports = class RemindTemplateCommand extends Command {
 		const now = moment();
 
 		return await new Promise(resolve => {
-			return setTimeout(() => {
-				return resolve(msg.say(`${reminder.remindee}, here's your reminder: \`${reminder.title}\``));
-			}, reminder.time.diff(now));
+			const timeoutHandler = {};
+
+			this.setLongTimeout(() => {
+				return resolve(msg.say(`${reminder.remindee}, here's your reminder: ${reminder.title}`));
+			}, reminder.time.diff(now), timeoutHandler);
 		});
+	}
+
+	/**
+	 * setTimeout() can only handle up to 32-bit integers (~3.5 weeks / 2147483647 ms)
+	 * To bypass this limit, recursively call setTimeout() until reaching given timeout.
+	 *
+	 * @param {Function} callback
+	 * @param {int} timeout - Milliseconds before command is executed
+	 * @param {Object} timeoutHandler - To cancel the timeout, if need be.
+	 */
+	setLongTimeout(callback, timeout, timeoutHandler) {
+		const MAX_TIMEOUT = 2147483647;
+
+		if(timeout > MAX_TIMEOUT) {
+			timeoutHandler.handle = setTimeout(
+				() => this.setLongTimeout(callback, timeout - MAX_TIMEOUT, timeoutHandler),
+				MAX_TIMEOUT
+			);
+		} else {
+			timeoutHandler.handle = setTimeout(callback, timeout);
+		}
 	}
 };
